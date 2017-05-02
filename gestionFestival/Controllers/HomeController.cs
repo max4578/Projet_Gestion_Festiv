@@ -12,6 +12,7 @@ namespace gestionFestival.Controllers
         public ActionResult Index()
         {
             //maxime ça marche !!!!!
+            // Ou pas petit cochon
             return View();
         }
     }
