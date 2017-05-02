@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using gestionFestival.DAL;
 
 namespace gestionFestival.Models
 {
@@ -94,6 +95,18 @@ namespace gestionFestival.Models
         public void SupprimerPersonnel()
         {
 
+        }
+
+        public bool Connexion(string email, string pass)
+        {
+            DataContextDataContext db = new DataContextDataContext();
+
+            if (db.VérificationLogin(email, pass).Count() > 0)
+            {
+                return true;
+            }
+            else
+                return false;
         }
     }
 }

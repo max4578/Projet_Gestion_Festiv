@@ -1,7 +1,17 @@
 ﻿
-@{
-    ViewBag.Title = "Index";
+
+
+@using (Html.BeginForm("Index", "Login"))
+{
+    
+    
+    <label>Email du compe</label>
+    <br/>
+    <input type="text" name="email" />
+    <br/><br/>
+    <label>Password</label>
+    <br/>
+    <input type="text" name="email" />
+    <br/>
+    <input type="submit" value="connexion"/>  <input type="button" value="Register" />
 }
-
-<h2>Index</h2>
-

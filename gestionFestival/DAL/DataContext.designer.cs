@@ -171,6 +171,13 @@ namespace gestionFestival.DAL
 				return this.GetTable<Revenu>();
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.VérificationLogin")]
+		public ISingleResult<VérificationLoginResult> VérificationLogin([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(30)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string pass)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, pass);
+			return ((ISingleResult<VérificationLoginResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Administrateur")]
@@ -2563,6 +2570,158 @@ namespace gestionFestival.DAL
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	public partial class VérificationLoginResult
+	{
+		
+		private int _idPers;
+		
+		private string _nomPers;
+		
+		private string _prenomPers;
+		
+		private System.DateTime _dateNaiss;
+		
+		private string _email;
+		
+		private string _telephone;
+		
+		private string _specialisation;
+		
+		private string _password;
+		
+		public VérificationLoginResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPers", DbType="Int NOT NULL")]
+		public int idPers
+		{
+			get
+			{
+				return this._idPers;
+			}
+			set
+			{
+				if ((this._idPers != value))
+				{
+					this._idPers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPers", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string nomPers
+		{
+			get
+			{
+				return this._nomPers;
+			}
+			set
+			{
+				if ((this._nomPers != value))
+				{
+					this._nomPers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_prenomPers", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string prenomPers
+		{
+			get
+			{
+				return this._prenomPers;
+			}
+			set
+			{
+				if ((this._prenomPers != value))
+				{
+					this._prenomPers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateNaiss", DbType="Date NOT NULL")]
+		public System.DateTime dateNaiss
+		{
+			get
+			{
+				return this._dateNaiss;
+			}
+			set
+			{
+				if ((this._dateNaiss != value))
+				{
+					this._dateNaiss = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this._email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telephone", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string telephone
+		{
+			get
+			{
+				return this._telephone;
+			}
+			set
+			{
+				if ((this._telephone != value))
+				{
+					this._telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_specialisation", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string specialisation
+		{
+			get
+			{
+				return this._specialisation;
+			}
+			set
+			{
+				if ((this._specialisation != value))
+				{
+					this._specialisation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this._password = value;
+				}
 			}
 		}
 	}

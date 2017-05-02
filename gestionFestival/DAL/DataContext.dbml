@@ -111,4 +111,18 @@
       <Association Name="Responsable_Revenu" Member="Responsable" ThisKey="idPersonnel" OtherKey="idPers" Type="Responsable" IsForeignKey="true" />
     </Type>
   </Table>
+  <Function Name="dbo.VérificationLogin" Method="VérificationLogin">
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="pass" Type="System.String" DbType="NVarChar(20)" />
+    <ElementType Name="VérificationLoginResult">
+      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prenomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="dateNaiss" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="telephone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="specialisation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>
