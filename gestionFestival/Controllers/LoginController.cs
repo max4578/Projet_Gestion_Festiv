@@ -37,21 +37,10 @@ namespace gestionFestival.Controllers
         [HttpPost]
         public ActionResult Register(string nom, string prenom, string tel ,DateTime dateNaiss,string mail,string spec,string pass)
         {
-            ViewBag.message="";
             CPersonnel p;
-            if(nom == "" || prenom == "" || tel== ""  || mail=="" || spec == ""  || pass=="")
-            {
-                ViewBag.message = "Des champs sont vide";       
-                return View("GetRegisterForm");
-            }
-            else
-            {
-                ViewBag.message = "Enregistrement effectué";
-                p = new CPersonnel(nom, prenom, tel, dateNaiss, mail, spec);
-                p.Inscription(pass);
-                return View("Login");
-                
-            }
+            p = new CPersonnel(nom, prenom, tel, dateNaiss, mail, spec);
+            p.Inscription(pass);
+            return View("Login");
         }
     }
 }
