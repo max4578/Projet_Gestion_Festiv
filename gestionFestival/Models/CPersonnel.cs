@@ -113,10 +113,15 @@ namespace gestionFestival.Models
         }
 
 
-        public void Inscription(string pass)
+        public bool Inscription(string pass)
         {
             DP = new DALPersonnel();
-            DP.AjouterPersonnel(nom,prenom,dateNaiss,mail,telephone,specialisation,pass);
+            if (!DP.AjoutPersonnel(nom, prenom, dateNaiss, mail, telephone, specialisation, pass))
+            {
+                return false;
+            }
+            else
+                return true;
             
         }
 

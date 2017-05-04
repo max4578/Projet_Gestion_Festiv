@@ -29,8 +29,10 @@ namespace gestionFestival.Controllers
 
 
         
-        public ActionResult GetRegisterForm()
-        {  
+        public ActionResult RegisterForm()
+        {
+            ViewBag.Message = "";
+
             return View("Register");
         }
 
@@ -39,8 +41,16 @@ namespace gestionFestival.Controllers
         {
             CPersonnel p;
             p = new CPersonnel(nom, prenom, tel, dateNaiss, mail, spec);
-            p.Inscription(pass);
-            return View("Login");
+            if (p.Inscription(pass))
+            {
+                return View("Index");
+
+            }
+            else
+            {
+                ViewBag.Message = "Erreur: émail déja existant";
+                return View("Register");
+            }
         }
     }
 }

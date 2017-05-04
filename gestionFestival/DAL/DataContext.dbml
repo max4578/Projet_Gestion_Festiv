@@ -2,33 +2,27 @@
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-73L8O8A;Initial Catalog=GestionFestival;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="GestionFestivalConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Administrateur" Member="Administrateur">
     <Type Name="Administrateur">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="dateFest" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="dateFest" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="nomFest" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Administrateur_Responsable" Member="Responsable" ThisKey="idPers" OtherKey="idAdmin" Type="Responsable" />
       <Association Name="Administrateur_Comptable" Member="Comptable" ThisKey="idPers" OtherKey="idAdmin" Type="Comptable" />
+      <Association Name="Administrateur_Responsable" Member="Responsable" ThisKey="idPers" OtherKey="idAdmin" Type="Responsable" />
       <Association Name="Personnel_Administrateur" Member="Personnel" ThisKey="idPers" OtherKey="idPers" Type="Personnel" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Personnel" Member="Personnel">
-    <Type Name="Personnel">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="nomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="prenomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="dateNaiss" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="telephone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="specialisation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Personnel_Administrateur" Member="Administrateur" ThisKey="idPers" OtherKey="idPers" Type="Administrateur" Cardinality="One" />
-      <Association Name="Personnel_Participant" Member="Participant" ThisKey="idPers" OtherKey="idPers" Type="Participant" Cardinality="One" />
-      <Association Name="Personnel_Responsable" Member="Responsable" ThisKey="idPers" OtherKey="idPers" Type="Responsable" Cardinality="One" />
-      <Association Name="Personnel_Comptable" Member="Comptable" ThisKey="idPers" OtherKey="idPers" Type="Comptable" Cardinality="One" />
+  <Table Name="dbo.Comptable" Member="Comptable">
+    <Type Name="Comptable">
+      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="budgetDisp" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="salaire" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="idAdmin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Administrateur_Comptable" Member="Administrateur" ThisKey="idAdmin" OtherKey="idPers" Type="Administrateur" IsForeignKey="true" />
+      <Association Name="Personnel_Comptable" Member="Personnel" ThisKey="idPers" OtherKey="idPers" Type="Personnel" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Depense" Member="Depense">
     <Type Name="Depense">
-      <Column Name="idDepense" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idDepense" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="totalDep" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Depense_Materiel" Member="Materiel" ThisKey="idDepense" OtherKey="idDepense" Type="Materiel" />
@@ -38,7 +32,7 @@
   </Table>
   <Table Name="dbo.Materiel" Member="Materiel">
     <Type Name="Materiel">
-      <Column Name="idMateriel" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idMateriel" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="prix" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="quantité" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="idDepense" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -48,7 +42,7 @@
   </Table>
   <Table Name="dbo.Participant" Member="Participant">
     <Type Name="Participant">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="heureTravail" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="salaire" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="idResp" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -58,9 +52,25 @@
       <Association Name="Responsable_Participant" Member="Responsable" ThisKey="idResp" OtherKey="idPers" Type="Responsable" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Personnel" Member="Personnel">
+    <Type Name="Personnel">
+      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prenomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="dateNaiss" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="telephone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="specialisation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="pass" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Personnel_Administrateur" Member="Administrateur" ThisKey="idPers" OtherKey="idPers" Type="Administrateur" Cardinality="One" />
+      <Association Name="Personnel_Comptable" Member="Comptable" ThisKey="idPers" OtherKey="idPers" Type="Comptable" Cardinality="One" />
+      <Association Name="Personnel_Participant" Member="Participant" ThisKey="idPers" OtherKey="idPers" Type="Participant" Cardinality="One" />
+      <Association Name="Personnel_Responsable" Member="Responsable" ThisKey="idPers" OtherKey="idPers" Type="Responsable" Cardinality="One" />
+    </Type>
+  </Table>
   <Table Name="dbo.Poste" Member="Poste">
     <Type Name="Poste">
-      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="nomPoste" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="idComptable" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -73,14 +83,14 @@
     <Type Name="Recette">
       <Column Name="idRecette" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="totalRec" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idPoste" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
       <Association Name="Recette_Revenu" Member="Revenu" ThisKey="idRecette" OtherKey="idRecette" Type="Revenu" />
       <Association Name="Poste_Recette" Member="Poste" ThisKey="idPoste" OtherKey="idPoste" Type="Poste" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Responsable" Member="Responsable">
     <Type Name="Responsable">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="fonction" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="salaireResp" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -94,23 +104,13 @@
   </Table>
   <Table Name="dbo.Revenu" Member="Revenu">
     <Type Name="Revenu">
-      <Column Name="idRevenu" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idRevenu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="montant" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="idRecette" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Recette_Revenu" Member="Recette" ThisKey="idRecette" OtherKey="idRecette" Type="Recette" IsForeignKey="true" />
       <Association Name="Responsable_Revenu" Member="Responsable" ThisKey="idPersonnel" OtherKey="idPers" Type="Responsable" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Comptable" Member="Comptable">
-    <Type Name="Comptable">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="budgetDisp" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="salaire" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idAdmin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Administrateur_Comptable" Member="Administrateur" ThisKey="idAdmin" OtherKey="idPers" Type="Administrateur" IsForeignKey="true" />
-      <Association Name="Personnel_Comptable" Member="Personnel" ThisKey="idPers" OtherKey="idPers" Type="Personnel" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.VérificationLogin" Method="VérificationLogin">
@@ -173,5 +173,11 @@
     <Parameter Name="spec" Type="System.String" DbType="NVarChar(20)" />
     <Parameter Name="pass" Type="System.String" DbType="NVarChar(20)" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.VérificatioCompteExistant" Method="VérificatioCompteExistant">
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="VérificatioCompteExistantResult">
+      <Column Name="" Member="Column1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
   </Function>
 </Database>

@@ -44,5 +44,18 @@ namespace gestionFestival.DAL
 
         }
 
+        public bool AjoutPersonnel(string nom, string prenom, DateTime dateNaiss,string  mail, string telephone, string specialisation, string pass)
+        {
+            if (VérificatioCompteExistant(mail).First().Column1 == 0)
+            { 
+                 AjouterPersonnel(nom, prenom, dateNaiss, mail, telephone, specialisation, pass);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }
