@@ -5,44 +5,32 @@ using System.Web;
 
 namespace gestionFestival.Models
 {
-    public class CAdministrateur
+    public class CAdministrateur:CPersonnel
     {
 
         /*******************/
         /*    Attribut     */
         /*******************/
-        private string nom;
-        private string prénom;
-        private string téléphone;
-        private DateTime dateNaiss;
+
+        private DateTime dateFest;
+        private string nomFest;
 
 
         /*******************/
         /*   Propriétés    */
         /*******************/
 
-        public string Nom
+        public string NomFest
         {
-            get { return nom; }
-            set { nom = value; }
+            get { return nomFest; }
+            set { nomFest = value; }
         }
 
-        public string Prénom
+       
+        public DateTime DateFest
         {
-            get { return prénom; }
-            set { prénom = value; }
-        }
-
-        public string Téléphone
-        {
-            get { return téléphone; }
-            set { téléphone = value; }
-        }
-
-        public DateTime DateNaiss
-        {
-            get { return dateNaiss; }
-            set { dateNaiss = value; }
+            get { return dateFest; }
+            set { dateFest = value; }
         }
 
 
@@ -53,6 +41,13 @@ namespace gestionFestival.Models
         public CAdministrateur()
         {
 
+        }
+
+        public CAdministrateur( string nom ,string prénom,string téléphone,
+            DateTime dateNaiss ,string mail,string spécialisation,string nomFest, DateTime dateFest):base(nom,prénom, téléphone,dateNaiss,mail,spécialisation)
+        {
+            this.NomFest = NomFest;
+            this.dateFest = dateFest;
         }
 
         /*******************/

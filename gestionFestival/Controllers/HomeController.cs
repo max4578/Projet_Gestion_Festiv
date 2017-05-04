@@ -11,7 +11,6 @@ namespace gestionFestival.Controllers
         // GET: Home
         public ActionResult Index()
         {
-
             return View();
         }
     }

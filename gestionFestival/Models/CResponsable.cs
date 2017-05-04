@@ -5,7 +5,7 @@ using System.Web;
 
 namespace gestionFestival.Models
 {
-    public class CResponsable
+    public class CResponsable:CPersonnel
     {
 
         /*******************/
@@ -38,6 +38,16 @@ namespace gestionFestival.Models
         public CResponsable()
         {
 
+        }
+
+        public CResponsable(string nom, string prénom, string téléphone,
+        DateTime dateNaiss, string mail, string spécialisation,string fonction,double salaireResp)
+        :base(nom,prénom, téléphone,dateNaiss,mail,spécialisation)
+        {
+
+            this.fonction = fonction;
+            this.salaireResp = salaireResp;
+            
         }
 
         /*******************/

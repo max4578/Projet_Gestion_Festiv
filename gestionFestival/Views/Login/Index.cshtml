@@ -1,0 +1,19 @@
+﻿
+
+
+@using (Html.BeginForm("Connexion", "Login"))
+{
+
+
+    <label>Email du compe</label>
+    <br/>
+    <input type="text" name="email" />
+    <br/><br/>
+    <label>Password</label>
+    <br/>
+    <input type="text" name="pass" />
+    <br/>
+    <input type="submit" value="connexion"/> 
+    
+    @Html.ActionLink("Register", "/GetRegisterForm","Login")
+}

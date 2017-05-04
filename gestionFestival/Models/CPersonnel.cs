@@ -13,16 +13,17 @@ namespace gestionFestival.Models
         /*    Attribut     */
         /*******************/
         private string nom;
-        private string prénom;
-        private string téléphone;
+        private string prenom;
+        private string telephone;
         private DateTime dateNaiss;
         private string mail;
-        private string spécialisation;
-        private string infoCompétence;
+        private string specialisation;
+        private DALPersonnel DP;
+        
 
 
         /*******************/
-        /*   Propriétés    */
+        /*   Proprietes    */
         /*******************/
 
         public string Nom
@@ -31,16 +32,16 @@ namespace gestionFestival.Models
             set { nom = value; }
         }
 
-        public string Prénom
+        public string Prenom
         {
-            get { return prénom; }
-            set { prénom = value; }
+            get { return prenom; }
+            set { prenom = value; }
         }
 
-        public string Téléphone
+        public string Telephone
         {
-            get { return téléphone; }
-            set { téléphone = value; }
+            get { return telephone; }
+            set { telephone = value; }
         }
 
         public DateTime DateNaiss
@@ -55,17 +56,13 @@ namespace gestionFestival.Models
             set { mail = value; }
         }
 
-        public string Spécialisation
+        public string Specialisation
         {
-            get { return spécialisation; }
-            set { spécialisation = value; }
+            get { return specialisation; }
+            set { specialisation = value; }
         }
 
-        public string InfoCompétence
-        {
-            get { return infoCompétence; }
-            set { infoCompétence = value; }
-        }
+       
 
         /*******************/
         /*  Constructeur   */
@@ -76,12 +73,24 @@ namespace gestionFestival.Models
 
         }
 
+        public CPersonnel(string nom, string prenom, string telephone,
+            DateTime dateNaiss, string mail, string specialisation)
+        {
+            this.nom = nom;
+            this.prenom = prenom;
+            this.telephone = telephone;
+            this.dateNaiss = dateNaiss;
+            this.mail = mail;
+            this.specialisation = specialisation;
+
+        }
+
 
         /*******************/
-        /*    Méthodes     */
+        /*    Methodes     */
         /*******************/
 
-        public void CréePersonnel()
+        public void CreePersonnel()
         {
 
         }
@@ -97,16 +106,19 @@ namespace gestionFestival.Models
 
         }
 
-        public bool Connexion(string email, string pass)
+        public object Connexion(string email, string pass)
         {
-            DataContextDataContext db = new DataContextDataContext();
-
-            if (db.VérificationLogin(email, pass).Count() > 0)
-            {
-                return true;
-            }
-            else
-                return false;
+            DP = new DALPersonnel();
+            return DP.DB_Connexion(email,pass);         
         }
+
+
+        public void Inscription(string pass)
+        {
+            DP = new DALPersonnel();
+            DP.AjouterPersonnel(nom,prenom,dateNaiss,mail,telephone,specialisation,pass);
+            
+        }
+
     }
 }

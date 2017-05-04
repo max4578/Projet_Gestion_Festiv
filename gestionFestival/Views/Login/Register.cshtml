@@ -1,0 +1,38 @@
+﻿@using gestionFestival.Models;
+
+
+@using (Html.BeginForm("Register", "Login"))
+{
+    <h1>Création d' un nouveau compte</h1>
+
+        <label>Nom</label>
+        <input type="text" name="nom" id="nom" required="required" />
+        <br />
+        <label>Prenom</label>
+        <input type="text" name="prenom" id="prenom"  required="required"/>
+        <br />
+        <label>Email</label>
+        <input type="text" name="mail" required="required"/>
+        <br />
+        <label>Téléphone</label>
+        <input type="text" name="tel" required="required"/>
+        <br />
+        <label>Date de naissance</label>
+         <input type="date" name="dateNaiss" value="1/1/1980"  required="required" />
+       
+            
+
+        <br />
+        <label>Spécialisation</label>
+        <input type="text" name="spec" height="40" width="100" required="required" />
+        <br />
+        <label>Mot de passe</label>
+        <input type="text" name="pass" height="40" width="100" required="required" />
+        <br />
+
+
+        <input type="submit" value="Confirmer" />
+        <br />
+
+        
+}
