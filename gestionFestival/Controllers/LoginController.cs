@@ -8,24 +8,15 @@ using gestionFestival.Models;
 namespace gestionFestival.Controllers
 {
     public class LoginController : Controller
-    {
-        
+    { 
 
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Login
-        [HttpPost]
-        public string Connexion(string email,string pass)
-        {
-
-            CPersonnel p= new CPersonnel();
-            object user = p.Connexion(email, pass);
-            /*CComptable c =(CComptable)user;*/
-            return user.GetType().ToString();
-        }
+       
+      
 
 
         
@@ -41,7 +32,7 @@ namespace gestionFestival.Controllers
         {
             CPersonnel p;
             p = new CPersonnel(nom, prenom, tel, dateNaiss, mail, spec);
-            if (p.Inscription(pass))
+            if (p.AjoutPersonnel(pass))
             {
                 return View("Index");
 

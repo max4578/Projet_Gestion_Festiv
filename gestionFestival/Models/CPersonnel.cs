@@ -6,7 +6,7 @@ using gestionFestival.DAL;
 
 namespace gestionFestival.Models
 {
-    public class CPersonnel
+    public class CPersonnel:DataContextDataContext
     {
 
         /*******************/
@@ -18,7 +18,6 @@ namespace gestionFestival.Models
         private DateTime dateNaiss;
         private string mail;
         private string specialisation;
-        private DALPersonnel DP;
         
 
 
@@ -48,6 +47,11 @@ namespace gestionFestival.Models
         {
             get { return dateNaiss; }
             set { dateNaiss = value; }
+        }
+
+        internal bool AjouterPersonnel(string pass)
+        {
+            throw new NotImplementedException();
         }
 
         public string Mail
@@ -108,21 +112,57 @@ namespace gestionFestival.Models
 
         public object Connexion(string email, string pass)
         {
-            DP = new DALPersonnel();
-            return DP.DB_Connexion(email,pass);         
+            VérificationLoginResult querry = VérificationLogin(email, pass).FirstOrDefault();
+            if (querry != null)
+            {
+                return FindStatut(querry.idPers, querry);
+            }
+            else
+                return null;
+
         }
 
 
-        public bool Inscription(string pass)
+
+
+
+        
+
+        private object FindStatut(int id, VérificationLoginResult q)
         {
-            DP = new DALPersonnel();
-            if (!DP.AjoutPersonnel(nom, prenom, dateNaiss, mail, telephone, specialisation, pass))
+
+
+            var querry1 = isAdmin(id).FirstOrDefault();
+            var querry2 = isCompt(id).FirstOrDefault();
+            var querry3 = isResponsable(id).FirstOrDefault();
+            var querry4 = isParticipant(id).FirstOrDefault();
+
+
+            if (querry1 != null)
+                return new CAdministrateur(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, querry1.nomFest, querry1.dateFest);
+            else if (querry2 != null)
+                return new CComptable(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry2.salaire), Convert.ToDouble(querry2.budgetDisp));
+            else if (querry3 != null)
+                return new CResponsable(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, querry3.fonction, Convert.ToDouble(querry3.salaireResp));
+            else if (querry4 != null)
+                return new CParticipant(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry4.salaire), querry4.heureTravail);
+            else
+                return new CPersonnel(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation);
+
+
+        }
+
+        public bool AjoutPersonnel(string pass)
+        {
+            if (VérificatioCompteExistant(mail).First().Column1 == 0)
+            {
+                AjouterPersonnel(nom, prenom, dateNaiss, mail, telephone, specialisation, pass);
+                return true;
+            }
+            else
             {
                 return false;
             }
-            else
-                return true;
-            
         }
 
     }

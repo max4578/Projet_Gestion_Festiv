@@ -59,9 +59,9 @@ namespace gestionFestival.Models
 
         }
 
-        public void DemandeAjoutMateriel()
+        public void DemandeAjoutMateriel(string nom)
         {
-
+           
         }
 
 
