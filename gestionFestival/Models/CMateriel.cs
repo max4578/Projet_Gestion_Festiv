@@ -13,11 +13,11 @@ namespace gestionFestival.Models
         /*******************/
         private string nom;
         private double prix;
-        private int quantité;
+        private int quantite;
 
 
         /*******************/
-        /*   Propriétés    */
+        /*   Proprietes    */
         /*******************/
 
         public string Nom
@@ -33,10 +33,10 @@ namespace gestionFestival.Models
         }
 
 
-        public int Quantité
+        public int Quantite
         {
-            get { return quantité; }
-            set { quantité = value; }
+            get { return quantite; }
+            set { quantite = value; }
         }
 
 
@@ -50,24 +50,16 @@ namespace gestionFestival.Models
 
         }
 
+        public CMateriel(string nom, double prix, int quantite)
+        {
+            this.nom = nom;
+            this.prix = prix;
+            this.quantite = quantite;
+        }
+
         /*******************/
-        /*    Méthodes     */
+        /*    Methodes     */
         /*******************/
-
-        public void CreerParticipant()
-        {
-
-        }
-
-        public void DemandeModifParticipant()
-        {
-
-        }
-
-
-        public void SupprimerParticipant()
-        {
-
-        }
+        
     }
 }

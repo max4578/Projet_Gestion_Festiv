@@ -14,7 +14,7 @@ namespace gestionFestival.Models
 
         private DateTime dateFest;
         private string nomFest;
-
+        private CComptable comptable;
 
         /*******************/
         /*   Propriétés    */
@@ -75,9 +75,9 @@ namespace gestionFestival.Models
 
         }
 
-        public void DefinirBudget()
+        public void DefinirBudget(double budget)
         {
-
+            comptable.DemandeModifierBudget(budget);
         }
 
         public void AjouterResponsable()
