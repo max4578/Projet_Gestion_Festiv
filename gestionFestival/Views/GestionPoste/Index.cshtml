@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Gestion des postes";
+}
+
+<h2>Gestion des postes</h2>
+
+@using (Html.BeginForm("CreerPoste", "GestionPoste"))
+{
+    @Html.Label("Nouveau poste")
+    <span>  </span>
+    @Html.TextBox("poste")
+    <input type="submit" value="Ajouter" />
+}
+@ViewBag.message
+
+<table>
+    <thead>Poste</thead><thead>Assigné à</thead>
+    @for(int i = 0; i< ViewBag.listeDesPostes.length ; i++)
+    {
+        <tr>
+            <td>@ViewBag.listeDesPostes. </td>
+            <td></td>
+            <td><button type="button" value="Assigner" ></button></td>
+            <td><button type="button" value="Modifier"></button></td>
+            <td><button type="button" value="supprimer"></button></td>
+        </tr>
+    }
+</table>
+

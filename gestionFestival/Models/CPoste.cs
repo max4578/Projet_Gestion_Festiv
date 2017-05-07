@@ -74,15 +74,29 @@ namespace gestionFestival.Models
 
         }
 
+        public CPoste(string nomPoste,string description,double budget)
+        {
+            this.nomPoste = nomPoste;
+            this.description = description;
+            budgetDépart = budget;
+            BudgetActuel = budget;
+            // Ajouter le responsable
+            
+        }
+
         /*******************/
         /*    Méthodes     */
         /*******************/
 
         public void CreerPoste()
         {
-
+            //insérer le poste dans la db
         }
 
+        public void AfficherLesPostes()
+        {
+
+        }
         public void ModifInfoPoste()
         {
 

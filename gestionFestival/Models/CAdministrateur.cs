@@ -12,26 +12,12 @@ namespace gestionFestival.Models
         /*    Attribut     */
         /*******************/
 
-        private DateTime dateFest;
-        private string nomFest;
-
+        private CComptable comptable;
 
         /*******************/
-        /*   Propriétés    */
+        /*   Proprietes    */
         /*******************/
 
-        public string NomFest
-        {
-            get { return nomFest; }
-            set { nomFest = value; }
-        }
-
-       
-        public DateTime DateFest
-        {
-            get { return dateFest; }
-            set { dateFest = value; }
-        }
 
 
         /*******************/
@@ -43,17 +29,24 @@ namespace gestionFestival.Models
 
         }
 
-        public CAdministrateur(int id, string nom ,string prénom,string téléphone,
-            DateTime dateNaiss ,string mail,string spécialisation,string nomFest, DateTime dateFest):base(id,nom,prénom, téléphone,dateNaiss,mail,spécialisation)
+        public CAdministrateur( string nom ,string prenom,string telephone,DateTime dateNaiss ,string mail,string specialisation):base(nom,prenom, telephone,dateNaiss,mail,specialisation)
         {
-            this.NomFest = NomFest;
-            this.dateFest = dateFest;
+            Nom = nom;
+            Prenom = prenom;
+            Telephone = telephone;
+            DateNaiss = dateNaiss;
+            Mail = mail;
+            Specialisation = specialisation;
         }
 
         /*******************/
-        /*    Méthodes     */
+        /*    Methodes     */
         /*******************/
 
+        public void DefinirBudgetFestival(double budget)
+        {
+            comptable.DemandeModifierBudget(budget);
+        }
         public void AjouterPoste()
         {
 
@@ -63,7 +56,6 @@ namespace gestionFestival.Models
         {
 
         }
-
 
         public void DemandeSuppressionPoste()
         {
@@ -75,10 +67,7 @@ namespace gestionFestival.Models
 
         }
 
-        public void DefinirBudget()
-        {
-
-        }
+        
 
         public void AjouterResponsable()
         {

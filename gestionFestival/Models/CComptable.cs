@@ -18,7 +18,7 @@ namespace gestionFestival.Models
 
 
         /*******************/
-        /*   Propriétés    */
+        /*   Proprietes    */
         /*******************/
 
         public double Salaire
@@ -48,23 +48,23 @@ namespace gestionFestival.Models
 
         }
 
-        public CComptable(int id, string nom, string prénom, string téléphone,
-          DateTime dateNaiss, string mail, string spécialisation,double salaire, double budgetDisponible):base(id,nom,prénom, téléphone,dateNaiss,mail,spécialisation)
+        public CComptable(string nom, string prenom, string telephone,
+          DateTime dateNaiss, string mail, string specialisation,double salaire, double budgetDisponible):base(nom,prenom, telephone,dateNaiss,mail,specialisation)
         {
             this.salaire = salaire;
             this.budgetDisponible = budgetDisponible;
         }
 
         /*******************/
-        /*    Méthodes     */
+        /*    Methodes     */
         /*******************/
 
-        public void DemandeModifierBudget(CResponsable resp)
+        public void DemandeModifierBudget(double budget)
         {
-
+            budgetDisponible = budget;
         }
 
-        public void AllouéBudget()
+        public void AlloueBudget()
         {
 
         }
