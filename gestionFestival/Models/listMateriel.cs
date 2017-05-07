@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using gestionFestival.DAL;
 
 namespace gestionFestival.Models
 {
-    public class listMateriel
+    public class listMateriel:DataContextDataContext
     {
 
         /*******************/
         /*    Attribut     */
         /*******************/
         private List<CMateriel> listMat;
+        
 
 
         /*******************/
@@ -31,7 +33,7 @@ namespace gestionFestival.Models
 
         public listMateriel()
         {
-
+            listMat = new List<CMateriel>();
         }
 
 
@@ -39,6 +41,14 @@ namespace gestionFestival.Models
         /*    Méthodes     */
         /*******************/
 
+        public List<CMateriel> GetList(int id)
+        {
+            foreach(var elem in GetAllMateriel(id))
+            {
+                    listMat.Add(new CMateriel(elem.idMateriel,elem.nom,Convert.ToDouble(elem.prix),elem.quantité));
+            }
 
+            return listMat;
+        }
     }
 }

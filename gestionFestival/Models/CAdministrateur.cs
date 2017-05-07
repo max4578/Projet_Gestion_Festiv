@@ -43,8 +43,8 @@ namespace gestionFestival.Models
 
         }
 
-        public CAdministrateur( string nom ,string prénom,string téléphone,
-            DateTime dateNaiss ,string mail,string spécialisation,string nomFest, DateTime dateFest):base(nom,prénom, téléphone,dateNaiss,mail,spécialisation)
+        public CAdministrateur(int id, string nom ,string prénom,string téléphone,
+            DateTime dateNaiss ,string mail,string spécialisation,string nomFest, DateTime dateFest):base(id,nom,prénom, téléphone,dateNaiss,mail,spécialisation)
         {
             this.NomFest = NomFest;
             this.dateFest = dateFest;

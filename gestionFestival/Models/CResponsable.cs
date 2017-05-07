@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using gestionFestival.DAL;
 namespace gestionFestival.Models
 {
     public class CResponsable:CPersonnel
@@ -40,9 +40,9 @@ namespace gestionFestival.Models
 
         }
 
-        public CResponsable(string nom, string prénom, string téléphone,
+        public CResponsable(int id, string nom, string prénom, string téléphone,
         DateTime dateNaiss, string mail, string spécialisation,string fonction,double salaireResp)
-        :base(nom,prénom, téléphone,dateNaiss,mail,spécialisation)
+        :base(id,nom,prénom, téléphone,dateNaiss,mail,spécialisation)
         {
 
             this.fonction = fonction;
@@ -56,7 +56,7 @@ namespace gestionFestival.Models
 
         public void CreerReponsable()
         {
-
+            
         }
 
         public void DemandeAjoutMateriel(string nom)

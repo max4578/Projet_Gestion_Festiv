@@ -12,18 +12,26 @@ namespace gestionFestival.Models
         /*******************/
         /*    Attribut     */
         /*******************/
+        private int id;
         private string nom;
         private string prenom;
         private string telephone;
         private DateTime dateNaiss;
         private string mail;
         private string specialisation;
-        
+
 
 
         /*******************/
         /*   Proprietes    */
         /*******************/
+
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
         public string Nom
         {
@@ -77,9 +85,10 @@ namespace gestionFestival.Models
 
         }
 
-        public CPersonnel(string nom, string prenom, string telephone,
+        public CPersonnel(int id, string nom, string prenom, string telephone,
             DateTime dateNaiss, string mail, string specialisation)
         {
+            this.id = id;
             this.nom = nom;
             this.prenom = prenom;
             this.telephone = telephone;
@@ -139,15 +148,15 @@ namespace gestionFestival.Models
 
 
             if (querry1 != null)
-                return new CAdministrateur(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, querry1.nomFest, querry1.dateFest);
+                return new CAdministrateur(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, querry1.nomFest, querry1.dateFest);
             else if (querry2 != null)
-                return new CComptable(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry2.salaire), Convert.ToDouble(querry2.budgetDisp));
+                return new CComptable(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry2.salaire), Convert.ToDouble(querry2.budgetDisp));
             else if (querry3 != null)
-                return new CResponsable(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, querry3.fonction, Convert.ToDouble(querry3.salaireResp));
+                return new CResponsable(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, querry3.fonction, Convert.ToDouble(querry3.salaireResp));
             else if (querry4 != null)
-                return new CParticipant(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry4.salaire), querry4.heureTravail);
+                return new CParticipant(q.idPers,q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry4.salaire), querry4.heureTravail);
             else
-                return new CPersonnel(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation);
+                return new CPersonnel(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation);
 
 
         }

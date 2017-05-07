@@ -44,10 +44,10 @@ namespace gestionFestival.Models
 
         }
 
-        public CParticipant(string nom, string prénom, string téléphone,
+        public CParticipant(int id, string nom, string prénom, string téléphone,
         DateTime dateNaiss, string mail, string spécialisation,
         double salaireParticipation,int heureTravail)
-        :base(nom,prénom, téléphone,dateNaiss,mail,spécialisation)
+        :base(id,nom,prénom, téléphone,dateNaiss,mail,spécialisation)
         {
             this.salaireParticipation = salaireParticipation;
             this.heureTravail = heureTravail;

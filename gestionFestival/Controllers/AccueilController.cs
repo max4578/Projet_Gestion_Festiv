@@ -16,7 +16,9 @@ namespace gestionFestival.Controllers
             CPersonnel p = new CPersonnel();
             object user = p.Connexion(email, pass);
             ViewBag.type = user.GetType().ToString();
-            return View();
+            ViewBag.infoPers = user;
+            Session["user"] = user;
+            return Redirect("Responsable/gestionMateriel");
             //gestionFestival.Models.CComptable
             //Ce string pourra servir a determiner le header de la page dans un script java
         }

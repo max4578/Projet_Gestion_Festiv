@@ -1,0 +1,40 @@
+﻿@using gestionFestival.Models;
+
+<table>
+    <tr><th>Nom</th><th>prix par unité</th><th>quantité</th><th>Total</th><th></th><th></th></tr>
+    @{
+
+        CResponsable r = (CResponsable)Session["user"];
+        Layout = "~/Views/Shared/headerResponsable.cshtml";
+        int i = 0;
+        foreach (CMateriel mat in ViewBag.list)
+        {
+            <tr>
+                <td>@mat.Nom</td>
+                <td>@mat.Prix €</td>
+                <td>@mat.Quantité</td>
+                <td>@(mat.Prix*mat.Quantité) €</td>
+                <td><button onclick="">@Html.ActionLink("Suppression Matériel", "SuppressionMateriel", "Responsable", new { id = i++}, null)</button></td>
+                <td><button onclick="">@Html.ActionLink("Modification", "GetModificationMaterielForm", "Responsable", new { id = i++ }, null)</button></td>
+                
+            </tr>
+
+        }
+
+
+    }
+            <tr><th>Nom</th> <th>Prix</th> <th>Quantité</th></tr>
+            @using (Html.BeginForm("AjouterMateriel", "Responsable"))
+            {
+                <tr>
+                    <td><input type="text" name="nom" required="required" /></td>
+                    <td><input type="number" name="prix" required="required" /></td>
+                    <td><input type="number" name="qtt" required="required" /></td>
+
+                    <td><input type="submit" value="connexion" required="required" /></td>
+                </tr>
+
+            }
+                
+</table>
+

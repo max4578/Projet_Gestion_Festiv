@@ -220,6 +220,27 @@ namespace gestionFestival.DAL
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email);
 			return ((ISingleResult<VérificatioCompteExistantResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetAllMateriel")]
+		public ISingleResult<GetAllMaterielResult> GetAllMateriel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPers);
+			return ((ISingleResult<GetAllMaterielResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DeleteMateriel")]
+		public int DeleteMateriel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idMat)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idMat);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AjouterMateriel")]
+		public int AjouterMateriel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string nom, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> prix, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> qtt, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nom, prix, qtt, idPers);
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Administrateur")]
@@ -3175,6 +3196,122 @@ namespace gestionFestival.DAL
 				if ((this._Column1 != value))
 				{
 					this._Column1 = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetAllMaterielResult
+	{
+		
+		private int _idMateriel;
+		
+		private string _nom;
+		
+		private decimal _prix;
+		
+		private int _quantité;
+		
+		private int _idDepense;
+		
+		private int _idPers;
+		
+		public GetAllMaterielResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMateriel", DbType="Int NOT NULL")]
+		public int idMateriel
+		{
+			get
+			{
+				return this._idMateriel;
+			}
+			set
+			{
+				if ((this._idMateriel != value))
+				{
+					this._idMateriel = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nom", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nom
+		{
+			get
+			{
+				return this._nom;
+			}
+			set
+			{
+				if ((this._nom != value))
+				{
+					this._nom = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_prix", DbType="Money NOT NULL")]
+		public decimal prix
+		{
+			get
+			{
+				return this._prix;
+			}
+			set
+			{
+				if ((this._prix != value))
+				{
+					this._prix = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_quantité", DbType="Int NOT NULL")]
+		public int quantité
+		{
+			get
+			{
+				return this._quantité;
+			}
+			set
+			{
+				if ((this._quantité != value))
+				{
+					this._quantité = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idDepense", DbType="Int NOT NULL")]
+		public int idDepense
+		{
+			get
+			{
+				return this._idDepense;
+			}
+			set
+			{
+				if ((this._idDepense != value))
+				{
+					this._idDepense = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPers", DbType="Int NOT NULL")]
+		public int idPers
+		{
+			get
+			{
+				return this._idPers;
+			}
+			set
+			{
+				if ((this._idPers != value))
+				{
+					this._idPers = value;
 				}
 			}
 		}

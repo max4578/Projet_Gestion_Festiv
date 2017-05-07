@@ -95,7 +95,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="ReleaseNotes.css" />
-    <Content Include="Scripts\accueil.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="DAL\DataContext.dbml">
@@ -114,6 +113,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccueilController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ResponsableController.cs" />
     <Compile Include="DAL\DataContext.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -154,6 +154,7 @@
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Accueil\Index.cshtml" />
     <Content Include="Views\Shared\headerResponsable.cshtml" />
+    <Content Include="Views\Responsable\gestionMateriel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

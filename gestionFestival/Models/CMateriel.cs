@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using gestionFestival.DAL;
 namespace gestionFestival.Models
 {
-    public class CMateriel
+    public class CMateriel:DataContextDataContext
     {
 
         /*******************/
         /*    Attribut     */
         /*******************/
+        private int id;
         private string nom;
         private double prix;
         private int quantité;
@@ -19,6 +20,14 @@ namespace gestionFestival.Models
         /*******************/
         /*   Propriétés    */
         /*******************/
+
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
 
         public string Nom
         {
@@ -45,29 +54,39 @@ namespace gestionFestival.Models
         /*  Constructeur   */
         /*******************/
 
-        public CMateriel()
+        public CMateriel(int id,string nom, double prix, int qtt)
         {
+            this.id = id;
+            this.nom = nom;
+            this.prix = prix;
+            this.quantité = qtt;
+        }
 
+        public CMateriel(string nom, double prix, int qtt)
+        {
+            this.nom = nom;
+            this.prix = prix;
+            this.quantité = qtt;
         }
 
         /*******************/
         /*    Méthodes     */
         /*******************/
 
-        public void CreerParticipant()
+        public void CreerMateriel(int idPers)
+        {
+            AjouterMateriel(nom,Convert.ToDecimal(prix),quantité,idPers);
+        }
+
+        public void DemandeModifMateriel()
         {
 
         }
 
-        public void DemandeModifParticipant()
+
+        public void SupprimerMateriel()
         {
-
-        }
-
-
-        public void SupprimerParticipant()
-        {
-
+            DeleteMateriel(id);
         }
     }
 }
