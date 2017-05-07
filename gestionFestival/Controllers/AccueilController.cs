@@ -18,7 +18,7 @@ namespace gestionFestival.Controllers
             ViewBag.type = user.GetType().ToString();
             ViewBag.infoPers = user;
             Session["user"] = user;
-            return Redirect("Responsable/gestionMateriel");
+            return View();
             //gestionFestival.Models.CComptable
             //Ce string pourra servir a determiner le header de la page dans un script java
         }

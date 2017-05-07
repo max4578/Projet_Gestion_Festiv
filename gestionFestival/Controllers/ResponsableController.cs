@@ -35,8 +35,8 @@ namespace gestionFestival.Controllers
         public ActionResult SuppressionMateriel(int id)
         {
             List<CMateriel> list= (List<CMateriel>)Session["listMateriel"];
-            CMateriel mat = list.ElementAt(id-1);
-            list.RemoveAt(id-1);
+            CMateriel mat = list.ElementAt(id);
+            list.RemoveAt(id);
             ViewBag.list = list;
             mat.SupprimerMateriel();
             return View("gestionMateriel");

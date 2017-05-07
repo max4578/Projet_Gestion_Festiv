@@ -98,6 +98,16 @@ namespace gestionFestival.Models
 
         }
 
+        public CPersonnel(string nom, string prenom, string telephone, DateTime dateNaiss, string mail, string specialisation)
+        {
+            this.nom = nom;
+            this.prenom = prenom;
+            this.telephone = telephone;
+            this.dateNaiss = dateNaiss;
+            this.mail = mail;
+            this.specialisation = specialisation;
+        }
+
 
         /*******************/
         /*    Methodes     */
@@ -148,9 +158,9 @@ namespace gestionFestival.Models
 
 
             if (querry1 != null)
-                return new CAdministrateur(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, querry1.nomFest, querry1.dateFest);
+                return new CAdministrateur(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation);
             else if (querry2 != null)
-                return new CComptable(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry2.salaire), Convert.ToDouble(querry2.budgetDisp));
+                return new CComptable(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry2.salaire), Convert.ToDouble(querry2.budgetDisp));
             else if (querry3 != null)
                 return new CResponsable(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, querry3.fonction, Convert.ToDouble(querry3.salaireResp));
             else if (querry4 != null)
