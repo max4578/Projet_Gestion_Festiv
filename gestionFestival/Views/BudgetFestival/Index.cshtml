@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Budget Festival";
+}
+
+<h2>Buget du festival</h2>
+@using (Html.BeginForm("EnvoyerBudget", "BudgetFestival"))
+{
+    @Html.Label("Quel montant voulez-vous allouer au festival ?")
+    <br />
+    @Html.TextBox("budget")
+    <span>€</span>
+    <br />
+    <input type="submit" value="Confirmer" />
+    <input type="reset" value="Annuler" />
+}
+<div>
+    @ViewBag.message
+</div>
+

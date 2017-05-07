@@ -139,7 +139,7 @@ namespace gestionFestival.Models
 
 
             if (querry1 != null)
-                return new CAdministrateur(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, querry1.nomFest, querry1.dateFest);
+                return new CAdministrateur(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation);
             else if (querry2 != null)
                 return new CComptable(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry2.salaire), Convert.ToDouble(querry2.budgetDisp));
             else if (querry3 != null)
