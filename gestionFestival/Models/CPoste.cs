@@ -93,6 +93,10 @@ namespace gestionFestival.Models
             //insérer le poste dans la db
         }
 
+        public void AfficherLesPostes()
+        {
+
+        }
         public void ModifInfoPoste()
         {
 

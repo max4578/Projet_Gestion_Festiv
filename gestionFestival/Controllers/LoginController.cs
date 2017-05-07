@@ -15,11 +15,6 @@ namespace gestionFestival.Controllers
             return View();
         }
 
-       
-      
-
-
-        
         public ActionResult RegisterForm()
         {
             ViewBag.Message = "";

@@ -114,6 +114,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccueilController.cs" />
     <Compile Include="Controllers\BudgetFestivalController.cs" />
+    <Compile Include="Controllers\GestionPosteController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="DAL\DataContext.designer.cs">
       <AutoGen>True</AutoGen>
@@ -156,6 +157,7 @@
     <Content Include="Views\Accueil\Index.cshtml" />
     <Content Include="Views\Shared\headerResponsable.cshtml" />
     <Content Include="Views\BudgetFestival\Index.cshtml" />
+    <Content Include="Views\GestionPoste\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -49,10 +49,6 @@ namespace gestionFestival.Models
             set { dateNaiss = value; }
         }
 
-        internal bool AjouterPersonnel(string pass)
-        {
-            throw new NotImplementedException();
-        }
 
         public string Mail
         {
@@ -93,7 +89,10 @@ namespace gestionFestival.Models
         /*******************/
         /*    Methodes     */
         /*******************/
-
+        internal bool AjouterPersonnel(string pass)
+        {
+            throw new NotImplementedException();
+        }
         public void CreePersonnel()
         {
 
