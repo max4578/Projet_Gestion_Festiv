@@ -24,19 +24,29 @@ namespace gestionFestival.Controllers
         [HttpPost]
         public ActionResult CreerPoste(string poste, string description)
         {
-            if(poste != "")
+            if (poste != "")
             {
                 CPoste nouveauPoste = new CPoste(poste, description, 0);
                 // Ajouter le poste dans la db 
                 db.AjouterPoste(poste, description);
                 ViewBag.message = "Le poste " + poste + " a bien été ajouté";
-                
             }
             else
             {
                 ViewBag.message = "Veuillez entrer un nom pour le poste";
             }
-            return View("Index");
+            return Redirect("Index");
         }
+
+        //public ActionResult SuppressionPoste(int id)
+        //{
+        //    List<CPoste> list = (List<CPoste>)Session["Poste"];
+        //    CPoste mat = list.ElementAt(id);
+        //    list.RemoveAt(id);
+        //    ViewBag.list = list;
+        //    return View("Index");
+        //}
+
+
     }
 }
