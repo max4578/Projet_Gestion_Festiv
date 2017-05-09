@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Web;
 
 namespace gestionFestival.Models
 {
-    public class CPoste:IPrévision
+    public class CPoste :IPrévision
     {
         /*******************/
         /*    Attribut     */
@@ -17,7 +18,7 @@ namespace gestionFestival.Models
         private CResponsable responsable;
         private CDepense dépense;
         private CRecette recette;
-
+        
 
         /*******************/
         /*   Propriétés    */
@@ -65,6 +66,7 @@ namespace gestionFestival.Models
         }
 
 
+
         /*******************/
         /*  Constructeur   */
         /*******************/
@@ -90,12 +92,12 @@ namespace gestionFestival.Models
 
         public void CreerPoste()
         {
-            //insérer le poste dans la db
+            
         }
 
         public void AfficherLesPostes()
         {
-
+            
         }
         public void ModifInfoPoste()
         {

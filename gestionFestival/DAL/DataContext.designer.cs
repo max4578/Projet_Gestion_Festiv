@@ -227,6 +227,13 @@ namespace gestionFestival.DAL
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, pass);
 			return ((ISingleResult<VérificationLoginResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AfficherPoste")]
+		public ISingleResult<AfficherPosteResult> AfficherPoste()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<AfficherPosteResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Comptable")]
@@ -3182,6 +3189,50 @@ namespace gestionFestival.DAL
 				if ((this._pass != value))
 				{
 					this._pass = value;
+				}
+			}
+		}
+	}
+	
+	public partial class AfficherPosteResult
+	{
+		
+		private string _nomPoste;
+		
+		private string _description;
+		
+		public AfficherPosteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPoste", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nomPoste
+		{
+			get
+			{
+				return this._nomPoste;
+			}
+			set
+			{
+				if ((this._nomPoste != value))
+				{
+					this._nomPoste = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
 				}
 			}
 		}

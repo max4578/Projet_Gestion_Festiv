@@ -6,30 +6,36 @@
 
 
 <h2>Gestion des postes</h2>
-
-@using (Html.BeginForm("CreerPoste", "GestionPoste"))
-{
-    @Html.Label("Nouveau poste")
-    <span>  </span>
-    @Html.TextBox("poste")
-    <input type="submit" value="Ajouter" />
-}
-@ViewBag.message
-
-<table>
-    <thead>Poste</thead><thead>Assigné à</thead>
-   
-    @foreach(CPoste liste in ViewBag.listeDesPostes)
+<div>
+    @using (Html.BeginForm("CreerPoste", "GestionPoste"))
     {
-        <tr>
-            <td>@liste.NomPoste </td>
-            <td>@liste.Description </td>
-            <td></td>
-            <td><button type="button">Assigner</button></td>
-            <td><button type="button">Modifier</button></td>
-            <td><button type="button">Supprimer</button></td>
-        </tr>
+        @Html.Label("Nouveau poste")
+        <span>  </span>
+        @Html.TextBox("poste")
+        <br /><br />
+        @Html.Label("Description du poste")
+        <span>  </span>
+        @Html.TextArea("description")
+        <br />
+        <input type="submit" value="Ajouter" />
     }
-       
-</table>
+    @ViewBag.message
+</div>
+<br /><br /><br /><br />
+<div>
+    <table>
+        <tr><td>Poste</td><td>Assigné à</td><td>Modifier</td><td>Supprimer</td></tr>
 
+        @foreach (CPoste liste in ViewBag.listeDesPostes)
+        {
+            <tr>
+                <td>@liste.NomPoste </td>
+                <td>nom du responsable</td>
+                <td><button type="button">Modifier</button></td>
+                <td><button type="button">Supprimer</button></td>
+            </tr>
+        }
+
+    </table>
+
+</div>

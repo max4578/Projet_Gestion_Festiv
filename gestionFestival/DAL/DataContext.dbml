@@ -185,4 +185,10 @@
       <Column Name="pass" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.AfficherPoste" Method="AfficherPoste">
+    <ElementType Name="AfficherPosteResult">
+      <Column Name="nomPoste" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

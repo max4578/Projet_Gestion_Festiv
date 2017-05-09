@@ -10,25 +10,27 @@ namespace gestionFestival.Controllers
     public class GestionPosteController : Controller
     {
         // GET: GestionPoste
+        DAL.DataContextDataContext db = new DAL.DataContextDataContext();
         public ActionResult Index()
         {
-            int i= 0;
             List<CPoste> listePoste = new List<CPoste>();
-            listePoste.Add(new CPoste("Nourriture", "vendre de la bouffe", 5000.25));
-            listePoste.Add(new CPoste("Boisson", "vendre des boissons", 1000));
-            listePoste.Add(new CPoste("Pyrotechnique", "Faire péter des pétard", 10000));
+            var chargerListePoste = db.AfficherPoste();
+            foreach (var poste in chargerListePoste)
+                listePoste.Add(new CPoste(poste.nomPoste, poste.description, 0));
             ViewBag.listeDesPostes = listePoste;
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreerPoste(string poste)
+        public ActionResult CreerPoste(string poste, string description)
         {
             if(poste != "")
             {
-                CPoste nouveauPoste = new CPoste(poste, "", 0);
-                ViewBag.message = "Le poste "+ poste +" a bien été ajouté";
-                // Ajouter le poste dans la db    
+                CPoste nouveauPoste = new CPoste(poste, description, 0);
+                // Ajouter le poste dans la db 
+                db.AjouterPoste(poste, description);
+                ViewBag.message = "Le poste " + poste + " a bien été ajouté";
+                
             }
             else
             {
