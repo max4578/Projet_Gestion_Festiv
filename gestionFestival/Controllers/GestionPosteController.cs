@@ -12,15 +12,12 @@ namespace gestionFestival.Controllers
         // GET: GestionPoste
         public ActionResult Index()
         {
-            //List<CPoste> listePoste = new List<CPoste>();
-            //listePoste.Add(new CPoste("Nourriture", "vendre de la bouffe", 5000.25));
-            //listePoste.Add(new CPoste("Boisson", "vendre des boissons", 1000));
-            //listePoste.Add(new CPoste("Pyrotechnique", "Faire péter des pétard", 10000));
-            //foreach(var poste in listePoste)
-            //{
-            //    ViewBag.
-            //}
-            //ViewBag.listeDesPoste = listePoste;
+            int i= 0;
+            List<CPoste> listePoste = new List<CPoste>();
+            listePoste.Add(new CPoste("Nourriture", "vendre de la bouffe", 5000.25));
+            listePoste.Add(new CPoste("Boisson", "vendre des boissons", 1000));
+            listePoste.Add(new CPoste("Pyrotechnique", "Faire péter des pétard", 10000));
+            ViewBag.listeDesPostes = listePoste;
             return View();
         }
 

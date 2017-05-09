@@ -5,7 +5,7 @@ using System.Web;
 
 namespace gestionFestival.Models
 {
-    public class CAdministrateur:CPersonnel
+    public class CAdministrateur : CPersonnel
     {
 
         /*******************/
@@ -13,12 +13,16 @@ namespace gestionFestival.Models
         /*******************/
 
         private CComptable comptable;
+        private double salaire = 3000;
 
         /*******************/
         /*   Proprietes    */
         /*******************/
 
-
+        public double Salaire
+         {
+            get { return salaire; }
+         }
 
         /*******************/
         /*  Constructeur   */

@@ -38,7 +38,7 @@ namespace gestionFestival.Controllers
             CMateriel mat = list.ElementAt(id);
             list.RemoveAt(id);
             ViewBag.list = list;
-            mat.SupprimerMateriel();
+          //  mat.SupprimerMateriel();
             return View("gestionMateriel");
         }
 
@@ -46,7 +46,7 @@ namespace gestionFestival.Controllers
         public ActionResult AjouterMateriel(string nom, double prix, int qtt)
         {
             CMateriel mat = new CMateriel(nom,prix,qtt);
-            mat.CreerMateriel(((CResponsable)Session["user"]).Id);
+            //mat.CreerMateriel(((CResponsable)Session["user"]).Id);
             Session["listMateriel"] = null;
             return Redirect("gestionMateriel");
         }

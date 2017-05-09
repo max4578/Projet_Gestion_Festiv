@@ -1,7 +1,9 @@
-﻿
+﻿@using gestionFestival.Models;
 @{
-    ViewBag.Title = "Gestion des postes";
+     Layout = "~/Views/Shared/headerAdmin.cshtml";
 }
+
+
 
 <h2>Gestion des postes</h2>
 
@@ -16,15 +18,18 @@
 
 <table>
     <thead>Poste</thead><thead>Assigné à</thead>
-    @for(int i = 0; i< ViewBag.listeDesPostes.length ; i++)
+   
+    @foreach(CPoste liste in ViewBag.listeDesPostes)
     {
         <tr>
-            <td>@ViewBag.listeDesPostes. </td>
+            <td>@liste.NomPoste </td>
+            <td>@liste.Description </td>
             <td></td>
-            <td><button type="button" value="Assigner" ></button></td>
-            <td><button type="button" value="Modifier"></button></td>
-            <td><button type="button" value="supprimer"></button></td>
+            <td><button type="button">Assigner</button></td>
+            <td><button type="button">Modifier</button></td>
+            <td><button type="button">Supprimer</button></td>
         </tr>
     }
+       
 </table>
 

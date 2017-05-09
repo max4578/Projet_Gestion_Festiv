@@ -158,6 +158,7 @@
     <Content Include="Views\BudgetFestival\Index.cshtml" />
     <Content Include="Views\GestionPoste\Index.cshtml" />
     <Content Include="Views\Responsable\gestionMateriel.cshtml" />
+    <Content Include="Views\Shared\headerAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
