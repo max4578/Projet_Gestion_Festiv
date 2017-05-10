@@ -10,9 +10,10 @@ namespace gestionFestival.Controllers
     public class GestionPosteController : Controller
     {
         // GET: GestionPoste
-        DAL.DataContextDataContext db = new DAL.DataContextDataContext();
         public ActionResult Index()
         {
+            // A modifier pour faire le tout en appelant une méthode de la classe
+            DAL.DataContextDataContext db = new DAL.DataContextDataContext();
             List<CPoste> listePoste = new List<CPoste>();
             var chargerListePoste = db.AfficherPoste();
             foreach (var poste in chargerListePoste)
@@ -27,8 +28,7 @@ namespace gestionFestival.Controllers
             if (poste != "")
             {
                 CPoste nouveauPoste = new CPoste(poste, description, 0);
-                // Ajouter le poste dans la db 
-                db.AjouterPoste(poste, description);
+                nouveauPoste.CreerPoste(poste, description);
                 ViewBag.message = "Le poste " + poste + " a bien été ajouté";
             }
             else

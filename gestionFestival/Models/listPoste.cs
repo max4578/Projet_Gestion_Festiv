@@ -11,7 +11,8 @@ namespace gestionFestival.Models
         /*    Attribut     */
         /*******************/
         private List<CPoste> listP;
-
+        private CPoste poste;
+        private DAL.DataContextDataContext db;
 
         /*******************/
         /*   Propriétés    */
@@ -30,7 +31,7 @@ namespace gestionFestival.Models
 
         public listPoste()
         {
-
+            
         }
 
 
@@ -42,5 +43,12 @@ namespace gestionFestival.Models
         {
 
         }
+
+        //public DAL.DataContextDataContext AfficherLesPostes()
+        //{
+        //    db = new DAL.DataContextDataContext();
+        //    var chargerListePoste = db.AfficherPoste();
+        //    return chargerListePoste;
+        //}
     }
 }

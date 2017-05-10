@@ -11,6 +11,7 @@ namespace gestionFestival.Models
         /*******************/
         /*    Attribut     */
         /*******************/
+
         private string nomPoste;
         private string description;
         private double budgetDépart;
@@ -18,6 +19,7 @@ namespace gestionFestival.Models
         private CResponsable responsable;
         private CDepense dépense;
         private CRecette recette;
+        private DAL.DataContextDataContext db;
         
 
         /*******************/
@@ -90,9 +92,10 @@ namespace gestionFestival.Models
         /*    Méthodes     */
         /*******************/
 
-        public void CreerPoste()
+        public void CreerPoste(string nomPoste, string descriptionPoste)
         {
-            
+            db = new DAL.DataContextDataContext();
+            db.AjouterPoste(nomPoste, descriptionPoste);
         }
 
         public void AfficherLesPostes()
