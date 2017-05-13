@@ -13,8 +13,8 @@ namespace gestionFestival.Controllers
         public ActionResult Index()
         {
             listPoste listePoste = new listPoste();
-            Session["listePoste"] = listePoste.AfficherListe();
-            ViewBag.listeDesPostes = listePoste.AfficherListe();
+            Session["listePoste"] = listePoste.GetList();
+            ViewBag.listeDesPostes = Session["listePoste"];
             return View();
         }
 
@@ -34,14 +34,40 @@ namespace gestionFestival.Controllers
             return Redirect("Index");
         }
 
-        //public ActionResult SuppressionPoste(int id)
-        //{
-        //    List<CPoste> list = (List<CPoste>)Session["Poste"];
-        //    CPoste poste = list.ElementAt(id);
-        //    list.RemoveAt(id);
-        //    ViewBag.list = list;
-        //    return View("Index");
-        //}
+        public ActionResult Poste(int id)
+        {
+            List<CPoste> list = (List<CPoste>)Session["listePoste"];
+            CPoste poste = list.ElementAt(id);
+            ViewBag.index = id;
+
+            return View("ModifierPoste",poste);
+        }
+
+        [HttpPost]
+        public ActionResult ChangementPoste(string nomPoste, string description, int index)
+        {
+            if (nomPoste != "")
+            {
+                CPoste nouveauPoste = ((List<CPoste>)Session["listePoste"]).ElementAt(index);
+                nouveauPoste.ModifierInfoPoste(nomPoste, description);
+                return Redirect("Index");
+            }
+            else
+            {
+                ViewBag.message = "Veuillez entrer un nom pour le poste";
+                return View();
+            }
+        }
+
+        public ActionResult SuppressionPoste(int id)
+        {
+            List<CPoste> list = (List<CPoste>)Session["listePoste"];
+            CPoste poste = list.ElementAt(id);
+            poste.SupprimerUnPoste();
+            list.RemoveAt(id);
+            ViewBag.listeDesPostes = list;
+            return View("Index");
+        }
 
 
     }

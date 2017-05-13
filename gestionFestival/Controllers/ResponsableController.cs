@@ -52,7 +52,7 @@ namespace gestionFestival.Controllers
         }
 
 
-        public ActionResult AjouterMateriel(string nom, double prix, int qtt,int id)
+        public ActionResult AjouterMateriel(string nom, double prix, int qtt)
         {
             CMateriel mat = new CMateriel(nom,prix,qtt);
             mat.CreerMateriel(((CResponsable)Session["user"]).Id, ((CPoste)Session["poste"]).Id);

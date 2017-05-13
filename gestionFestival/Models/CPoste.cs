@@ -80,24 +80,35 @@ namespace gestionFestival.Models
         /*******************/
         /*  Constructeur   */
         /*******************/
-
+        public CPoste() { }
         public CPoste(int idPers)
         {
             db = new DAL.DataContextDataContext();
            var result= db.GetRespAndPoste(idPers).FirstOrDefault();
             this.id = result.idPoste;
             this.nomPoste = result.nomPoste;
-
         }
 
-        public CPoste(string nomPoste,string description,double budget)
+        public CPoste(int id,string nomPoste,string description,double budget)
         {
+            this.id = id;
             this.nomPoste = nomPoste;
             this.description = description;
             budgetDepart = budget;
             BudgetActuel = budget;
             // Ajouter le responsable
-            
+        }
+
+        public CPoste(string nomPoste, string description, double budget)
+        {
+       
+            this.nomPoste = nomPoste;
+            this.description = description;
+            budgetDepart = budget;
+            BudgetActuel = budget;
+            // Ajouter le responsable
+
+
         }
 
         /*******************/
@@ -110,31 +121,26 @@ namespace gestionFestival.Models
             db.AjouterPoste(nomPoste, descriptionPoste);
         }
 
-        public void AfficherLesPostes()
+        public void ModifierInfoPoste(string nom, string description)
         {
-            
+            db = new DataContextDataContext();
+            db.ModifierPoste(id, nom, description);
         }
-        public void ModifInfoPoste()
+        public void AllouerBudget(double budget)
         {
-
+            BudgetDepart = budget;
+            BudgetActuel = budget;
         }
-
-
-        public void SupprimerPoste()
+        public void ModifierBudget(double budget)
         {
-
-        }
-
-        public void AssignerReponsable(CPoste p)
-        {
-
+           //appel procédure stocké update budget
         }
 
-        public void ModifierBudget()
+        public void SupprimerUnPoste()
         {
-
+            db = new DataContextDataContext();
+            db.SupprimerPoste(id);
         }
-
         public void Print()
         {
             throw new NotImplementedException();

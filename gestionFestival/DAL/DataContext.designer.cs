@@ -48,22 +48,22 @@ namespace gestionFestival.DAL
     partial void InsertPersonnel(Personnel instance);
     partial void UpdatePersonnel(Personnel instance);
     partial void DeletePersonnel(Personnel instance);
-    partial void InsertPoste(Poste instance);
-    partial void UpdatePoste(Poste instance);
-    partial void DeletePoste(Poste instance);
     partial void InsertRecette(Recette instance);
     partial void UpdateRecette(Recette instance);
     partial void DeleteRecette(Recette instance);
-    partial void InsertResponsable(Responsable instance);
-    partial void UpdateResponsable(Responsable instance);
-    partial void DeleteResponsable(Responsable instance);
     partial void InsertRevenu(Revenu instance);
     partial void UpdateRevenu(Revenu instance);
     partial void DeleteRevenu(Revenu instance);
+    partial void InsertPoste(Poste instance);
+    partial void UpdatePoste(Poste instance);
+    partial void DeletePoste(Poste instance);
+    partial void InsertResponsable(Responsable instance);
+    partial void UpdateResponsable(Responsable instance);
+    partial void DeleteResponsable(Responsable instance);
     #endregion
 		
 		public DataContextDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["GestionFestivalConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["GestionFestivalConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -140,14 +140,6 @@ namespace gestionFestival.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<Poste> Poste
-		{
-			get
-			{
-				return this.GetTable<Poste>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Recette> Recette
 		{
 			get
@@ -156,19 +148,27 @@ namespace gestionFestival.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<Responsable> Responsable
-		{
-			get
-			{
-				return this.GetTable<Responsable>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Revenu> Revenu
 		{
 			get
 			{
 				return this.GetTable<Revenu>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Poste> Poste
+		{
+			get
+			{
+				return this.GetTable<Poste>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Responsable> Responsable
+		{
+			get
+			{
+				return this.GetTable<Responsable>();
 			}
 		}
 		
@@ -270,45 +270,17 @@ namespace gestionFestival.DAL
 			return ((ISingleResult<VérificationLoginResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AfficherPoste")]
-		public ISingleResult<AfficherPosteResult> AfficherPoste()
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ModifierPoste")]
+		public int ModifierPoste([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string nomPoste, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string description)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<AfficherPosteResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetRespAndPoste")]
-		public ISingleResult<GetRespAndPosteResult> GetRespAndPoste([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPers);
-			return ((ISingleResult<GetRespAndPosteResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AjouterMateriel")]
-		public int AjouterMateriel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string nom, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> prix, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> qtt, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPoste)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nom, prix, qtt, idPers, idPoste);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, nomPoste, description);
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetAllMateriel")]
-		public ISingleResult<GetAllMaterielResult> GetAllMateriel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SupprimerPoste")]
+		public int SupprimerPoste([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPoste)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPers);
-			return ((ISingleResult<GetAllMaterielResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DeleteMateriel")]
-		public int DeleteMateriel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idMat)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idMat);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateMateriel")]
-		public int UpdateMateriel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string nom, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> prix, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> qtt, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idMat)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nom, prix, qtt, idMat);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPoste);
 			return ((int)(result.ReturnValue));
 		}
 	}
@@ -1749,200 +1721,6 @@ namespace gestionFestival.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Poste")]
-	public partial class Poste : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idPoste;
-		
-		private string _nomPoste;
-		
-		private string _description;
-		
-		private EntitySet<Depense> _Depense;
-		
-		private EntitySet<Recette> _Recette;
-		
-		private EntitySet<Responsable> _Responsable;
-		
-    #region Définitions de méthodes d'extensibilité
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidPosteChanging(int value);
-    partial void OnidPosteChanged();
-    partial void OnnomPosteChanging(string value);
-    partial void OnnomPosteChanged();
-    partial void OndescriptionChanging(string value);
-    partial void OndescriptionChanged();
-    #endregion
-		
-		public Poste()
-		{
-			this._Depense = new EntitySet<Depense>(new Action<Depense>(this.attach_Depense), new Action<Depense>(this.detach_Depense));
-			this._Recette = new EntitySet<Recette>(new Action<Recette>(this.attach_Recette), new Action<Recette>(this.detach_Recette));
-			this._Responsable = new EntitySet<Responsable>(new Action<Responsable>(this.attach_Responsable), new Action<Responsable>(this.detach_Responsable));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int idPoste
-		{
-			get
-			{
-				return this._idPoste;
-			}
-			set
-			{
-				if ((this._idPoste != value))
-				{
-					this.OnidPosteChanging(value);
-					this.SendPropertyChanging();
-					this._idPoste = value;
-					this.SendPropertyChanged("idPoste");
-					this.OnidPosteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPoste", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string nomPoste
-		{
-			get
-			{
-				return this._nomPoste;
-			}
-			set
-			{
-				if ((this._nomPoste != value))
-				{
-					this.OnnomPosteChanging(value);
-					this.SendPropertyChanging();
-					this._nomPoste = value;
-					this.SendPropertyChanged("nomPoste");
-					this.OnnomPosteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string description
-		{
-			get
-			{
-				return this._description;
-			}
-			set
-			{
-				if ((this._description != value))
-				{
-					this.OndescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._description = value;
-					this.SendPropertyChanged("description");
-					this.OndescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Poste_Depense", Storage="_Depense", ThisKey="idPoste", OtherKey="idPoste")]
-		public EntitySet<Depense> Depense
-		{
-			get
-			{
-				return this._Depense;
-			}
-			set
-			{
-				this._Depense.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Poste_Recette", Storage="_Recette", ThisKey="idPoste", OtherKey="idPoste")]
-		public EntitySet<Recette> Recette
-		{
-			get
-			{
-				return this._Recette;
-			}
-			set
-			{
-				this._Recette.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Poste_Responsable", Storage="_Responsable", ThisKey="idPoste", OtherKey="idPoste")]
-		public EntitySet<Responsable> Responsable
-		{
-			get
-			{
-				return this._Responsable;
-			}
-			set
-			{
-				this._Responsable.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Depense(Depense entity)
-		{
-			this.SendPropertyChanging();
-			entity.Poste = this;
-		}
-		
-		private void detach_Depense(Depense entity)
-		{
-			this.SendPropertyChanging();
-			entity.Poste = null;
-		}
-		
-		private void attach_Recette(Recette entity)
-		{
-			this.SendPropertyChanging();
-			entity.Poste = this;
-		}
-		
-		private void detach_Recette(Recette entity)
-		{
-			this.SendPropertyChanging();
-			entity.Poste = null;
-		}
-		
-		private void attach_Responsable(Responsable entity)
-		{
-			this.SendPropertyChanging();
-			entity.Poste = this;
-		}
-		
-		private void detach_Responsable(Responsable entity)
-		{
-			this.SendPropertyChanging();
-			entity.Poste = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Recette")]
 	public partial class Recette : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2119,342 +1897,6 @@ namespace gestionFestival.DAL
 		{
 			this.SendPropertyChanging();
 			entity.Recette = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Responsable")]
-	public partial class Responsable : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idPers;
-		
-		private string _fonction;
-		
-		private decimal _salaireResp;
-		
-		private int _idPoste;
-		
-		private int _idAdmin;
-		
-		private EntitySet<Materiel> _Materiel;
-		
-		private EntitySet<Participant> _Participant;
-		
-		private EntitySet<Revenu> _Revenu;
-		
-		private EntityRef<Personnel> _Personnel;
-		
-		private EntityRef<Poste> _Poste;
-		
-    #region Définitions de méthodes d'extensibilité
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidPersChanging(int value);
-    partial void OnidPersChanged();
-    partial void OnfonctionChanging(string value);
-    partial void OnfonctionChanged();
-    partial void OnsalaireRespChanging(decimal value);
-    partial void OnsalaireRespChanged();
-    partial void OnidPosteChanging(int value);
-    partial void OnidPosteChanged();
-    partial void OnidAdminChanging(int value);
-    partial void OnidAdminChanged();
-    #endregion
-		
-		public Responsable()
-		{
-			this._Materiel = new EntitySet<Materiel>(new Action<Materiel>(this.attach_Materiel), new Action<Materiel>(this.detach_Materiel));
-			this._Participant = new EntitySet<Participant>(new Action<Participant>(this.attach_Participant), new Action<Participant>(this.detach_Participant));
-			this._Revenu = new EntitySet<Revenu>(new Action<Revenu>(this.attach_Revenu), new Action<Revenu>(this.detach_Revenu));
-			this._Personnel = default(EntityRef<Personnel>);
-			this._Poste = default(EntityRef<Poste>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPers", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int idPers
-		{
-			get
-			{
-				return this._idPers;
-			}
-			set
-			{
-				if ((this._idPers != value))
-				{
-					if (this._Personnel.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidPersChanging(value);
-					this.SendPropertyChanging();
-					this._idPers = value;
-					this.SendPropertyChanged("idPers");
-					this.OnidPersChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fonction", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string fonction
-		{
-			get
-			{
-				return this._fonction;
-			}
-			set
-			{
-				if ((this._fonction != value))
-				{
-					this.OnfonctionChanging(value);
-					this.SendPropertyChanging();
-					this._fonction = value;
-					this.SendPropertyChanged("fonction");
-					this.OnfonctionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_salaireResp", DbType="Money NOT NULL")]
-		public decimal salaireResp
-		{
-			get
-			{
-				return this._salaireResp;
-			}
-			set
-			{
-				if ((this._salaireResp != value))
-				{
-					this.OnsalaireRespChanging(value);
-					this.SendPropertyChanging();
-					this._salaireResp = value;
-					this.SendPropertyChanged("salaireResp");
-					this.OnsalaireRespChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste", DbType="Int NOT NULL")]
-		public int idPoste
-		{
-			get
-			{
-				return this._idPoste;
-			}
-			set
-			{
-				if ((this._idPoste != value))
-				{
-					if (this._Poste.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidPosteChanging(value);
-					this.SendPropertyChanging();
-					this._idPoste = value;
-					this.SendPropertyChanged("idPoste");
-					this.OnidPosteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAdmin", DbType="Int NOT NULL")]
-		public int idAdmin
-		{
-			get
-			{
-				return this._idAdmin;
-			}
-			set
-			{
-				if ((this._idAdmin != value))
-				{
-					this.OnidAdminChanging(value);
-					this.SendPropertyChanging();
-					this._idAdmin = value;
-					this.SendPropertyChanged("idAdmin");
-					this.OnidAdminChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Responsable_Materiel", Storage="_Materiel", ThisKey="idPers", OtherKey="idPers")]
-		public EntitySet<Materiel> Materiel
-		{
-			get
-			{
-				return this._Materiel;
-			}
-			set
-			{
-				this._Materiel.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Responsable_Participant", Storage="_Participant", ThisKey="idPers", OtherKey="idResp")]
-		public EntitySet<Participant> Participant
-		{
-			get
-			{
-				return this._Participant;
-			}
-			set
-			{
-				this._Participant.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Responsable_Revenu", Storage="_Revenu", ThisKey="idPers", OtherKey="idPersonnel")]
-		public EntitySet<Revenu> Revenu
-		{
-			get
-			{
-				return this._Revenu;
-			}
-			set
-			{
-				this._Revenu.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Personnel_Responsable", Storage="_Personnel", ThisKey="idPers", OtherKey="idPers", IsForeignKey=true)]
-		public Personnel Personnel
-		{
-			get
-			{
-				return this._Personnel.Entity;
-			}
-			set
-			{
-				Personnel previousValue = this._Personnel.Entity;
-				if (((previousValue != value) 
-							|| (this._Personnel.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Personnel.Entity = null;
-						previousValue.Responsable = null;
-					}
-					this._Personnel.Entity = value;
-					if ((value != null))
-					{
-						value.Responsable = this;
-						this._idPers = value.idPers;
-					}
-					else
-					{
-						this._idPers = default(int);
-					}
-					this.SendPropertyChanged("Personnel");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Poste_Responsable", Storage="_Poste", ThisKey="idPoste", OtherKey="idPoste", IsForeignKey=true)]
-		public Poste Poste
-		{
-			get
-			{
-				return this._Poste.Entity;
-			}
-			set
-			{
-				Poste previousValue = this._Poste.Entity;
-				if (((previousValue != value) 
-							|| (this._Poste.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Poste.Entity = null;
-						previousValue.Responsable.Remove(this);
-					}
-					this._Poste.Entity = value;
-					if ((value != null))
-					{
-						value.Responsable.Add(this);
-						this._idPoste = value.idPoste;
-					}
-					else
-					{
-						this._idPoste = default(int);
-					}
-					this.SendPropertyChanged("Poste");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Materiel(Materiel entity)
-		{
-			this.SendPropertyChanging();
-			entity.Responsable = this;
-		}
-		
-		private void detach_Materiel(Materiel entity)
-		{
-			this.SendPropertyChanging();
-			entity.Responsable = null;
-		}
-		
-		private void attach_Materiel(Materiel entity)
-		{
-			this.SendPropertyChanging();
-			entity.Responsable = this;
-		}
-		
-		private void detach_Materiel(Materiel entity)
-		{
-			this.SendPropertyChanging();
-			entity.Responsable = null;
-		}
-		
-		private void attach_Participant(Participant entity)
-		{
-			this.SendPropertyChanging();
-			entity.Responsable = this;
-		}
-		
-		private void detach_Participant(Participant entity)
-		{
-			this.SendPropertyChanging();
-			entity.Responsable = null;
-		}
-		
-		private void attach_Revenu(Revenu entity)
-		{
-			this.SendPropertyChanging();
-			entity.Responsable = this;
-		}
-		
-		private void detach_Revenu(Revenu entity)
-		{
-			this.SendPropertyChanging();
-			entity.Responsable = null;
 		}
 	}
 	
@@ -2695,6 +2137,548 @@ namespace gestionFestival.DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Poste")]
+	public partial class Poste : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idPoste;
+		
+		private string _nomPoste;
+		
+		private string _description;
+		
+		private System.Nullable<decimal> _budgetDepart;
+		
+		private System.Nullable<decimal> _budgetActuel;
+		
+		private EntitySet<Depense> _Depense;
+		
+		private EntitySet<Recette> _Recette;
+		
+		private EntitySet<Responsable> _Responsable;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidPosteChanging(int value);
+    partial void OnidPosteChanged();
+    partial void OnnomPosteChanging(string value);
+    partial void OnnomPosteChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    partial void OnbudgetDepartChanging(System.Nullable<decimal> value);
+    partial void OnbudgetDepartChanged();
+    partial void OnbudgetActuelChanging(System.Nullable<decimal> value);
+    partial void OnbudgetActuelChanged();
+    #endregion
+		
+		public Poste()
+		{
+			this._Depense = new EntitySet<Depense>(new Action<Depense>(this.attach_Depense), new Action<Depense>(this.detach_Depense));
+			this._Recette = new EntitySet<Recette>(new Action<Recette>(this.attach_Recette), new Action<Recette>(this.detach_Recette));
+			this._Responsable = new EntitySet<Responsable>(new Action<Responsable>(this.attach_Responsable), new Action<Responsable>(this.detach_Responsable));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idPoste
+		{
+			get
+			{
+				return this._idPoste;
+			}
+			set
+			{
+				if ((this._idPoste != value))
+				{
+					this.OnidPosteChanging(value);
+					this.SendPropertyChanging();
+					this._idPoste = value;
+					this.SendPropertyChanged("idPoste");
+					this.OnidPosteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPoste", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nomPoste
+		{
+			get
+			{
+				return this._nomPoste;
+			}
+			set
+			{
+				if ((this._nomPoste != value))
+				{
+					this.OnnomPosteChanging(value);
+					this.SendPropertyChanging();
+					this._nomPoste = value;
+					this.SendPropertyChanged("nomPoste");
+					this.OnnomPosteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(50)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this.OndescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budgetDepart", DbType="Money")]
+		public System.Nullable<decimal> budgetDepart
+		{
+			get
+			{
+				return this._budgetDepart;
+			}
+			set
+			{
+				if ((this._budgetDepart != value))
+				{
+					this.OnbudgetDepartChanging(value);
+					this.SendPropertyChanging();
+					this._budgetDepart = value;
+					this.SendPropertyChanged("budgetDepart");
+					this.OnbudgetDepartChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budgetActuel", DbType="Money")]
+		public System.Nullable<decimal> budgetActuel
+		{
+			get
+			{
+				return this._budgetActuel;
+			}
+			set
+			{
+				if ((this._budgetActuel != value))
+				{
+					this.OnbudgetActuelChanging(value);
+					this.SendPropertyChanging();
+					this._budgetActuel = value;
+					this.SendPropertyChanged("budgetActuel");
+					this.OnbudgetActuelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Poste_Depense", Storage="_Depense", ThisKey="idPoste", OtherKey="idPoste")]
+		public EntitySet<Depense> Depense
+		{
+			get
+			{
+				return this._Depense;
+			}
+			set
+			{
+				this._Depense.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Poste_Recette", Storage="_Recette", ThisKey="idPoste", OtherKey="idPoste")]
+		public EntitySet<Recette> Recette
+		{
+			get
+			{
+				return this._Recette;
+			}
+			set
+			{
+				this._Recette.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Poste_Responsable", Storage="_Responsable", ThisKey="idPoste", OtherKey="idPoste")]
+		public EntitySet<Responsable> Responsable
+		{
+			get
+			{
+				return this._Responsable;
+			}
+			set
+			{
+				this._Responsable.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Depense(Depense entity)
+		{
+			this.SendPropertyChanging();
+			entity.Poste = this;
+		}
+		
+		private void detach_Depense(Depense entity)
+		{
+			this.SendPropertyChanging();
+			entity.Poste = null;
+		}
+		
+		private void attach_Recette(Recette entity)
+		{
+			this.SendPropertyChanging();
+			entity.Poste = this;
+		}
+		
+		private void detach_Recette(Recette entity)
+		{
+			this.SendPropertyChanging();
+			entity.Poste = null;
+		}
+		
+		private void attach_Responsable(Responsable entity)
+		{
+			this.SendPropertyChanging();
+			entity.Poste = this;
+		}
+		
+		private void detach_Responsable(Responsable entity)
+		{
+			this.SendPropertyChanging();
+			entity.Poste = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Responsable")]
+	public partial class Responsable : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idPers;
+		
+		private string _fonction;
+		
+		private decimal _salaireResp;
+		
+		private int _idPoste;
+		
+		private EntitySet<Materiel> _Materiel;
+		
+		private EntitySet<Participant> _Participant;
+		
+		private EntitySet<Revenu> _Revenu;
+		
+		private EntityRef<Personnel> _Personnel;
+		
+		private EntityRef<Poste> _Poste;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidPersChanging(int value);
+    partial void OnidPersChanged();
+    partial void OnfonctionChanging(string value);
+    partial void OnfonctionChanged();
+    partial void OnsalaireRespChanging(decimal value);
+    partial void OnsalaireRespChanged();
+    partial void OnidPosteChanging(int value);
+    partial void OnidPosteChanged();
+    #endregion
+		
+		public Responsable()
+		{
+			this._Materiel = new EntitySet<Materiel>(new Action<Materiel>(this.attach_Materiel), new Action<Materiel>(this.detach_Materiel));
+			this._Participant = new EntitySet<Participant>(new Action<Participant>(this.attach_Participant), new Action<Participant>(this.detach_Participant));
+			this._Revenu = new EntitySet<Revenu>(new Action<Revenu>(this.attach_Revenu), new Action<Revenu>(this.detach_Revenu));
+			this._Personnel = default(EntityRef<Personnel>);
+			this._Poste = default(EntityRef<Poste>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPers", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idPers
+		{
+			get
+			{
+				return this._idPers;
+			}
+			set
+			{
+				if ((this._idPers != value))
+				{
+					if (this._Personnel.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidPersChanging(value);
+					this.SendPropertyChanging();
+					this._idPers = value;
+					this.SendPropertyChanged("idPers");
+					this.OnidPersChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fonction", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string fonction
+		{
+			get
+			{
+				return this._fonction;
+			}
+			set
+			{
+				if ((this._fonction != value))
+				{
+					this.OnfonctionChanging(value);
+					this.SendPropertyChanging();
+					this._fonction = value;
+					this.SendPropertyChanged("fonction");
+					this.OnfonctionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_salaireResp", DbType="Money NOT NULL")]
+		public decimal salaireResp
+		{
+			get
+			{
+				return this._salaireResp;
+			}
+			set
+			{
+				if ((this._salaireResp != value))
+				{
+					this.OnsalaireRespChanging(value);
+					this.SendPropertyChanging();
+					this._salaireResp = value;
+					this.SendPropertyChanged("salaireResp");
+					this.OnsalaireRespChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste", DbType="Int NOT NULL")]
+		public int idPoste
+		{
+			get
+			{
+				return this._idPoste;
+			}
+			set
+			{
+				if ((this._idPoste != value))
+				{
+					if (this._Poste.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidPosteChanging(value);
+					this.SendPropertyChanging();
+					this._idPoste = value;
+					this.SendPropertyChanged("idPoste");
+					this.OnidPosteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Responsable_Materiel", Storage="_Materiel", ThisKey="idPers", OtherKey="idPers")]
+		public EntitySet<Materiel> Materiel
+		{
+			get
+			{
+				return this._Materiel;
+			}
+			set
+			{
+				this._Materiel.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Responsable_Participant", Storage="_Participant", ThisKey="idPers", OtherKey="idResp")]
+		public EntitySet<Participant> Participant
+		{
+			get
+			{
+				return this._Participant;
+			}
+			set
+			{
+				this._Participant.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Responsable_Revenu", Storage="_Revenu", ThisKey="idPers", OtherKey="idPersonnel")]
+		public EntitySet<Revenu> Revenu
+		{
+			get
+			{
+				return this._Revenu;
+			}
+			set
+			{
+				this._Revenu.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Personnel_Responsable", Storage="_Personnel", ThisKey="idPers", OtherKey="idPers", IsForeignKey=true)]
+		public Personnel Personnel
+		{
+			get
+			{
+				return this._Personnel.Entity;
+			}
+			set
+			{
+				Personnel previousValue = this._Personnel.Entity;
+				if (((previousValue != value) 
+							|| (this._Personnel.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Personnel.Entity = null;
+						previousValue.Responsable = null;
+					}
+					this._Personnel.Entity = value;
+					if ((value != null))
+					{
+						value.Responsable = this;
+						this._idPers = value.idPers;
+					}
+					else
+					{
+						this._idPers = default(int);
+					}
+					this.SendPropertyChanged("Personnel");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Poste_Responsable", Storage="_Poste", ThisKey="idPoste", OtherKey="idPoste", IsForeignKey=true)]
+		public Poste Poste
+		{
+			get
+			{
+				return this._Poste.Entity;
+			}
+			set
+			{
+				Poste previousValue = this._Poste.Entity;
+				if (((previousValue != value) 
+							|| (this._Poste.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Poste.Entity = null;
+						previousValue.Responsable.Remove(this);
+					}
+					this._Poste.Entity = value;
+					if ((value != null))
+					{
+						value.Responsable.Add(this);
+						this._idPoste = value.idPoste;
+					}
+					else
+					{
+						this._idPoste = default(int);
+					}
+					this.SendPropertyChanged("Poste");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Materiel(Materiel entity)
+		{
+			this.SendPropertyChanging();
+			entity.Responsable = this;
+		}
+		
+		private void detach_Materiel(Materiel entity)
+		{
+			this.SendPropertyChanging();
+			entity.Responsable = null;
+		}
+		
+		private void attach_Participant(Participant entity)
+		{
+			this.SendPropertyChanging();
+			entity.Responsable = this;
+		}
+		
+		private void detach_Participant(Participant entity)
+		{
+			this.SendPropertyChanging();
+			entity.Responsable = null;
+		}
+		
+		private void attach_Revenu(Revenu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Responsable = this;
+		}
+		
+		private void detach_Revenu(Revenu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Responsable = null;
 		}
 	}
 	
@@ -3539,318 +3523,6 @@ namespace gestionFestival.DAL
 				if ((this._pass != value))
 				{
 					this._pass = value;
-				}
-			}
-		}
-	}
-	
-	public partial class AfficherPosteResult
-	{
-		
-		private string _nomPoste;
-		
-		private string _description;
-		
-		public AfficherPosteResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPoste", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string nomPoste
-		{
-			get
-			{
-				return this._nomPoste;
-			}
-			set
-			{
-				if ((this._nomPoste != value))
-				{
-					this._nomPoste = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string description
-		{
-			get
-			{
-				return this._description;
-			}
-			set
-			{
-				if ((this._description != value))
-				{
-					this._description = value;
-				}
-			}
-		}
-	}
-	
-	public partial class GetRespAndPosteResult
-	{
-		
-		private int _idPers;
-		
-		private string _fonction;
-		
-		private decimal _salaireResp;
-		
-		private int _idPoste;
-		
-		private int _idAdmin;
-		
-		private int _idPoste1;
-		
-		private string _nomPoste;
-		
-		private string _description;
-		
-		public GetRespAndPosteResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPers", DbType="Int NOT NULL")]
-		public int idPers
-		{
-			get
-			{
-				return this._idPers;
-			}
-			set
-			{
-				if ((this._idPers != value))
-				{
-					this._idPers = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fonction", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string fonction
-		{
-			get
-			{
-				return this._fonction;
-			}
-			set
-			{
-				if ((this._fonction != value))
-				{
-					this._fonction = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_salaireResp", DbType="Money NOT NULL")]
-		public decimal salaireResp
-		{
-			get
-			{
-				return this._salaireResp;
-			}
-			set
-			{
-				if ((this._salaireResp != value))
-				{
-					this._salaireResp = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste", DbType="Int NOT NULL")]
-		public int idPoste
-		{
-			get
-			{
-				return this._idPoste;
-			}
-			set
-			{
-				if ((this._idPoste != value))
-				{
-					this._idPoste = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAdmin", DbType="Int NOT NULL")]
-		public int idAdmin
-		{
-			get
-			{
-				return this._idAdmin;
-			}
-			set
-			{
-				if ((this._idAdmin != value))
-				{
-					this._idAdmin = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste1", DbType="Int NOT NULL")]
-		public int idPoste1
-		{
-			get
-			{
-				return this._idPoste1;
-			}
-			set
-			{
-				if ((this._idPoste1 != value))
-				{
-					this._idPoste1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPoste", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string nomPoste
-		{
-			get
-			{
-				return this._nomPoste;
-			}
-			set
-			{
-				if ((this._nomPoste != value))
-				{
-					this._nomPoste = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string description
-		{
-			get
-			{
-				return this._description;
-			}
-			set
-			{
-				if ((this._description != value))
-				{
-					this._description = value;
-				}
-			}
-		}
-	}
-	
-	public partial class GetAllMaterielResult
-	{
-		
-		private int _idMateriel;
-		
-		private string _nom;
-		
-		private decimal _prix;
-		
-		private int _quantité;
-		
-		private int _idDepense;
-		
-		private int _idPers;
-		
-		public GetAllMaterielResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMateriel", DbType="Int NOT NULL")]
-		public int idMateriel
-		{
-			get
-			{
-				return this._idMateriel;
-			}
-			set
-			{
-				if ((this._idMateriel != value))
-				{
-					this._idMateriel = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nom", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string nom
-		{
-			get
-			{
-				return this._nom;
-			}
-			set
-			{
-				if ((this._nom != value))
-				{
-					this._nom = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_prix", DbType="Money NOT NULL")]
-		public decimal prix
-		{
-			get
-			{
-				return this._prix;
-			}
-			set
-			{
-				if ((this._prix != value))
-				{
-					this._prix = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_quantité", DbType="Int NOT NULL")]
-		public int quantité
-		{
-			get
-			{
-				return this._quantité;
-			}
-			set
-			{
-				if ((this._quantité != value))
-				{
-					this._quantité = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idDepense", DbType="Int NOT NULL")]
-		public int idDepense
-		{
-			get
-			{
-				return this._idDepense;
-			}
-			set
-			{
-				if ((this._idDepense != value))
-				{
-					this._idDepense = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPers", DbType="Int NOT NULL")]
-		public int idPers
-		{
-			get
-			{
-				return this._idPers;
-			}
-			set
-			{
-				if ((this._idPers != value))
-				{
-					this._idPers = value;
 				}
 			}
 		}

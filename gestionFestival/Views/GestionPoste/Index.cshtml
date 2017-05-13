@@ -1,9 +1,7 @@
 ﻿@using gestionFestival.Models;
 @{
-     Layout = "~/Views/Shared/headerAdmin.cshtml";
+    Layout = "~/Views/Shared/headerAdmin.cshtml";
 }
-
-
 
 <h2>Gestion des postes</h2>
 <div>
@@ -27,14 +25,14 @@
 <div>
     <table>
         <tr><td>Poste</td><td>Assigné à</td><td>Modifier</td><td>Supprimer</td></tr>
-
-        @foreach (CPoste liste in (List<CPoste>)ViewBag.listeDesPostes)
+        @{int i = 0; }
+        @foreach (CPoste liste in ViewBag.listeDesPostes)
         {
             <tr>
                 <td>@liste.NomPoste </td>
                 <td>nom du responsable</td>
-                @*<td><button onclick="">@Html.ActionLink("Suppression Poste", "SuppressionPoste", "GestionPosteController", new { id = i }, null)</button></td>*@
-                @*<td><button onclick="">@Html.ActionLink("Modification", "GetModificationMaterielForm", "Responsable", new { id = i++ }, null)</button></td>*@
+                <td><button onclick="">@Html.ActionLink("Suppression Poste", "SuppressionPoste", "GestionPoste", new { id = i }, null)</button></td>
+                <td><button onclick="">@Html.ActionLink("Modification", "Poste", "GestionPoste", new { id = i++ }, null)</button></td>
             </tr>
         }
     </table>

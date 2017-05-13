@@ -1,0 +1,20 @@
+﻿@using gestionFestival.Models
+@{
+    ViewBag.Title = "ModiferPoste";
+}
+
+<h2>Modifer le Poste </h2>
+
+@using (Html.BeginForm("ChangementPoste", "GestionPoste"))
+{
+
+    CPoste poste = Model;
+    <label>Nom</label>
+    <input type="text" value="@poste.NomPoste" name="nomPoste" />
+    <label>Description</label>
+    <input type="text" value="@poste.Description" name="description" />
+    <input type="hidden" value="@ViewBag.index" name="index" />
+    <input type="submit" value="Confirmer la modification" />
+
+}
+
