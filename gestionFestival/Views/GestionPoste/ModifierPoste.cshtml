@@ -1,20 +1,29 @@
-﻿@using gestionFestival.Models
+﻿@model gestionFestival.Models.CPoste
+@using gestionFestival.Models
+
 @{
+    Layout = "~/Views/Shared/headerAdmin.cshtml";
     ViewBag.Title = "ModiferPoste";
 }
 
-<h2>Modifer le Poste </h2>
-
-@using (Html.BeginForm("ChangementPoste", "GestionPoste"))
+@using (Html.BeginForm("ChangementPoste","GestionPoste"))
 {
+    <fieldset>
+        <legend>Modifer le Poste</legend>
 
-    CPoste poste = Model;
-    <label>Nom</label>
-    <input type="text" value="@poste.NomPoste" name="nomPoste" />
-    <label>Description</label>
-    <input type="text" value="@poste.Description" name="description" />
-    <input type="hidden" value="@ViewBag.index" name="index" />
-    <input type="submit" value="Confirmer la modification" />
-
+        <div>
+            @Html.Label("Nouveau poste")
+            @Html.TextBoxFor(model => model.NomPoste)
+            @Html.ValidationMessageFor(model => model.NomPoste)
+            <br />
+            @Html.Label("Description")
+            @Html.TextBoxFor(model => model.Description)
+            <input type="hidden" value="@ViewBag.index" name="index" />
+        </div>
+        <div>
+            @ViewBag.message
+        </div>
+        <br />
+        <input type="submit" value="Confirmer la modification" />
+    </fieldset>
 }
-

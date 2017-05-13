@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace gestionFestival.Models
 {
@@ -33,7 +34,7 @@ namespace gestionFestival.Models
             get { return id; }
             set { id = value; }
         }
-
+        [Required(ErrorMessage = "Le nom du poste doit être saisi")]
         public string NomPoste
         {
             get { return nomPoste; }
