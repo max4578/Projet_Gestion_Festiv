@@ -12,6 +12,7 @@ namespace gestionFestival.Models
         /*    Attribut     */
         /*******************/
 
+        private int id;
         private string nomPoste;
         private string description;
         private double budgetDépart;
@@ -20,11 +21,17 @@ namespace gestionFestival.Models
         private CDepense dépense;
         private CRecette recette;
         private DAL.DataContextDataContext db;
-        
+
 
         /*******************/
         /*   Propriétés    */
         /*******************/
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
         public string NomPoste
         {
@@ -73,8 +80,12 @@ namespace gestionFestival.Models
         /*  Constructeur   */
         /*******************/
 
-        public CPoste()
+        public CPoste(int idPers)
         {
+            db = new DAL.DataContextDataContext();
+           var result= db.GetRespAndPoste(idPers).FirstOrDefault();
+            this.id = result.idPoste;
+            this.nomPoste = result.nomPoste;
 
         }
 

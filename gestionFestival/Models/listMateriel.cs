@@ -43,10 +43,10 @@ namespace gestionFestival.Models
 
         public List<CMateriel> GetList(int id)
         {
-           /* foreach(var elem in GetAllMateriel(id))
+            foreach(var elem in GetAllMateriel(id))
             {
                     listMat.Add(new CMateriel(elem.idMateriel,elem.nom,Convert.ToDouble(elem.prix),elem.quantité));
-            }*/
+            }
 
             return listMat;
         }

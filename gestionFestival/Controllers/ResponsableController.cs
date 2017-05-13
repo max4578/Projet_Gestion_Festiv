@@ -9,7 +9,16 @@ namespace gestionFestival.Controllers
 {
     public class ResponsableController : Controller
     {
-        
+
+        public ActionResult Index()
+        {
+
+            CPoste poste = new CPoste(((CResponsable)Session["user"]).Id);
+            Session["poste"] = poste;
+            CResponsable resp = poste.Responsable;
+            return View();
+        }
+
         // GET: Responsable
         public ActionResult gestionMateriel()
         {
@@ -38,16 +47,35 @@ namespace gestionFestival.Controllers
             CMateriel mat = list.ElementAt(id);
             list.RemoveAt(id);
             ViewBag.list = list;
-          //  mat.SupprimerMateriel();
+            mat.SupprimerMateriel();
             return View("gestionMateriel");
         }
 
 
-        public ActionResult AjouterMateriel(string nom, double prix, int qtt)
+        public ActionResult AjouterMateriel(string nom, double prix, int qtt,int id)
         {
             CMateriel mat = new CMateriel(nom,prix,qtt);
-            //mat.CreerMateriel(((CResponsable)Session["user"]).Id);
+            mat.CreerMateriel(((CResponsable)Session["user"]).Id, ((CPoste)Session["poste"]).Id);
             Session["listMateriel"] = null;
+            return Redirect("gestionMateriel");
+        }
+
+        public ActionResult ModifMaterialForm(int id)
+        {
+            List<CMateriel> list = (List<CMateriel>)Session["listMateriel"];
+            CMateriel mat = list.ElementAt(id);
+            ViewBag.index = id;
+
+            return View("ModifMatForm",mat);
+        }
+
+        public ActionResult ModifMat(string nom, double prix , int qtt,int index)
+        {
+            List<CMateriel> list = (List<CMateriel>)Session["listMateriel"];
+            list.ElementAt(index).Nom = nom;
+            list.ElementAt(index).Prix = prix;
+            list.ElementAt(index).Quantité = qtt;
+            list.ElementAt(index).ModifMateriel();
             return Redirect("gestionMateriel");
         }
     }

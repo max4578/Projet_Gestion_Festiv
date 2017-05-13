@@ -1,0 +1,18 @@
+﻿@using gestionFestival.Models
+
+@using (Html.BeginForm("ModifMat", "Responsable"))
+{
+
+    CMateriel mat = Model;
+    <label>Nom</label>
+    <input type="text" value="@mat.Nom" name="nom"/>
+    <label>Prix</label>
+    <input type="number" value="@mat.Prix" name="prix" />
+    <label>Quantité</label>
+    <input type="number" value="@mat.Quantité" name="qtt" />
+    <input type="hidden" value="@ViewBag.index" name="index"/>
+    <input type="submit" value="Confirmer la modification"/>
+
+}
+
+
