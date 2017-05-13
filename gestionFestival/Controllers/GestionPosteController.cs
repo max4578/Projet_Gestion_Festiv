@@ -17,21 +17,24 @@ namespace gestionFestival.Controllers
             ViewBag.listeDesPostes = Session["listePoste"];
             return View();
         }
-
         [HttpPost]
-        public ActionResult CreerPoste(string poste, string description)
+        public ActionResult Index(string poste, string description)
         {
+            listPoste listePoste = new listPoste();
+            Session["listePoste"] = listePoste.GetList();
+            ViewBag.listeDesPostes = Session["listePoste"];
             if (poste != "")
             {
                 CPoste nouveauPoste = new CPoste(poste, description, 0);
                 nouveauPoste.CreerPoste(poste, description);
                 ViewBag.message = "Le poste " + poste + " a bien été ajouté";
+                return Redirect("GestionPoste");
             }
             else
             {
                 ViewBag.message = "Veuillez entrer un nom pour le poste";
+                return View();
             }
-            return Redirect("Index");
         }
 
         public ActionResult Poste(int id)
@@ -50,13 +53,12 @@ namespace gestionFestival.Controllers
             {
                 CPoste nouveauPoste = ((List<CPoste>)Session["listePoste"]).ElementAt(index);
                 nouveauPoste.ModifierInfoPoste(nomPoste, description);
-                return Redirect("Index");
             }
             else
             {
                 ViewBag.message = "Veuillez entrer un nom pour le poste";
-                return View();
             }
+            return Redirect("Index");
         }
 
         public ActionResult SuppressionPoste(int id)
