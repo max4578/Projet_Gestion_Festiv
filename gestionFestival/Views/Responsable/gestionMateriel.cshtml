@@ -15,7 +15,7 @@
                 <td>@mat.Quantité</td>
                 <td>@(mat.Prix*mat.Quantité) €</td>
                 <td><button onclick="">@Html.ActionLink("Suppression Matériel", "SuppressionMateriel", "Responsable", new { id = i}, null)</button></td>
-                <td><button onclick="">@Html.ActionLink("Modification", "GetModificationMaterielForm", "Responsable", new { id = i++ }, null)</button></td>
+                <td><button onclick="">@Html.ActionLink("Modification", "ModifMaterialForm", "Responsable", new { id = i++ }, null)</button></td>
                 
             </tr>
 
@@ -31,7 +31,7 @@
                     <td><input type="number" name="prix" required="required" /></td>
                     <td><input type="number" name="qtt" required="required" /></td>
 
-                    <td><input type="submit" value="connexion" required="required" /></td>
+                    <td><input type="submit" value="Ajouter" required="required" /></td>
                 </tr>
 
             }

@@ -28,6 +28,12 @@ namespace gestionFestival.Models
         /*   Proprietes    */
         /*******************/
 
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
         public string NomPoste
         {
             get { return nomPoste; }
@@ -75,9 +81,13 @@ namespace gestionFestival.Models
         /*  Constructeur   */
         /*******************/
 
-        public CPoste()
+        public CPoste(int idPers)
         {
-           
+            db = new DAL.DataContextDataContext();
+           var result= db.GetRespAndPoste(idPers).FirstOrDefault();
+            this.id = result.idPoste;
+            this.nomPoste = result.nomPoste;
+
         }
 
         public CPoste(string nomPoste,string description,double budget)

@@ -73,20 +73,21 @@ namespace gestionFestival.Models
         /*    Méthodes     */
         /*******************/
 
-       /* public void CreerMateriel(int idPers)
+        public void CreerMateriel(int idPers,int idPoste)
         {
-            AjouterMateriel(nom,Convert.ToDecimal(prix),quantité,idPers);
-        }*/
+            AjouterMateriel(nom, Convert.ToDecimal(prix), quantité, idPers, idPoste);
+        }
 
-        public void DemandeModifMateriel()
+        public void ModifMateriel()
         {
-
+            UpdateMateriel(nom,(decimal)prix,quantité,id);
         }
 
 
-        /*public void SupprimerMateriel()
+        public void SupprimerMateriel()
         {
             DeleteMateriel(id);
-        }*/
+        }
     }
 }
+ 
