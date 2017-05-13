@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace gestionFestival.Models
 {
-    interface IPrévision
+    interface IPrevision
     {
         void Print();
         void ConsultGraph();

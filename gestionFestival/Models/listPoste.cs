@@ -1,4 +1,5 @@
 ﻿using System;
+using gestionFestival.DAL;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,8 +12,7 @@ namespace gestionFestival.Models
         /*    Attribut     */
         /*******************/
         private List<CPoste> listP;
-        private CPoste poste;
-        private DAL.DataContextDataContext db;
+        private DataContextDataContext db;
 
         /*******************/
         /*   Propriétés    */
@@ -31,7 +31,11 @@ namespace gestionFestival.Models
 
         public listPoste()
         {
-            
+            db = new DataContextDataContext();
+            listP = new List<CPoste>();
+            var chargerListePoste = db.AfficherPoste();
+            foreach (var poste in chargerListePoste)
+                listP.Add(new CPoste(poste.nomPoste, poste.description, 0));
         }
 
 
@@ -44,11 +48,9 @@ namespace gestionFestival.Models
 
         }
 
-        //public DAL.DataContextDataContext AfficherLesPostes()
-        //{
-        //    db = new DAL.DataContextDataContext();
-        //    var chargerListePoste = db.AfficherPoste();
-        //    return chargerListePoste;
-        //}
+        public List<CPoste> AfficherListe()
+        {
+            return listP;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using gestionFestival.DAL;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
@@ -6,24 +7,25 @@ using System.Web;
 
 namespace gestionFestival.Models
 {
-    public class CPoste :IPrévision
+    public class CPoste :IPrevision
     {
         /*******************/
         /*    Attribut     */
         /*******************/
 
-        private string nomPoste;
-        private string description;
-        private double budgetDépart;
-        private double budgetActuel;
+        private int id;
+        private string  nomPoste;
+        private string  description;
+        private double  budgetDepart;
+        private double  budgetActuel;
         private CResponsable responsable;
-        private CDepense dépense;
+        private CDepense depense;
         private CRecette recette;
-        private DAL.DataContextDataContext db;
-        
+        private DataContextDataContext db;
+
 
         /*******************/
-        /*   Propriétés    */
+        /*   Proprietes    */
         /*******************/
 
         public string NomPoste
@@ -40,8 +42,8 @@ namespace gestionFestival.Models
 
         public double BudgetDepart
         {
-            get { return budgetDépart; }
-            set { budgetDépart = value; }
+            get { return budgetDepart; }
+            set { budgetDepart = value; }
         }
 
         public double BudgetActuel
@@ -58,8 +60,8 @@ namespace gestionFestival.Models
 
         public CDepense Depense
         {
-            get { return dépense; }
-            set { dépense = value; }
+            get { return depense; }
+            set { depense = value; }
         }
         public CRecette Recette
         {
@@ -75,26 +77,26 @@ namespace gestionFestival.Models
 
         public CPoste()
         {
-
+           
         }
 
         public CPoste(string nomPoste,string description,double budget)
         {
             this.nomPoste = nomPoste;
             this.description = description;
-            budgetDépart = budget;
+            budgetDepart = budget;
             BudgetActuel = budget;
             // Ajouter le responsable
             
         }
 
         /*******************/
-        /*    Méthodes     */
+        /*    Methodes     */
         /*******************/
 
         public void CreerPoste(string nomPoste, string descriptionPoste)
         {
-            db = new DAL.DataContextDataContext();
+            db = new DataContextDataContext();
             db.AjouterPoste(nomPoste, descriptionPoste);
         }
 

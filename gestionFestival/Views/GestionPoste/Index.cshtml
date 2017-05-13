@@ -28,16 +28,15 @@
     <table>
         <tr><td>Poste</td><td>Assigné à</td><td>Modifier</td><td>Supprimer</td></tr>
 
-        @foreach (CPoste liste in ViewBag.listeDesPostes)
+        @foreach (CPoste liste in (List<CPoste>)ViewBag.listeDesPostes)
         {
             <tr>
                 <td>@liste.NomPoste </td>
                 <td>nom du responsable</td>
-                <td><button type="button">Modifier</button></td>
-                <td><button type="button">Supprimer</button></td>
+                @*<td><button onclick="">@Html.ActionLink("Suppression Poste", "SuppressionPoste", "GestionPosteController", new { id = i }, null)</button></td>*@
+                @*<td><button onclick="">@Html.ActionLink("Modification", "GetModificationMaterielForm", "Responsable", new { id = i++ }, null)</button></td>*@
             </tr>
         }
-
     </table>
 
 </div>

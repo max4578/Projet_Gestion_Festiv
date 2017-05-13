@@ -134,7 +134,7 @@
     <Compile Include="Models\CRecette.cs" />
     <Compile Include="Models\CResponsable.cs" />
     <Compile Include="Models\CRevenu.cs" />
-    <Compile Include="Models\IPrévision.cs" />
+    <Compile Include="Models\IPrevision.cs" />
     <Compile Include="Models\listMateriel.cs" />
     <Compile Include="Models\listParticipant.cs" />
     <Compile Include="Models\listPersonnel.cs" />
