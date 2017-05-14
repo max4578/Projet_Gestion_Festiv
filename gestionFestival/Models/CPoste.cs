@@ -85,19 +85,19 @@ namespace gestionFestival.Models
         public CPoste(int idPers)
         {
             db = new DAL.DataContextDataContext();
-           var result= db.GetRespAndPoste(idPers).FirstOrDefault();
+            var result= db.GetRespAndPoste(idPers).FirstOrDefault();
             this.id = result.idPoste;
             this.nomPoste = result.nomPoste;
         }
 
-        public CPoste(int id,string nomPoste,string description,double budget)
+        public CPoste(int id,string nomPoste,string description,double budget/*,CResponsable responsable*/)
         {
             this.id = id;
             this.nomPoste = nomPoste;
             this.description = description;
             budgetDepart = budget;
             BudgetActuel = budget;
-            // Ajouter le responsable
+            //this.responsable = responsable;
         }
 
         public CPoste(string nomPoste, string description, double budget)

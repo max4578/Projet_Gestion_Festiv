@@ -58,7 +58,7 @@ namespace gestionFestival.Controllers
                 CPoste nouveauPoste = ((List<CPoste>)Session["listePoste"]).ElementAt(index);
                 nouveauPoste.ModifierInfoPoste(poste.NomPoste, poste.Description);
                 ViewBag.listeDesPostes = Session["listePoste"];
-                return RedirectToAction("Index"); ;
+                return RedirectToAction("Index");
             }
         }
         public ActionResult SuppressionPoste(int id)
@@ -71,7 +71,27 @@ namespace gestionFestival.Controllers
             ViewBag.message = "Le poste " + poste.NomPoste + " a été supprimé";
             return View("Index");
         }
-
+        public ActionResult Responsable(int id)
+        {
+            List<CPoste> list = (List<CPoste>)Session["listePoste"];
+            CPoste poste = list.ElementAt(id);
+            List<CPersonnel> listP = new List<CPersonnel>
+            {
+                new CPersonnel {Id = 1 , Nom = "Jean", Prenom = "Albert1", Telephone = "", DateNaiss = new DateTime(), Mail = "p@gmail.com", Specialisation = ""  },
+                new CPersonnel {Id = 2 , Nom = "Jean", Prenom = "Albert2", Telephone = "", DateNaiss = new DateTime(), Mail = "p@gmail.com", Specialisation = ""  },
+                new CPersonnel {Id = 3 , Nom = "Jean", Prenom = "Albert3", Telephone = "", DateNaiss = new DateTime(), Mail = "p@gmail.com", Specialisation = ""  },
+                new CPersonnel {Id = 4 , Nom = "Jean", Prenom = "Albert4", Telephone = "", DateNaiss = new DateTime(), Mail = "p@gmail.com", Specialisation = ""  }
+            };
+            ViewBag.listePersonnel = new SelectList(listP, "Id", "Prenom");
+            ViewBag.index = id;
+            return View("AssignerPoste", poste);
+        }
+        [HttpPost]
+        public ActionResult AssignerPoste(CPersonnel personnel, int index)
+        {
+            List<CPoste> list = (List<CPoste>)Session["listePoste"];
+            return View("Index");
+        }
 
     }
 }

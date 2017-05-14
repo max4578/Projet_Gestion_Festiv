@@ -40,6 +40,7 @@
                 <td>@liste.NomPoste </td>
                 <td>nom du responsable</td>
                 <td><button onclick="">@Html.ActionLink("Suppression Poste", "SuppressionPoste", "GestionPoste", new { id = i }, null)</button></td>
+                <td><button onclick="">@Html.ActionLink("Assigner le poste", "Responsable", "GestionPoste", new { id = i }, null)</button></td>
                 <td><button onclick="">@Html.ActionLink("Modification", "Poste", "GestionPoste", new { id = i++ }, null)</button></td>
             </tr>
         }

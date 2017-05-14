@@ -170,6 +170,7 @@
     <Content Include="Views\Responsable\Index.cshtml" />
     <Content Include="Views\Responsable\ModifMatForm.cshtml" />
     <Content Include="Views\GestionPoste\ModifierPoste.cshtml" />
+    <Content Include="Views\GestionPoste\AssignerPoste.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

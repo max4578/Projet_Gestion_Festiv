@@ -1,0 +1,24 @@
+﻿@model gestionFestival.Models.CPoste
+@using gestionFestival.Models
+
+@{
+    Layout = "~/Views/Shared/headerAdmin.cshtml";
+    ViewBag.Title = "ModiferPoste";
+}
+
+@using (Html.BeginForm("ChangementPoste", "GestionPoste"))
+{
+    <fieldset>
+        <legend>Assigner le poste</legend>
+
+        <div>
+            @Html.Label(Model.NomPoste)
+            @Html.Label("assigné à ")
+            @Html.DropDownList("CPersonnel", (SelectList)ViewBag.ListePersonnel)
+
+            <input type="hidden" value="@ViewBag.index" name="index" />
+        </div>
+        <br />
+        <input type="submit" value="Assigner le poste" />
+    </fieldset>
+}
