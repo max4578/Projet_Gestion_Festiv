@@ -1,5 +1,60 @@
-﻿@{
+﻿@using gestionFestival.ViewModel;
+@using gestionFestival.Models;
+
+@{
     Layout = "~/Views/Shared/headerResponsable.cshtml";
-    <h1>Bienvenue</h1>
+    VM_Responsable vm = Model;
+
 }
 
+
+@{ 
+
+    
+    <div id="listMat">
+        <label>Liste du matériel</label>
+        <table>
+            <tr><th>Nom</th><th>prix par unité</th><th>quantité</th><th>Total</th>
+            @{double somme = 0; }
+            @foreach (CMateriel mat in vm.depense.ListMat.ListeMat)
+            {
+                <tr>
+                    <td>@mat.Nom</td>
+                    <td>@mat.Prix €</td>
+                    <td>@mat.Quantité</td>
+                    <td>@(mat.Prix * mat.Quantité) €</td>
+                </tr>
+                somme += mat.Prix * mat.Quantité;
+            }
+        </table>
+
+    </div>
+
+    <label>Liste des participants</label>
+    <div id="listPart">
+
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>email</th>
+                <th>Téléphone</th>
+                <th>Salaire</th>
+            
+                @foreach (CParticipant part in vm.depense.ListPart.ListePart)
+                {
+                <tr>
+                    <td>@part.Nom  @part.Prenom</td>
+                    <td>@part.Mail</td>
+                    <td>@part.Telephone</td>
+                    <td>@part.Salaire €</td>
+                </tr>
+                    somme +=part.Salaire;
+                }
+            </table>
+
+    </div>
+
+
+    <label>Budget</label>
+    <div id="budget">@somme/@vm.poste.BudgetDepart</div>
+}

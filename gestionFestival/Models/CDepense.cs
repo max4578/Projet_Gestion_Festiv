@@ -44,9 +44,10 @@ namespace gestionFestival.Models
         /*  Constructeur   */
         /*******************/
 
-        public CDepense()
+        public CDepense(int id)
         {
-
+            listMat = new listMateriel(id);
+            listPart = new listParticipant(id);
         }
 
         /*******************/
