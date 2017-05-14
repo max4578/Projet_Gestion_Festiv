@@ -13,35 +13,64 @@ namespace gestionFestival.Controllers
         public ActionResult Index()
         {
             listPoste listePoste = new listPoste();
-            Session["listePoste"] = listePoste.AfficherListe();
-            ViewBag.listeDesPostes = listePoste.AfficherListe();
+            Session["listePoste"] = listePoste.GetList();
+            ViewBag.listeDesPostes = Session["listePoste"];
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreerPoste(string poste, string description)
+        public ActionResult Index(CPoste poste)
         {
-            if (poste != "")
+            if (!ModelState.IsValid)
             {
-                CPoste nouveauPoste = new CPoste(poste, description, 0);
-                nouveauPoste.CreerPoste(poste, description);
-                ViewBag.message = "Le poste " + poste + " a bien été ajouté";
+                ViewBag.listeDesPostes = Session["listePoste"];
+                return View();
             }
             else
             {
-                ViewBag.message = "Veuillez entrer un nom pour le poste";
+                CPoste nouveauPoste = new CPoste(poste.NomPoste, poste.Description, 0);
+                nouveauPoste.CreerPoste(poste.NomPoste, poste.Description);
+                ViewBag.message = "Le poste " + poste.NomPoste + " a été ajouté";
+                listPoste listePoste = new listPoste();
+                Session["listePoste"] = listePoste.GetList();
+                return RedirectToAction("Index");
             }
-            return Redirect("Index");
         }
 
-        //public ActionResult SuppressionPoste(int id)
-        //{
-        //    List<CPoste> list = (List<CPoste>)Session["Poste"];
-        //    CPoste poste = list.ElementAt(id);
-        //    list.RemoveAt(id);
-        //    ViewBag.list = list;
-        //    return View("Index");
-        //}
+        public ActionResult Poste(int id)
+        {
+            List<CPoste> list = (List<CPoste>)Session["listePoste"];
+            CPoste poste = list.ElementAt(id);
+            ViewBag.index = id;
+            return View("ModifierPoste",poste);
+        }
+
+        [HttpPost]
+        public ActionResult ChangementPoste(CPoste poste, int index)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.index = index;
+                return View("ModifierPoste");
+            }
+            else
+            {
+                CPoste nouveauPoste = ((List<CPoste>)Session["listePoste"]).ElementAt(index);
+                nouveauPoste.ModifierInfoPoste(poste.NomPoste, poste.Description);
+                ViewBag.listeDesPostes = Session["listePoste"];
+                return RedirectToAction("Index"); ;
+            }
+        }
+        public ActionResult SuppressionPoste(int id)
+        {
+            List<CPoste> list = (List<CPoste>)Session["listePoste"];
+            CPoste poste = list.ElementAt(id);
+            poste.SupprimerUnPoste();
+            list.RemoveAt(id);
+            ViewBag.listeDesPostes = list;
+            ViewBag.message = "Le poste " + poste.NomPoste + " a été supprimé";
+            return View("Index");
+        }
 
 
     }

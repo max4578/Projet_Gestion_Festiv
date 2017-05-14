@@ -43,6 +43,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -102,6 +108,9 @@
       <LastGenOutput>DataContext.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="DAL\DataContext.dbml.layout">
+      <DependentUpon>DataContext.dbml</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -161,6 +170,7 @@
     <Content Include="Views\Shared\headerAdmin.cshtml" />
     <Content Include="Views\Responsable\Index.cshtml" />
     <Content Include="Views\Responsable\ModifMatForm.cshtml" />
+    <Content Include="Views\GestionPoste\ModifierPoste.cshtml" />
     <Content Include="Views\Responsable\gestionParticipant.cshtml" />
     <Content Include="Views\Responsable\ModifParticipantForm.cshtml" />
     <None Include="Web.Debug.config">
@@ -177,11 +187,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DAL\DataContext.dbml.layout">
-      <DependentUpon>DataContext.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

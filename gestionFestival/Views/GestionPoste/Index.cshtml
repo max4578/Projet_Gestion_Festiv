@@ -1,40 +1,46 @@
-﻿@using gestionFestival.Models;
+﻿@model gestionFestival.Models.CPoste
+@using gestionFestival.Models
 @{
-     Layout = "~/Views/Shared/headerAdmin.cshtml";
+    Layout = "~/Views/Shared/headerAdmin.cshtml";
 }
 
-
-
-<h2>Gestion des postes</h2>
+<h2></h2>
 <div>
-    @using (Html.BeginForm("CreerPoste", "GestionPoste"))
+    @using (Html.BeginForm("Index", "GestionPoste"))
     {
-        @Html.Label("Nouveau poste")
-        <span>  </span>
-        @Html.TextBox("poste")
-        <br /><br />
-        @Html.Label("Description du poste")
-        <span>  </span>
-        @Html.TextArea("description")
-        <br />
-        <input type="submit" value="Ajouter" />
+        <fieldset>
+            <legend>Gestion des postes</legend>
+
+            <div>
+                @Html.Label("Nouveau poste")
+                @Html.TextBoxFor(model => model.NomPoste)
+                @Html.ValidationMessageFor(model => model.NomPoste)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description)
+            </div>
+            <br />
+            <input type="submit" value="Ajouter" />
+        </fieldset>
     }
 </div>
+<br />
 <div>
-    @ViewBag.message
+    <h3>@ViewBag.message</h3>
 </div>
-<br /><br /><br /><br />
+<br />
 <div>
     <table>
-        <tr><td>Poste</td><td>Assigné à</td><td>Modifier</td><td>Supprimer</td></tr>
-
-        @foreach (CPoste liste in (List<CPoste>)ViewBag.listeDesPostes)
+        <tr><td>Poste</td><td>Assigné à</td><td></td><td></td></tr>
+        @{int i = 0; }
+        @foreach (CPoste liste in ViewBag.listeDesPostes)
         {
             <tr>
                 <td>@liste.NomPoste </td>
                 <td>nom du responsable</td>
-                @*<td><button onclick="">@Html.ActionLink("Suppression Poste", "SuppressionPoste", "GestionPosteController", new { id = i }, null)</button></td>*@
-                @*<td><button onclick="">@Html.ActionLink("Modification", "GetModificationMaterielForm", "Responsable", new { id = i++ }, null)</button></td>*@
+                <td><button onclick="">@Html.ActionLink("Suppression Poste", "SuppressionPoste", "GestionPoste", new { id = i }, null)</button></td>
+                <td><button onclick="">@Html.ActionLink("Modification", "Poste", "GestionPoste", new { id = i++ }, null)</button></td>
             </tr>
         }
     </table>

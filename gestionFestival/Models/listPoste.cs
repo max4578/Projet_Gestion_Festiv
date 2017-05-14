@@ -35,7 +35,7 @@ namespace gestionFestival.Models
             listP = new List<CPoste>();
             var chargerListePoste = db.AfficherPoste();
             foreach (var poste in chargerListePoste)
-                listP.Add(new CPoste(poste.nomPoste, poste.description, 0));
+                listP.Add(new CPoste(poste.idPoste,poste.nomPoste, poste.description, 0));
         }
 
 
@@ -43,12 +43,7 @@ namespace gestionFestival.Models
         /*    Méthodes     */
         /*******************/
 
-        public void CalculTotal()
-        {
-
-        }
-
-        public List<CPoste> AfficherListe()
+        public List<CPoste> GetList()
         {
             return listP;
         }

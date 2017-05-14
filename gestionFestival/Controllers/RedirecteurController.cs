@@ -19,17 +19,17 @@ namespace gestionFestival.Controllers
             string type = user.GetType().ToString();
             
             Session["user"] = user;
-            //if (type == "gestionFestival.Models.CAdministrateur")
-            //{
-            //    //Layout = "/Views/Shared/headerAdmin.cshtml";
-            //}
+            if (type == "gestionFestival.Models.CAdministrateur")
+            {
+                return Redirect("GestionPoste");
+            }
 
             //else if (type == "gestionFestival.Models.CComptable")
             //{
-            //   // Layout = "~/Views/Shared/headerComptable.cshtml";
+            //    // Layout = "~/Views/Shared/headerComptable.cshtml";
             //}
 
-            //else 
+            else
             if (type == "gestionFestival.Models.CResponsable")
             {
                 return Redirect("Responsable");
