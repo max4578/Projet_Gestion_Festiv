@@ -108,8 +108,6 @@ namespace gestionFestival.Models
             budgetDepart = budget;
             BudgetActuel = budget;
             // Ajouter le responsable
-
-
         }
 
         /*******************/
