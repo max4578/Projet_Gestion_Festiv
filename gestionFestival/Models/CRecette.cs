@@ -39,9 +39,11 @@ namespace gestionFestival.Models
         /*  Constructeur   */
         /*******************/
 
-        public CRecette()
+        public CRecette(int id)
         {
-
+            listRev = new listRevenu();
+            listRev.GetList(id);
+            
         }
 
         /*******************/
@@ -50,7 +52,12 @@ namespace gestionFestival.Models
 
         public void CalculerRecette()
         {
+            foreach (CRevenu rev in listRev.ListeRev)
+            {
+                totalRecette += rev.Montant;
+            }
 
+          
         }
     }
 }

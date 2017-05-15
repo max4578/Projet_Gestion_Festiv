@@ -17,7 +17,8 @@ namespace gestionFestival.Controllers
         {
             VM_Responsable VM_Resp = new VM_Responsable();
             VM_Resp.depense = new CDepense(((CResponsable)Session["user"]).Id);
-            VM_Resp.poste = new CPoste(((CResponsable)Session["user"]).Id);          
+            VM_Resp.poste = new CPoste(((CResponsable)Session["user"]).Id);
+            VM_Resp.recette = new CRecette(((CResponsable)Session["user"]).Id);
             Session["poste"] = VM_Resp.poste;
            
             return View(VM_Resp);
@@ -29,23 +30,19 @@ namespace gestionFestival.Controllers
         /************************/
         public ActionResult gestionMateriel()
         {
-          
+            CResponsable resp = (CResponsable)Session["user"];
             listMateriel listM = new listMateriel(((CResponsable)Session["user"]).Id);
 
             
             //Rajouter exception ici
-            if (Session["listMateriel"]==null) { 
-                List<CMateriel> list =listM.ListeMat;
+            if (Session["listMateriel"]==null) {
+                List<CMateriel> list = resp.ConsultListMateriel();
                 Session["listMateriel"] = list;
-                ViewBag.list = list;
                 return View("gestionMateriel");
             }
             else
             {
-
-                ViewBag.list = (List<CMateriel>)Session["listMateriel"];
                 return View("gestionMateriel");
-
             }
 
         }
@@ -97,21 +94,20 @@ namespace gestionFestival.Controllers
 
 
         /************************/
-        /*  Gestion participant    */
+        /*  Gestion participant */
         /************************/
         public ActionResult gestionParticipant()
         {
-
-            ListBox lbPers = new ListBox();
-            listPersonnel lp = new listPersonnel();
+            CResponsable resp = (CResponsable)Session["user"];
             
-            Session["listPersonnel"] = lp.ListePersonnel;
+            
+            Session["listPersonnel"] = resp.ConsultListPersonnel();
             listParticipant listP= new listParticipant(((CResponsable)Session["user"]).Id);
             //Rajouter exception ici
             if (Session["listParticipant"] == null)
             {
                 List<CParticipant> list = listP.ListePart;
-                Session["listParticipant"] = list;
+                Session["listParticipant"] = resp.ConsultListParticipant() ;
                 ViewBag.list = list;
                 return View("gestionParticipant");
             }
@@ -160,16 +156,102 @@ namespace gestionFestival.Controllers
 
         public ActionResult ModifParticipant(double salaire, int heureTravail, int index)
         {
-            CResponsable resp = (CResponsable)Session["user"];
+          
             List<CParticipant> list = (List<CParticipant>)Session["listParticipant"];
 
             list.ElementAt(index).Salaire = salaire;
             list.ElementAt(index).HeureTravail = heureTravail;
             
             CParticipant part = list.ElementAt(index);
-            resp.DemandeModificationParticipant(part, salaire,heureTravail);
+            ((CResponsable)Session["user"]).DemandeModificationParticipant(part, salaire,heureTravail);
 
             return Redirect("gestionParticipant");
         }
+
+
+
+        /************************/
+        /*  Gestion Revenu    */
+        /************************/
+        public ActionResult gestionRevenu()
+        {
+            CResponsable resp = (CResponsable)Session["user"];
+
+            //Rajouter exception ici
+            if (Session["listRevenu"] == null)
+            {
+                List<CRevenu> list = resp.ConsultListRevenu();
+                Session["listRevenu"] = list;
+                return View("gestionRevenu");
+            }
+            else
+            {
+                return View("gestionRevenu");
+            }
+
+        }
+
+        public ActionResult SuppressionRevenu(int id)
+        {
+            CResponsable resp = (CResponsable)Session["user"];
+            CRevenu rev = ((List<CRevenu>)Session["listRevenu"]).ElementAt(id);
+            resp.DemandeSuppressionRevenu(rev);
+            ((List<CRevenu>)Session["listRevenu"]).RemoveAt(id);
+            return View("gestionRevenu");
+        }
+
+
+        public ActionResult AjouterRevenu(string description, double montant)
+        {
+            CResponsable resp = (CResponsable)Session["user"];
+            CRevenu rev = new CRevenu(description, montant);
+            resp.DemandeAjoutRevenu(rev, ((CPoste)Session["poste"]).Id);
+            Session["listRevenu"] = null;
+            return Redirect("gestionRevenu");
+        }
+
+        public ActionResult ModifRevenuForm(int id)
+        {
+            List<CRevenu> list = (List<CRevenu>)Session["listRevenu"];
+            CRevenu rev = list.ElementAt(id);
+            ViewBag.index = id;
+
+            return View("ModifRevenuForm", rev);
+        }
+
+        public ActionResult ModifRevenu(string description,double montant, int index)
+        {
+            CResponsable resp = (CResponsable)Session["user"];
+            List<CRevenu> list = (List<CRevenu>)Session["listRevenu"];
+
+            list.ElementAt(index).Description=description;
+            list.ElementAt(index).Montant = montant;
+            //list.ElementAt(index).ModifRevenu();
+            CRevenu rev = list.ElementAt(index);
+            resp.DemandeModificationRevenu(rev, description,montant);
+
+            return Redirect("gestionRevenu");
+        }
+
+
+        /************************/
+        /*  Gestion Budget      */
+        /************************/
+
+        public ActionResult gestionBudget()
+        {
+            CResponsable resp = (CResponsable)Session["user"];
+            CDepense Dep = new CDepense(resp.Id);
+            CRecette Rec = new CRecette(resp.Id);
+            Dep.CalculerDepense();
+            Rec.CalculerRecette();
+            ViewBag.Dep = Dep;
+            ViewBag.Rec = Rec;
+
+           
+
+            return View();
+        }
+
     }
 }

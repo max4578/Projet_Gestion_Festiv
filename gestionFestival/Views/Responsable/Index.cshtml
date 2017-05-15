@@ -13,7 +13,7 @@
     
     <div id="listMat">
         <label>Liste du matériel</label>
-        <table>
+        <table border="1">
             <tr><th>Nom</th><th>prix par unité</th><th>quantité</th><th>Total</th>
             @{double somme = 0; }
             @foreach (CMateriel mat in vm.depense.ListMat.ListeMat)
@@ -33,7 +33,9 @@
     <label>Liste des participants</label>
     <div id="listPart">
 
-        <table>
+         <br/>
+
+        <table border="1">
             <tr>
                 <th>Nom</th>
                 <th>email</th>
@@ -53,6 +55,30 @@
             </table>
 
     </div>
+
+
+
+    <label>Liste des revenus</label>
+    <div id="listRev" >
+
+        <table  border="1">
+            <tr>
+                <th>Description</th>
+                <th>Montant</th>
+               
+
+                @foreach (CRevenu rev in vm.recette.ListRev.ListeRev)
+                {
+                <tr>
+                    <td>@rev.Description</td>
+                    <td>@rev.Montant €</td>
+                    
+                </tr>
+                    somme -= rev.Montant;
+                }
+            </table>
+
+        </div>
 
 
     <label>Budget</label>

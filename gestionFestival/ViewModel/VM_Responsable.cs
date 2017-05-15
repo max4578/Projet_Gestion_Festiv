@@ -10,5 +10,6 @@ namespace gestionFestival.ViewModel
     {
          public CDepense depense { get; set; }
          public CPoste poste  { get; set; }
+        public CRecette recette { get; set; }
     }
 }
