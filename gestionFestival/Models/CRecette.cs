@@ -52,7 +52,12 @@ namespace gestionFestival.Models
 
         public void CalculerRecette()
         {
+            foreach (CRevenu rev in listRev.ListeRev)
+            {
+                totalRecette += rev.Montant;
+            }
 
+          
         }
     }
 }

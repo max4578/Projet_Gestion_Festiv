@@ -57,6 +57,15 @@ namespace gestionFestival.Models
         public void CalculerDepense()
         {
 
+            foreach(CMateriel mat in listMat.ListeMat)
+            {
+                totalDepense += mat.Prix * mat.Quantité;
+            }
+
+            foreach (CParticipant part in ListPart.ListePart)
+            {
+                totalDepense += part.Salaire;
+            }
         }
     }
 }

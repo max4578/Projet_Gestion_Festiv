@@ -232,5 +232,26 @@ namespace gestionFestival.Controllers
 
             return Redirect("gestionRevenu");
         }
+
+
+        /************************/
+        /*  Gestion Budget      */
+        /************************/
+
+        public ActionResult gestionBudget()
+        {
+            CResponsable resp = (CResponsable)Session["user"];
+            CDepense Dep = new CDepense(resp.Id);
+            CRecette Rec = new CRecette(resp.Id);
+            Dep.CalculerDepense();
+            Rec.CalculerRecette();
+            ViewBag.Dep = Dep;
+            ViewBag.Rec = Rec;
+
+           
+
+            return View();
+        }
+
     }
 }

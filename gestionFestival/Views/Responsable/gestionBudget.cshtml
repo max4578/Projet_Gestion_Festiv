@@ -1,0 +1,14 @@
+﻿@using gestionFestival.Models;
+
+@{
+    Layout = "~/Views/Shared/headerResponsable.cshtml";
+
+
+    CDepense Dep = ViewBag.Dep;
+    CRecette Rec = ViewBag.Rec;
+
+    <h1>Budget alloué au poste =@Dep.Total</h1>
+
+    <h1>Recette alloué au poste =@Rec.Total</h1>
+
+}
