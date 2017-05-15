@@ -90,6 +90,7 @@ namespace gestionFestival.Controllers
         public ActionResult AssignerPoste(CPersonnel personnel, int index)
         {
             List<CPoste> list = (List<CPoste>)Session["listePoste"];
+            ViewBag.listeDesPostes = list;
             return View("Index");
         }
 
