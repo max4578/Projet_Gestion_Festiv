@@ -48,6 +48,8 @@ namespace gestionFestival.Models
             set { quantité = value; }
         }
 
+        public int Quantite { get; internal set; }
+
 
 
         /*******************/

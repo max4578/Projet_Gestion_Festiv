@@ -16,7 +16,7 @@ namespace gestionFestival.Models
 
 
         /*******************/
-        /*   Propriétés    */
+        /*   Proprietes    */
         /*******************/
 
         public string Fonction
@@ -40,9 +40,15 @@ namespace gestionFestival.Models
 
         }
 
-        public CResponsable(int id, string nom, string prénom, string téléphone,
-        DateTime dateNaiss, string mail, string spécialisation,string fonction,double salaireResp)
-        :base(id,nom,prénom, téléphone,dateNaiss,mail,spécialisation)
+        public CResponsable(int id,string fonction, double salaireResp):base(id)
+        {
+            this.fonction = fonction;
+            this.Salaire = salaireResp;
+        }
+
+        public CResponsable(int id, string nom, string prenom, string telephone,
+        DateTime dateNaiss, string mail, string specialisation,string fonction,double salaireResp)
+        :base(id,nom,prenom, telephone,dateNaiss,mail,specialisation)
         {
 
             this.fonction = fonction;
@@ -51,12 +57,12 @@ namespace gestionFestival.Models
         }
 
         /*******************/
-        /*    Méthodes     */
+        /*    Methodes     */
         /*******************/
 
-        public void CreerReponsable()
+        public void CreerResponsable(int idPoste)
         {
-            
+            AjouterResponsable(Id,fonction,(decimal)salaireResp,idPoste);
         }
 
         public void DemandeAjoutMateriel(CMateriel mat,int idPoste)
@@ -69,7 +75,7 @@ namespace gestionFestival.Models
         {
             mat.Nom = nom;
             mat.Prix = prix;
-            mat.Quantité = qtt;
+            mat.Quantite = qtt;
             mat.ModifMateriel();
         }
 

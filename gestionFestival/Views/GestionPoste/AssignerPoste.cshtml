@@ -14,9 +14,15 @@
         <div>
             @Html.Label(Model.NomPoste)
             @Html.Label("assigné à ")
-            @Html.DropDownList("CPersonnel", (SelectList)ViewBag.ListePersonnel)
-
+            @Html.DropDownList("selectResponsable", (SelectList)ViewBag.ListePersonnel)
             <input type="hidden" value="@ViewBag.index" name="index" />
+            <br />
+            @Html.Label("Description du poste")
+            @Html.TextArea("fonction", "", new { @class = "form-control" })
+            <br />
+            @Html.Label("Salaire")
+            @Html.TextBox("Salaire") €
+
         </div>
         <br />
         <input type="submit" value="Assigner le poste" />

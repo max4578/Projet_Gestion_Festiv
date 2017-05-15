@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using gestionFestival.Models;
+using gestionFestival.ViewModel;
 
 namespace gestionFestival.Controllers
 {
@@ -13,8 +14,10 @@ namespace gestionFestival.Controllers
         public ActionResult Index()
         {
             listPoste listePoste = new listPoste();
-            Session["listePoste"] = listePoste.GetList();
+            Session["listePosteNonAssigne"] = listePoste.GetListPosteNonAssigne();
+            Session["listePoste"] = listePoste.GetListPosteAssigne();
             ViewBag.listeDesPostes = Session["listePoste"];
+            ViewBag.listeDesPostesNonAssigne = Session["listePosteNonAssigne"];
             return View();
         }
 
@@ -30,9 +33,8 @@ namespace gestionFestival.Controllers
             {
                 CPoste nouveauPoste = new CPoste(poste.NomPoste, poste.Description, 0);
                 nouveauPoste.CreerPoste(poste.NomPoste, poste.Description);
-                ViewBag.message = "Le poste " + poste.NomPoste + " a été ajouté";
                 listPoste listePoste = new listPoste();
-                Session["listePoste"] = listePoste.GetList();
+                Session["listePoste"] = listePoste.GetListPosteNonAssigne();
                 return RedirectToAction("Index");
             }
         }
@@ -71,25 +73,38 @@ namespace gestionFestival.Controllers
             ViewBag.message = "Le poste " + poste.NomPoste + " a été supprimé";
             return View("Index");
         }
+
+        public ActionResult SuppressionPosteAssigne(int id)
+        {
+            List<VM_PosteAssigne> list = (List<VM_PosteAssigne>)Session["listePoste"];
+            CPoste poste = list.ElementAt(id).poste;
+            poste.SupprimerUnPoste();
+            list.RemoveAt(id);
+            ViewBag.listeDesPostes = list;
+            ViewBag.message = "Le poste " + poste.NomPoste + " a été supprimé";
+            return View("Index");
+        }
         public ActionResult Responsable(int id)
         {
             List<CPoste> list = (List<CPoste>)Session["listePoste"];
             CPoste poste = list.ElementAt(id);
-            List<CPersonnel> listP = new List<CPersonnel>
-            {
-                new CPersonnel {Id = 1 , Nom = "Jean", Prenom = "Albert1", Telephone = "", DateNaiss = new DateTime(), Mail = "p@gmail.com", Specialisation = ""  },
-                new CPersonnel {Id = 2 , Nom = "Jean", Prenom = "Albert2", Telephone = "", DateNaiss = new DateTime(), Mail = "p@gmail.com", Specialisation = ""  },
-                new CPersonnel {Id = 3 , Nom = "Jean", Prenom = "Albert3", Telephone = "", DateNaiss = new DateTime(), Mail = "p@gmail.com", Specialisation = ""  },
-                new CPersonnel {Id = 4 , Nom = "Jean", Prenom = "Albert4", Telephone = "", DateNaiss = new DateTime(), Mail = "p@gmail.com", Specialisation = ""  }
-            };
-            ViewBag.listePersonnel = new SelectList(listP, "Id", "Prenom");
+            listPersonnel listP = new listPersonnel();
+            ViewBag.listePersonnel = new SelectList(listP.GetListPersonnel(), "Id", "Nom","Prenom");
             ViewBag.index = id;
             return View("AssignerPoste", poste);
         }
         [HttpPost]
-        public ActionResult AssignerPoste(CPersonnel personnel, int index)
+        public ActionResult AssignerPoste(string selectResponsable,string fonction,int salaire, int index)
         {
+            int key;
             List<CPoste> list = (List<CPoste>)Session["listePoste"];
+            CPoste poste = list.ElementAt(index);
+            bool result = int.TryParse(selectResponsable, out key);
+            if (result)
+            {
+                CResponsable responsable = new CResponsable(key, fonction, salaire);
+                responsable.CreerResponsable(poste.Id);
+            }
             ViewBag.listeDesPostes = list;
             return View("Index");
         }

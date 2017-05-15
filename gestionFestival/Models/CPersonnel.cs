@@ -6,7 +6,7 @@ using gestionFestival.DAL;
 
 namespace gestionFestival.Models
 {
-    public class CPersonnel:DataContextDataContext
+    public class CPersonnel : DataContextDataContext
     {
 
         /*******************/
@@ -74,7 +74,7 @@ namespace gestionFestival.Models
             set { specialisation = value; }
         }
 
-       
+
 
         /*******************/
         /*  Constructeur   */
@@ -83,6 +83,11 @@ namespace gestionFestival.Models
         public CPersonnel()
         {
 
+        }
+
+        public CPersonnel(int id)
+        {
+            this.id = id;
         }
 
         public CPersonnel(int id, string nom, string prenom, string telephone,
@@ -145,7 +150,7 @@ namespace gestionFestival.Models
 
 
 
-        
+
 
         private object FindStatut(int id, VérificationLoginResult q)
         {
@@ -164,7 +169,7 @@ namespace gestionFestival.Models
             else if (querry3 != null)
                 return new CResponsable(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, querry3.fonction, Convert.ToDouble(querry3.salaireResp));
             else if (querry4 != null)
-                return new CParticipant(q.idPers,q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry4.salaire), querry4.heureTravail);
+                return new CParticipant(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry4.salaire), querry4.heureTravail);
             else
                 return new CPersonnel(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation);
 
@@ -184,5 +189,9 @@ namespace gestionFestival.Models
             }
         }
 
+
+        public override string ToString(){
+            return "test";
+        }
     }
 }

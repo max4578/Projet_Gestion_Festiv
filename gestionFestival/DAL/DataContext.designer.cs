@@ -235,13 +235,6 @@ namespace gestionFestival.DAL
 			return ((ISingleResult<GetPersonnelOnlyResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetRespAndPoste")]
-		public ISingleResult<GetRespAndPosteResult> GetRespAndPoste([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPers);
-			return ((ISingleResult<GetRespAndPosteResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isAdmin")]
 		public ISingleResult<isAdminResult> isAdmin([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
 		{
@@ -317,6 +310,34 @@ namespace gestionFestival.DAL
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<AfficherPosteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetRespAndPoste")]
+		public ISingleResult<GetRespAndPosteResult> GetRespAndPoste([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPers);
+			return ((ISingleResult<GetRespAndPosteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AjouterResponsable")]
+		public int AjouterResponsable([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPersonnel, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string fonction, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> salaireResp, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPoste)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPersonnel, fonction, salaireResp, idPoste);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AfficherPosteNonAttribue")]
+		public ISingleResult<AfficherPosteNonAttribueResult> AfficherPosteNonAttribue()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<AfficherPosteNonAttribueResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AfficherPosteAssigne")]
+		public ISingleResult<AfficherPosteAssigneResult> AfficherPosteAssigne()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<AfficherPosteAssigneResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -3251,194 +3272,6 @@ namespace gestionFestival.DAL
 		}
 	}
 	
-	public partial class GetRespAndPosteResult
-	{
-		
-		private int _idPers;
-		
-		private string _fonction;
-		
-		private decimal _salaireResp;
-		
-		private int _idPoste;
-		
-		private int _idAdmin;
-		
-		private int _idPoste1;
-		
-		private string _nomPoste;
-		
-		private string _description;
-		
-		private decimal _budgetDepart;
-		
-		private decimal _budgetActuel;
-		
-		public GetRespAndPosteResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPers", DbType="Int NOT NULL")]
-		public int idPers
-		{
-			get
-			{
-				return this._idPers;
-			}
-			set
-			{
-				if ((this._idPers != value))
-				{
-					this._idPers = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fonction", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string fonction
-		{
-			get
-			{
-				return this._fonction;
-			}
-			set
-			{
-				if ((this._fonction != value))
-				{
-					this._fonction = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_salaireResp", DbType="Money NOT NULL")]
-		public decimal salaireResp
-		{
-			get
-			{
-				return this._salaireResp;
-			}
-			set
-			{
-				if ((this._salaireResp != value))
-				{
-					this._salaireResp = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste", DbType="Int NOT NULL")]
-		public int idPoste
-		{
-			get
-			{
-				return this._idPoste;
-			}
-			set
-			{
-				if ((this._idPoste != value))
-				{
-					this._idPoste = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAdmin", DbType="Int NOT NULL")]
-		public int idAdmin
-		{
-			get
-			{
-				return this._idAdmin;
-			}
-			set
-			{
-				if ((this._idAdmin != value))
-				{
-					this._idAdmin = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste1", DbType="Int NOT NULL")]
-		public int idPoste1
-		{
-			get
-			{
-				return this._idPoste1;
-			}
-			set
-			{
-				if ((this._idPoste1 != value))
-				{
-					this._idPoste1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPoste", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string nomPoste
-		{
-			get
-			{
-				return this._nomPoste;
-			}
-			set
-			{
-				if ((this._nomPoste != value))
-				{
-					this._nomPoste = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string description
-		{
-			get
-			{
-				return this._description;
-			}
-			set
-			{
-				if ((this._description != value))
-				{
-					this._description = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budgetDepart", DbType="Money NOT NULL")]
-		public decimal budgetDepart
-		{
-			get
-			{
-				return this._budgetDepart;
-			}
-			set
-			{
-				if ((this._budgetDepart != value))
-				{
-					this._budgetDepart = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budgetActuel", DbType="Money NOT NULL")]
-		public decimal budgetActuel
-		{
-			get
-			{
-				return this._budgetActuel;
-			}
-			set
-			{
-				if ((this._budgetActuel != value))
-				{
-					this._budgetActuel = value;
-				}
-			}
-		}
-	}
-	
 	public partial class isAdminResult
 	{
 		
@@ -4048,6 +3881,552 @@ namespace gestionFestival.DAL
 				if ((this._budgetActuel != value))
 				{
 					this._budgetActuel = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetRespAndPosteResult
+	{
+		
+		private int _idPers;
+		
+		private string _fonction;
+		
+		private decimal _salaireResp;
+		
+		private int _idPoste;
+		
+		private int _idPoste1;
+		
+		private string _nomPoste;
+		
+		private string _description;
+		
+		private System.Nullable<decimal> _budgetDepart;
+		
+		private System.Nullable<decimal> _budgetActuel;
+		
+		public GetRespAndPosteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPers", DbType="Int NOT NULL")]
+		public int idPers
+		{
+			get
+			{
+				return this._idPers;
+			}
+			set
+			{
+				if ((this._idPers != value))
+				{
+					this._idPers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fonction", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string fonction
+		{
+			get
+			{
+				return this._fonction;
+			}
+			set
+			{
+				if ((this._fonction != value))
+				{
+					this._fonction = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_salaireResp", DbType="Money NOT NULL")]
+		public decimal salaireResp
+		{
+			get
+			{
+				return this._salaireResp;
+			}
+			set
+			{
+				if ((this._salaireResp != value))
+				{
+					this._salaireResp = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste", DbType="Int NOT NULL")]
+		public int idPoste
+		{
+			get
+			{
+				return this._idPoste;
+			}
+			set
+			{
+				if ((this._idPoste != value))
+				{
+					this._idPoste = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste1", DbType="Int NOT NULL")]
+		public int idPoste1
+		{
+			get
+			{
+				return this._idPoste1;
+			}
+			set
+			{
+				if ((this._idPoste1 != value))
+				{
+					this._idPoste1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPoste", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nomPoste
+		{
+			get
+			{
+				return this._nomPoste;
+			}
+			set
+			{
+				if ((this._nomPoste != value))
+				{
+					this._nomPoste = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(50)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budgetDepart", DbType="Money")]
+		public System.Nullable<decimal> budgetDepart
+		{
+			get
+			{
+				return this._budgetDepart;
+			}
+			set
+			{
+				if ((this._budgetDepart != value))
+				{
+					this._budgetDepart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budgetActuel", DbType="Money")]
+		public System.Nullable<decimal> budgetActuel
+		{
+			get
+			{
+				return this._budgetActuel;
+			}
+			set
+			{
+				if ((this._budgetActuel != value))
+				{
+					this._budgetActuel = value;
+				}
+			}
+		}
+	}
+	
+	public partial class AfficherPosteNonAttribueResult
+	{
+		
+		private int _idPoste;
+		
+		private string _nomPoste;
+		
+		private string _description;
+		
+		public AfficherPosteNonAttribueResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste", DbType="Int NOT NULL")]
+		public int idPoste
+		{
+			get
+			{
+				return this._idPoste;
+			}
+			set
+			{
+				if ((this._idPoste != value))
+				{
+					this._idPoste = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPoste", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nomPoste
+		{
+			get
+			{
+				return this._nomPoste;
+			}
+			set
+			{
+				if ((this._nomPoste != value))
+				{
+					this._nomPoste = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(50)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+	}
+	
+	public partial class AfficherPosteAssigneResult
+	{
+		
+		private int _idPoste;
+		
+		private string _nomPoste;
+		
+		private string _description;
+		
+		private System.Nullable<decimal> _budgetDepart;
+		
+		private System.Nullable<decimal> _budgetActuel;
+		
+		private int _idPers;
+		
+		private string _fonction;
+		
+		private decimal _salaireResp;
+		
+		private int _idPoste1;
+		
+		private int _idPers1;
+		
+		private string _nomPers;
+		
+		private string _prenomPers;
+		
+		private System.DateTime _dateNaiss;
+		
+		private string _email;
+		
+		private string _telephone;
+		
+		private string _specialisation;
+		
+		private string _pass;
+		
+		public AfficherPosteAssigneResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste", DbType="Int NOT NULL")]
+		public int idPoste
+		{
+			get
+			{
+				return this._idPoste;
+			}
+			set
+			{
+				if ((this._idPoste != value))
+				{
+					this._idPoste = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPoste", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nomPoste
+		{
+			get
+			{
+				return this._nomPoste;
+			}
+			set
+			{
+				if ((this._nomPoste != value))
+				{
+					this._nomPoste = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(50)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budgetDepart", DbType="Money")]
+		public System.Nullable<decimal> budgetDepart
+		{
+			get
+			{
+				return this._budgetDepart;
+			}
+			set
+			{
+				if ((this._budgetDepart != value))
+				{
+					this._budgetDepart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budgetActuel", DbType="Money")]
+		public System.Nullable<decimal> budgetActuel
+		{
+			get
+			{
+				return this._budgetActuel;
+			}
+			set
+			{
+				if ((this._budgetActuel != value))
+				{
+					this._budgetActuel = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPers", DbType="Int NOT NULL")]
+		public int idPers
+		{
+			get
+			{
+				return this._idPers;
+			}
+			set
+			{
+				if ((this._idPers != value))
+				{
+					this._idPers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fonction", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string fonction
+		{
+			get
+			{
+				return this._fonction;
+			}
+			set
+			{
+				if ((this._fonction != value))
+				{
+					this._fonction = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_salaireResp", DbType="Money NOT NULL")]
+		public decimal salaireResp
+		{
+			get
+			{
+				return this._salaireResp;
+			}
+			set
+			{
+				if ((this._salaireResp != value))
+				{
+					this._salaireResp = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste1", DbType="Int NOT NULL")]
+		public int idPoste1
+		{
+			get
+			{
+				return this._idPoste1;
+			}
+			set
+			{
+				if ((this._idPoste1 != value))
+				{
+					this._idPoste1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPers1", DbType="Int NOT NULL")]
+		public int idPers1
+		{
+			get
+			{
+				return this._idPers1;
+			}
+			set
+			{
+				if ((this._idPers1 != value))
+				{
+					this._idPers1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPers", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string nomPers
+		{
+			get
+			{
+				return this._nomPers;
+			}
+			set
+			{
+				if ((this._nomPers != value))
+				{
+					this._nomPers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_prenomPers", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string prenomPers
+		{
+			get
+			{
+				return this._prenomPers;
+			}
+			set
+			{
+				if ((this._prenomPers != value))
+				{
+					this._prenomPers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateNaiss", DbType="DateTime NOT NULL")]
+		public System.DateTime dateNaiss
+		{
+			get
+			{
+				return this._dateNaiss;
+			}
+			set
+			{
+				if ((this._dateNaiss != value))
+				{
+					this._dateNaiss = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this._email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telephone", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string telephone
+		{
+			get
+			{
+				return this._telephone;
+			}
+			set
+			{
+				if ((this._telephone != value))
+				{
+					this._telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_specialisation", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string specialisation
+		{
+			get
+			{
+				return this._specialisation;
+			}
+			set
+			{
+				if ((this._specialisation != value))
+				{
+					this._specialisation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pass", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string pass
+		{
+			get
+			{
+				return this._pass;
+			}
+			set
+			{
+				if ((this._pass != value))
+				{
+					this._pass = value;
 				}
 			}
 		}

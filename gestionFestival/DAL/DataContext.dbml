@@ -193,21 +193,6 @@
       <Column Name="pass" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.GetRespAndPoste" Method="GetRespAndPoste">
-    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
-    <ElementType Name="GetRespAndPosteResult">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fonction" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="salaireResp" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idAdmin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idPoste1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nomPoste" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="description" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="budgetDepart" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="budgetActuel" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.isAdmin" Method="isAdmin">
     <Parameter Name="id" Type="System.Int32" DbType="Int" />
     <ElementType Name="isAdminResult">
@@ -295,6 +280,55 @@
       <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="budgetDepart" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="budgetActuel" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetRespAndPoste" Method="GetRespAndPoste">
+    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetRespAndPosteResult">
+      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fonction" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="salaireResp" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPoste" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="budgetDepart" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="budgetActuel" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.AjouterResponsable" Method="AjouterResponsable">
+    <Parameter Name="idPersonnel" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fonction" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="salaireResp" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.AfficherPosteNonAttribue" Method="AfficherPosteNonAttribue">
+    <ElementType Name="AfficherPosteNonAttribueResult">
+      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPoste" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.AfficherPosteAssigne" Method="AfficherPosteAssigne">
+    <ElementType Name="AfficherPosteAssigneResult">
+      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPoste" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="budgetDepart" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="budgetActuel" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fonction" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="salaireResp" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idPers1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prenomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="dateNaiss" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="telephone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="specialisation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="pass" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>
