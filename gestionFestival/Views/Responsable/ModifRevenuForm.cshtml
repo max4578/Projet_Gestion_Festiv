@@ -1,0 +1,18 @@
+﻿@using gestionFestival.Models
+
+@using (Html.BeginForm("ModifRevenu", "Responsable"))
+{
+
+    CRevenu rev = Model;
+    <label>Nom</label>
+    <input type="text" value="@rev.Description" name="description" />
+    <label>Prix</label>
+    <input type="number" value="@rev.Montant" name="montant" />
+    <label>Quantité</label>
+   
+    <input type="hidden" value="@ViewBag.index" name="index" />
+    <input type="submit" value="Confirmer la modification" />
+
+}
+
+

@@ -55,6 +55,30 @@
     </div>
 
 
+
+    <label>Liste des revenus</label>
+    <div id="listRev">
+
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Montant</th>
+               
+
+                @foreach (CRevenu rev in vm.recette.ListRev.ListeRev)
+                {
+                <tr>
+                    <td>@rev.Description</td>
+                    <td>@rev.Montant €</td>
+                    
+                </tr>
+                    somme -= rev.Montant;
+                }
+            </table>
+
+        </div>
+
+
     <label>Budget</label>
     <div id="budget">@somme/@vm.poste.BudgetDepart</div>
 }

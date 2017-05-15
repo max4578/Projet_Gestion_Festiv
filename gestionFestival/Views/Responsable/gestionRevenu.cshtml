@@ -1,0 +1,38 @@
+﻿@using gestionFestival.Models;
+
+<table>
+    <tr><th>Description du revenu</th><th>Montanbt</th><th></th><th></th></tr>
+    @{
+
+        CResponsable r = (CResponsable)Session["user"];
+        Layout = "~/Views/Shared/headerResponsable.cshtml";
+        int i = 0;
+        foreach (CRevenu rev in (List<CRevenu>)Session["listRevenu"])
+        {
+            <tr>
+                <td>@rev.Description</td>
+                <td>@rev.Montant €</td>
+                
+                <td><button onclick="">@Html.ActionLink("Suppression Revenu", "SuppressionRevenu", "Responsable", new { id = i }, null)</button></td>
+                <td><button onclick="">@Html.ActionLink("Modification", "ModifRevenuForm", "Responsable", new { id = i++ }, null)</button></td>
+
+            </tr>
+
+        }
+
+
+    }
+    <tr><th>Description</th> <th>Montant</th> </tr>
+    @using (Html.BeginForm("AjouterRevenu", "Responsable"))
+            {
+        <tr>
+            <td><input type="text" name="description" required="required" /></td>
+            <td><input type="number" name="montant" required="required" /></td>
+           
+
+            <td><input type="submit" value="Ajouter" required="required" /></td>
+        </tr>
+
+    }
+
+</table>

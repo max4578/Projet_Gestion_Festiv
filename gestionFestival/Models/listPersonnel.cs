@@ -33,7 +33,7 @@ namespace gestionFestival.Models
         public listPersonnel()
         {
             listPerso = new List<CPersonnel>();
-            listPerso = GetList();
+            //listPerso = GetList();
         }
 
 

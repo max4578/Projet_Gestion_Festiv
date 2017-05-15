@@ -96,20 +96,22 @@ namespace gestionFestival.Models
             part.SupprimerParticipant();
         }
 
-        public void DemandeAjoutRevenu()
+        public void DemandeAjoutRevenu(CRevenu rev,int idPoste)
         {
-
+            rev.AjouterRevenu(Id,idPoste);
         }
 
 
-        public void DemandeModificationRevenu()
+        public void DemandeModificationRevenu(CRevenu rev,string description,double montant)
         {
-
+            rev.Description = description;
+            rev.Montant = montant;
+            rev.ModifierRevenu();
         }
 
-        public void DemandeSuppressionRevenu()
+        public void DemandeSuppressionRevenu(CRevenu rev)
         {
-
+            rev.SupprimerRevenu();
         }
 
         public void DemandeAugmentBudget()
@@ -117,20 +119,25 @@ namespace gestionFestival.Models
 
         }
 
-        public void ConsultListPersonnel()
+        public List<CPersonnel> ConsultListPersonnel()
         {
+            return new listPersonnel().GetList(); ;
 
         }
 
-        public void ConsultListMateriel()
+        public List<CMateriel> ConsultListMateriel()
         {
+            return new listMateriel(Id).ListeMat;
+        }
+        public List<CParticipant> ConsultListParticipant()
+        {
+            return new listParticipant(Id).ListePart;
 
         }
-        public void ConsultListParticipant()
+
+        public List<CRevenu> ConsultListRevenu()
         {
-
+            return new listRevenu().GetList(Id);
         }
-
-      
     }
 }
