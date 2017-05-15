@@ -53,24 +53,28 @@ namespace gestionFestival.Models
             this.heureTravail = heureTravail;
         }
 
+        public CParticipant(int id, string nom, string prenom, string telephone, DateTime dateNaiss, string mail, string specialisation) : base(id, nom, prenom, telephone, dateNaiss, mail, specialisation)
+        {
+        }
+
         /*******************/
         /*    Méthodes     */
         /*******************/
 
-        public void CreerParticipant()
+        public void CreerParticipant(int idResp,int idPoste)
         {
-
+            AjouterParticipant(Id,(decimal)salaireParticipation,heureTravail,idResp,idPoste);
         }
 
-        public void DemandeModifParticipant()
+        public void ModifParticipant()
         {
-
+            UpdateParticipant((decimal)salaireParticipation,heureTravail,Id);
         }
 
 
         public void SupprimerParticipant()
         {
-
+            DeleteParticipant(Id);
         }
     }
 }

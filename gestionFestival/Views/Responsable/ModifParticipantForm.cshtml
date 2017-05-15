@@ -1,0 +1,18 @@
+﻿
+@using gestionFestival.Models
+
+@using (Html.BeginForm("ModifParticipant", "Responsable"))
+{
+
+    CParticipant part = Model;
+    <h1>Fiche du participant @part.Prenom  @part.Nom</h1>
+    <label>Salaire</label>
+    <input type="number" value="@part.Salaire" name="salaire" />
+    <label>Heure travail</label>
+    <input type="number" value="@part.HeureTravail" name="heureTravail" />
+    <input type="hidden" value="@ViewBag.index" name="index" />
+
+
+    <input type="submit" value="Confirmer la modification" />
+
+}

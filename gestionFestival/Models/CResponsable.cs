@@ -59,36 +59,41 @@ namespace gestionFestival.Models
             
         }
 
-        public void DemandeAjoutMateriel(string nom)
+        public void DemandeAjoutMateriel(CMateriel mat,int idPoste)
         {
-           
+            mat.CreerMateriel(Id, idPoste);
         }
 
 
-        public void DemandeModificationMateriel()
+        public void DemandeModificationMateriel(CMateriel mat,string nom,double prix, int qtt)
         {
-
+            mat.Nom = nom;
+            mat.Prix = prix;
+            mat.Quantité = qtt;
+            mat.ModifMateriel();
         }
 
-        public void DemandeSuppressionMateriel()
+        public void DemandeSuppressionMateriel(CMateriel mat)
         {
-
+            mat.SupprimerMateriel();
         }
 
-        public void DemandeAjoutParticipant()
+        public void DemandeAjoutParticipant(CParticipant part,int idPoste)
         {
-
+            part.CreerParticipant(Id,idPoste);
         }
 
 
-        public void DemandeModificationParticipant()
+        public void DemandeModificationParticipant(CParticipant p,double salaire, int heureTravail)
         {
-
+            p.Salaire = salaire;
+            p.HeureTravail = heureTravail;
+            p.ModifParticipant();
         }
 
-        public void DemandeSuppressionParticipant()
+        public void DemandeSuppressionParticipant(CParticipant part)
         {
-
+            part.SupprimerParticipant();
         }
 
         public void DemandeAjoutRevenu()
@@ -126,6 +131,6 @@ namespace gestionFestival.Models
 
         }
 
-
+      
     }
 }

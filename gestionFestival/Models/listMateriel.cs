@@ -36,6 +36,11 @@ namespace gestionFestival.Models
             listMat = new List<CMateriel>();
         }
 
+        public listMateriel(int id)
+        {
+            listMat = new List<CMateriel>();
+            listMat = GetList(id);
+        }
 
         /*******************/
         /*    Méthodes     */

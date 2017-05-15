@@ -150,6 +150,7 @@
     <Compile Include="Models\listPoste.cs" />
     <Compile Include="Models\listRevenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\VM_Responsable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -170,6 +171,8 @@
     <Content Include="Views\Responsable\Index.cshtml" />
     <Content Include="Views\Responsable\ModifMatForm.cshtml" />
     <Content Include="Views\GestionPoste\ModifierPoste.cshtml" />
+    <Content Include="Views\Responsable\gestionParticipant.cshtml" />
+    <Content Include="Views\Responsable\ModifParticipantForm.cshtml" />
     <Content Include="Views\GestionPoste\AssignerPoste.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

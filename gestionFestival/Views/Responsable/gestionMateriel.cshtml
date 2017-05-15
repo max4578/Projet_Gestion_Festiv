@@ -7,7 +7,7 @@
         CResponsable r = (CResponsable)Session["user"];
         Layout = "~/Views/Shared/headerResponsable.cshtml";
         int i = 0;
-        foreach (CMateriel mat in ViewBag.list)
+        foreach (CMateriel mat in (List<CMateriel>)Session["listMateriel"])
         {
             <tr>
                 <td>@mat.Nom</td>

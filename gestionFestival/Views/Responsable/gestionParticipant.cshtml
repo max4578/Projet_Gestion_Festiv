@@ -1,0 +1,45 @@
+﻿@using gestionFestival.Models;
+@using System.Web.UI.WebControls;
+
+
+<table>
+    <tr><th>Identité</th><th>email</th><th>tel</th><th>Salaire</th><th></th><th></th></tr>
+    @{
+
+        CResponsable r = (CResponsable)Session["user"];
+        Layout = "~/Views/Shared/headerResponsable.cshtml";
+        int i = 0;
+        foreach (CParticipant part in (List<CParticipant>)Session["listParticipant"])
+        {
+            <tr>
+                <td>@part.Nom</td>
+                <td>@part.Mail €</td>
+                <td>@part.Telephone</td>
+                <td>@part.Salaire €</td>
+                <td><button onclick="">@Html.ActionLink("Renvoi", "SuppressionParticipant", "Responsable", new { id = i }, null)</button></td>
+                <td><button onclick="">@Html.ActionLink("Modifier Info", "ModifParticipantForm", "Responsable", new { id = i++ }, null)</button></td>
+
+            </tr>
+        }
+    }
+</table>
+
+    
+
+@using (Html.BeginForm("AjouterParticipant", "Responsable"))
+{
+      <select name="personnel">
+        @{int j = 0;}
+            @foreach(CPersonnel p in (List<CPersonnel>)Session["listPersonnel"]) {
+         <option value="@(j++)">@p.Nom  @p.Prenom   Spécialisation: @p.Specialisation </option>
+        }
+    </select>
+    <label>Salaire</label>
+    <input type="number" min="0" name="salaire"/>
+    <label>Heure de travail</label>
+    <input type="number" min="0" name="heureTravail"/>
+     <input type="submit" value="Ajouter" required="required" />
+
+
+}
+

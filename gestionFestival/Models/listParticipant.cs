@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using gestionFestival.DAL;
 
 namespace gestionFestival.Models
 {
-    public class listParticipant
+    public class listParticipant:DataContextDataContext
     {
 
         /*******************/
@@ -34,11 +35,26 @@ namespace gestionFestival.Models
 
         }
 
+        public listParticipant(int id)
+        {
+            listPart = new List<CParticipant>();
+            listPart= GetList(id);
+        }
+
 
         /*******************/
         /*    Méthodes     */
         /*******************/
 
+        public List<CParticipant> GetList(int id)
+        {
+            foreach (var elem in GetAllParticipant(id))
+            {
+                listPart.Add(new CParticipant(elem.idPers,elem.nomPers,elem.prenomPers,elem.telephone,elem.dateNaiss,elem.email,elem.specialisation,(double)elem.salaire,elem.heureTravail));
+            }
+
+            return listPart;
+        }
 
     }
 }
