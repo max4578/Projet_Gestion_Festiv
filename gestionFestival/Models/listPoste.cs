@@ -66,11 +66,9 @@ namespace gestionFestival.Models
             //var chargerListePoste = db.AfficherPosteAssigne();
             var chargerListePoste = db.AfficherPoste();
             foreach (var poste in chargerListePoste)
-                listPosteAssigne.Add(new VM_PosteAssigne
-                {
-                    poste = new CPoste(poste.nomPoste, poste.description, 0),
-                    responsable = new CResponsable(.id, poste.fonction, 0)
-                }
+                listPosteAssigne.Add(new VM_PosteAssigne {
+                    poste = new CPoste(poste.nomPoste,poste.description,0),
+                    responsable = new CResponsable(poste.idPers,poste.fonction,0)}
                 );
             return listPosteAssigne;
         }
