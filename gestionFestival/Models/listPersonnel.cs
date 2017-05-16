@@ -33,7 +33,7 @@ namespace gestionFestival.Models
         public listPersonnel()
         {
             listPerso = new List<CPersonnel>();
-            //listPerso = GetList();
+            listPerso = GetList();
         }
 
 
@@ -52,9 +52,9 @@ namespace gestionFestival.Models
 
         public List<CPersonnel> GetListPersonnel()
         {
-            foreach (var elem in GetPersonnelOnly())
+            foreach (var elem in db.GetPersonnelOnly())
             {
-                listPerso.Add(new CPersonnel(elem.idPers, elem.nomPers, elem.prenomPers, elem.telephone, elem.dateNaiss, elem.email, elem.specialisation));
+                listPerso.Add(new CPersonnel(elem.idPersonnel, elem.nomPersonnel, elem.prenomPersonnel, elem.telephone, elem.dateNaissance, elem.email, elem.specialisation));
             }
             return listPerso;
         }

@@ -102,7 +102,7 @@ namespace gestionFestival.Controllers
             bool result = int.TryParse(selectResponsable, out key);
             if (result)
             {
-                CResponsable responsable = new CResponsable(key, fonction, salaire);
+                CResponsable responsable = new CResponsable(key, 5, salaire);
                 responsable.CreerResponsable(poste.Id);
             }
             ViewBag.listeDesPostes = list;

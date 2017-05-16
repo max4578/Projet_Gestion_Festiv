@@ -1,0 +1,19 @@
+﻿@model gestionFestival.ViewModel.VM_Administrateur
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Accueil Administrateur</h2>
+
+<div>
+        @Html.Label("le festival")
+        @Html.Label(Model.Nomfestival)
+        @Html.Label("se déroule du ")
+        @*retourné la date de début*@
+        @Html.Label("au ")
+        @*retourné la date de fin*@
+        budget du festival : @Html.TextBox(Model.BudgetTotal);
+</div>
+<div>
+
+</div>
