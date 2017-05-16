@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using gestionFestival.DAL;
+
 
 namespace gestionFestival.Models
 {
@@ -14,7 +16,7 @@ namespace gestionFestival.Models
         /*******************/
         private double salaireParticipation;
         private int heureTravail;
-
+        private DataContextDataContext db = new DataContextDataContext();
 
         /*******************/
         /*   Propriétés    */
@@ -61,20 +63,20 @@ namespace gestionFestival.Models
         /*    Méthodes     */
         /*******************/
 
-        public void CreerParticipant(int idResp,int idPoste)
+        public void CreerParticipant(int idPoste)
         {
-            AjouterParticipant(Id,(decimal)salaireParticipation,heureTravail,idResp,idPoste);
+            db.AjouterParticipant(Id,(decimal)salaireParticipation,heureTravail,idPoste);
         }
 
         public void ModifParticipant()
         {
-            UpdateParticipant((decimal)salaireParticipation,heureTravail,Id);
+            db.UpdateParticipant((decimal)salaireParticipation,heureTravail,Id);
         }
 
 
         public void SupprimerParticipant()
         {
-            DeleteParticipant(Id);
+            db.DeleteParticipant(Id);
         }
     }
 }

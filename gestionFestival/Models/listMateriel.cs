@@ -6,14 +6,14 @@ using gestionFestival.DAL;
 
 namespace gestionFestival.Models
 {
-    public class listMateriel:DataContextDataContext
+    public class listMateriel
     {
 
         /*******************/
         /*    Attribut     */
         /*******************/
         private List<CMateriel> listMat;
-        
+        private DataContextDataContext db = new DataContextDataContext();
 
 
         /*******************/
@@ -36,21 +36,21 @@ namespace gestionFestival.Models
             listMat = new List<CMateriel>();
         }
 
-        public listMateriel(int id)
+        public listMateriel(int idPoste)
         {
             listMat = new List<CMateriel>();
-            listMat = GetList(id);
+            listMat = GetList(idPoste);
         }
 
         /*******************/
         /*    Méthodes     */
         /*******************/
 
-        public List<CMateriel> GetList(int id)
+        public List<CMateriel> GetList(int idPoste)
         {
-            foreach(var elem in GetAllMateriel(id))
+            foreach (var elem in db.GetAllMateriel(idPoste))
             {
-                    listMat.Add(new CMateriel(elem.idMateriel,elem.nom,Convert.ToDouble(elem.prix),elem.quantité));
+                listMat.Add(new CMateriel(elem.idMateriel, elem.nom, Convert.ToDouble(elem.prix), elem.quantité));
             }
 
             return listMat;

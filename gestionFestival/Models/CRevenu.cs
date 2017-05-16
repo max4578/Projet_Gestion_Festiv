@@ -57,7 +57,7 @@ namespace gestionFestival.Models
 
         public void AjouterRevenu(int idPers,int idPoste)
         {
-            db.AjouterRevenu(description,(decimal)montant,idPers,idPoste);
+            db.AjouterRevenu(description,(decimal)montant,idPoste);
         }
 
         public void ModifierRevenu()

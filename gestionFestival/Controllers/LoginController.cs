@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using gestionFestival.Models;
+using gestionFestival.DAL;
+using System.Data.SqlClient;
 
 namespace gestionFestival.Controllers
 {
@@ -12,13 +14,15 @@ namespace gestionFestival.Controllers
 
         public ActionResult Index()
         {
+     
+
+
             return View();
         }
 
         public ActionResult RegisterForm()
         {
             ViewBag.Message = "";
-
             return View("Register");
         }
 

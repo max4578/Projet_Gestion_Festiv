@@ -50,7 +50,7 @@ namespace gestionFestival.Models
         {
             foreach (var elem in GetAllParticipant(id))
             {
-                listPart.Add(new CParticipant(elem.idPers,elem.nomPers,elem.prenomPers,elem.telephone,elem.dateNaiss,elem.email,elem.specialisation,(double)elem.salaire,elem.heureTravail));
+                listPart.Add(new CParticipant(elem.idPersonnel, elem.nomPersonnel, elem.prenomPersonnel, elem.telephone, elem.dateNaissance, elem.email, elem.specialisation,(double)elem.salaireHoraire,elem.nbrHeure));
             }
 
             return listPart;

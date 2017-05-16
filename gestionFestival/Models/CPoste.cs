@@ -22,7 +22,7 @@ namespace gestionFestival.Models
         private CResponsable responsable;
         private CDepense depense;
         private CRecette recette;
-        private DataContextDataContext db;
+        private DataContextDataContext db= new DataContextDataContext();
 
 
         /*******************/
@@ -84,10 +84,14 @@ namespace gestionFestival.Models
         public CPoste() { }
         public CPoste(int idPers)
         {
-            db = new DAL.DataContextDataContext();
+            
             var result= db.GetRespAndPoste(idPers).FirstOrDefault();
-            this.id = result.idPoste;
+            this.id = result.idPoste.Value;
             this.nomPoste = result.nomPoste;
+            this.budgetActuel = (double)result.budgetActuel;
+            this.budgetDepart = (double)result.budgetDepart;
+            depense = new CDepense(id);
+            recette = new CRecette(id);
         }
 
         public CPoste(int id,string nomPoste,string description,double budget/*,CResponsable responsable*/)

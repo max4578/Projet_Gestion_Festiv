@@ -15,23 +15,27 @@ namespace gestionFestival.Controllers
 
             CPersonnel p = new CPersonnel();
             
-            object user = p.Connexion(email, pass);
-            string type = user.GetType().ToString();
+            object user=p.Connexion(email, pass);
             
-            Session["user"] = user;
-            if (type == "gestionFestival.Models.CAdministrateur")
+            
+            
+            if (p.Role== "Admin")
             {
+                CAdministrateur admin = (CAdministrateur)user;
+                Session["user"] = admin;
                 return Redirect("GestionPoste");
             }
 
             //else if (type == "gestionFestival.Models.CComptable")
             //{
-            //    // Layout = "~/Views/Shared/headerComptable.cshtml";
+            //    // Layout = "~/Views/Shared/headerComptable.cshtml";Session["user"] = user;
             //}
 
             else
-            if (type == "gestionFestival.Models.CResponsable")
+            if (p.Role == "Responsable")
             {
+                CResponsable resp = (CResponsable)user;
+                Session["user"] = resp;
                 return Redirect("Responsable");
             }
             return Redirect("Responsable");

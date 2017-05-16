@@ -11,7 +11,7 @@ namespace gestionFestival.Models
         /*******************/
         /*    Attribut     */
         /*******************/
-        private string fonction;
+        private int heureTravail;
         private double salaireResp;
 
 
@@ -19,10 +19,10 @@ namespace gestionFestival.Models
         /*   Propriétés    */
         /*******************/
 
-        public string Fonction
+        public int Heure
         {
-            get { return fonction; }
-            set { fonction = value; }
+            get { return heureTravail; }
+            set { heureTravail = value; }
         }
 
         public double Salaire
@@ -41,11 +41,11 @@ namespace gestionFestival.Models
         }
 
         public CResponsable(int id, string nom, string prénom, string téléphone,
-        DateTime dateNaiss, string mail, string spécialisation,string fonction,double salaireResp)
+        DateTime dateNaiss, string mail, string spécialisation,int ht,double salaireResp)
         :base(id,nom,prénom, téléphone,dateNaiss,mail,spécialisation)
         {
 
-            this.fonction = fonction;
+            this.heureTravail = ht ;
             this.salaireResp = salaireResp;
             
         }
@@ -61,7 +61,7 @@ namespace gestionFestival.Models
 
         public void DemandeAjoutMateriel(CMateriel mat,int idPoste)
         {
-            mat.CreerMateriel(Id, idPoste);
+            mat.CreerMateriel(idPoste);
         }
 
 
@@ -80,7 +80,7 @@ namespace gestionFestival.Models
 
         public void DemandeAjoutParticipant(CParticipant part,int idPoste)
         {
-            part.CreerParticipant(Id,idPoste);
+            part.CreerParticipant(idPoste);
         }
 
 
@@ -121,23 +121,23 @@ namespace gestionFestival.Models
 
         public List<CPersonnel> ConsultListPersonnel()
         {
-            return new listPersonnel().GetList(); ;
+            return new listPersonnel().GetList();
 
         }
 
-        public List<CMateriel> ConsultListMateriel()
+        public List<CMateriel> ConsultListMateriel(int idPost)
         {
-            return new listMateriel(Id).ListeMat;
+            return new listMateriel(idPost).ListeMat;
         }
-        public List<CParticipant> ConsultListParticipant()
+        public List<CParticipant> ConsultListParticipant(int idPost)
         {
-            return new listParticipant(Id).ListePart;
+            return new listParticipant(idPost).ListePart;
 
         }
 
-        public List<CRevenu> ConsultListRevenu()
+        public List<CRevenu> ConsultListRevenu(int idPost)
         {
-            return new listRevenu().GetList(Id);
+            return new listRevenu(idPost).ListeRev;
         }
     }
 }

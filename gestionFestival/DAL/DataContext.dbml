@@ -1,30 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GestionFestival" Class="DataContextDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-73L8O8A;Initial Catalog=GestionFestival;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="GestionFestivalConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Administrateur" Member="Administrateur">
-    <Type Name="Administrateur">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="dateFest" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+  <Table Name="dbo.Demande" Member="Demande">
+    <Type Name="Demande">
+      <Column Name="idDemande" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="montant" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="dateDemande" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Personnel_Demande" Member="Personnel" ThisKey="idPersonnel" OtherKey="idPersonnel" Type="Personnel" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Festival" Member="Festival">
+    <Type Name="Festival">
+      <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="nomFest" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Personnel_Administrateur" Member="Personnel" ThisKey="idPers" OtherKey="idPers" Type="Personnel" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Comptable" Member="Comptable">
-    <Type Name="Comptable">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="budgetDisp" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="salaire" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idAdmin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Personnel_Comptable" Member="Personnel" ThisKey="idPers" OtherKey="idPers" Type="Personnel" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Depense" Member="Depense">
-    <Type Name="Depense">
-      <Column Name="idDepense" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="totalDepense" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Association Name="Depense_Materiel" Member="Materiel" ThisKey="idDepense" OtherKey="idDepense" Type="Materiel" />
-      <Association Name="Depense_Participant" Member="Participant" ThisKey="idDepense" OtherKey="idDepense" Type="Participant" />
-      <Association Name="Poste_Depense" Member="Poste" ThisKey="idPoste" OtherKey="idPoste" Type="Poste" IsForeignKey="true" />
+      <Column Name="dateDebut" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateFin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="budget" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="Festival_Personnel" Member="Personnel" ThisKey="idFestival" OtherKey="idFestival" Type="Personnel" />
     </Type>
   </Table>
   <Table Name="dbo.Materiel" Member="Materiel">
@@ -33,38 +25,36 @@
       <Column Name="nom" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="prix" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="quantité" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idDepense" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Depense_Materiel" Member="Depense" ThisKey="idDepense" OtherKey="idDepense" Type="Depense" IsForeignKey="true" />
-      <Association Name="Responsable_Materiel" Member="Responsable" ThisKey="idPers" OtherKey="idPers" Type="Responsable" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Participant" Member="Participant">
-    <Type Name="Participant">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="heureTravail" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="salaire" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idResp" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idDepense" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Depense_Participant" Member="Depense" ThisKey="idDepense" OtherKey="idDepense" Type="Depense" IsForeignKey="true" />
-      <Association Name="Personnel_Participant" Member="Personnel" ThisKey="idPers" OtherKey="idPers" Type="Personnel" IsForeignKey="true" />
-      <Association Name="Responsable_Participant" Member="Responsable" ThisKey="idResp" OtherKey="idPers" Type="Responsable" IsForeignKey="true" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Poste_Materiel" Member="Poste" ThisKey="idPoste" OtherKey="idPoste" Type="Poste" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Personnel" Member="Personnel">
     <Type Name="Personnel">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="nomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="prenomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="dateNaiss" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prenomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="dateNaissance" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="telephone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="specialisation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="pass" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Personnel_Administrateur" Member="Administrateur" ThisKey="idPers" OtherKey="idPers" Type="Administrateur" Cardinality="One" />
-      <Association Name="Personnel_Comptable" Member="Comptable" ThisKey="idPers" OtherKey="idPers" Type="Comptable" Cardinality="One" />
-      <Association Name="Personnel_Participant" Member="Participant" ThisKey="idPers" OtherKey="idPers" Type="Participant" Cardinality="One" />
-      <Association Name="Personnel_Responsable" Member="Responsable" ThisKey="idPers" OtherKey="idPers" Type="Responsable" Cardinality="One" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="libelRole" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Personnel_Demande" Member="Demande" ThisKey="idPersonnel" OtherKey="idPersonnel" Type="Demande" />
+      <Association Name="Personnel_Salaire" Member="Salaire" ThisKey="idPersonnel" OtherKey="idPersonnel" Type="Salaire" />
+      <Association Name="Festival_Personnel" Member="Festival" ThisKey="idFestival" OtherKey="idFestival" Type="Festival" IsForeignKey="true" />
+      <Association Name="Poste_Personnel" Member="Poste" ThisKey="idPoste" OtherKey="idPoste" Type="Poste" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Revenu" Member="Revenu">
+    <Type Name="Revenu">
+      <Column Name="idRevenu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="montant" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Poste_Revenu" Member="Poste" ThisKey="idPoste" OtherKey="idPoste" Type="Poste" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Poste" Member="Poste">
@@ -74,42 +64,19 @@
       <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="budgetDepart" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="budgetActuel" Type="System.Decimal" DbType="Money" CanBeNull="true" />
-      <Association Name="Poste_Depense" Member="Depense" ThisKey="idPoste" OtherKey="idPoste" Type="Depense" />
-      <Association Name="Poste_Recette" Member="Recette" ThisKey="idPoste" OtherKey="idPoste" Type="Recette" />
-      <Association Name="Poste_Responsable" Member="Responsable" ThisKey="idPoste" OtherKey="idPoste" Type="Responsable" />
+      <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Poste_Materiel" Member="Materiel" ThisKey="idPoste" OtherKey="idPoste" Type="Materiel" />
+      <Association Name="Poste_Personnel" Member="Personnel" ThisKey="idPoste" OtherKey="idPoste" Type="Personnel" />
+      <Association Name="Poste_Revenu" Member="Revenu" ThisKey="idPoste" OtherKey="idPoste" Type="Revenu" />
     </Type>
   </Table>
-  <Table Name="dbo.Recette" Member="Recette">
-    <Type Name="Recette">
-      <Column Name="idRecette" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="totalRec" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Recette_Revenu" Member="Revenu" ThisKey="idRecette" OtherKey="idRecette" Type="Revenu" />
-      <Association Name="Poste_Recette" Member="Poste" ThisKey="idPoste" OtherKey="idPoste" Type="Poste" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Responsable" Member="Responsable">
-    <Type Name="Responsable">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="fonction" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="salaireResp" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Responsable_Materiel" Member="Materiel" ThisKey="idPers" OtherKey="idPers" Type="Materiel" />
-      <Association Name="Responsable_Participant" Member="Participant" ThisKey="idPers" OtherKey="idResp" Type="Participant" />
-      <Association Name="Responsable_Revenu" Member="Revenu" ThisKey="idPers" OtherKey="idPersonnel" Type="Revenu" />
-      <Association Name="Personnel_Responsable" Member="Personnel" ThisKey="idPers" OtherKey="idPers" Type="Personnel" IsForeignKey="true" />
-      <Association Name="Poste_Responsable" Member="Poste" ThisKey="idPoste" OtherKey="idPoste" Type="Poste" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Revenu" Member="Revenu">
-    <Type Name="Revenu">
-      <Column Name="idRevenu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="description" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="montant" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idRecette" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+  <Table Name="dbo.Salaire" Member="Salaire">
+    <Type Name="Salaire">
+      <Column Name="idSalaire" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="salaireHoraire" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="nbrHeure" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Recette_Revenu" Member="Recette" ThisKey="idRecette" OtherKey="idRecette" Type="Recette" IsForeignKey="true" />
-      <Association Name="Responsable_Revenu" Member="Responsable" ThisKey="idPersonnel" OtherKey="idPers" Type="Responsable" IsForeignKey="true" />
+      <Association Name="Personnel_Salaire" Member="Personnel" ThisKey="idPersonnel" OtherKey="idPersonnel" Type="Personnel" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.AfficherPoste" Method="AfficherPoste">
@@ -119,21 +86,13 @@
       <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="budgetDepart" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="budgetActuel" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.AjouterMateriel" Method="AjouterMateriel">
     <Parameter Name="nom" Type="System.String" DbType="NVarChar(20)" />
     <Parameter Name="prix" Type="System.Decimal" DbType="Money" />
     <Parameter Name="qtt" Type="System.Int32" DbType="Int" />
-    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
-    <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.AjouterParticipant" Method="AjouterParticipant">
-    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
-    <Parameter Name="salaire" Type="System.Decimal" DbType="Money" />
-    <Parameter Name="ht" Type="System.Int32" DbType="Int" />
-    <Parameter Name="idResp" Type="System.Int32" DbType="Int" />
     <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
@@ -155,7 +114,6 @@
   <Function Name="dbo.AjouterRevenu" Method="AjouterRevenu">
     <Parameter Name="desc" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="montant" Type="System.Decimal" DbType="Money" />
-    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
     <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
@@ -163,113 +121,73 @@
     <Parameter Name="idMat" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.DeleteParticipant" Method="DeleteParticipant">
-    <Parameter Name="idPart" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.DeleteRevenu" Method="DeleteRevenu">
     <Parameter Name="idRev" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.GetAllMateriel" Method="GetAllMateriel">
-    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
     <ElementType Name="GetAllMaterielResult">
       <Column Name="idMateriel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="nom" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="prix" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="quantité" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idDepense" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.GetAllParticipant" Method="GetAllParticipant">
-    <Parameter Name="idResp" Type="System.Int32" DbType="Int" />
-    <ElementType Name="GetAllParticipantResult">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="heureTravail" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="salaire" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idResp" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idDepense" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idPers1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="prenomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="dateNaiss" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="telephone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="specialisation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="pass" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.GetAllRevenu" Method="GetAllRevenu">
-    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
     <ElementType Name="GetAllRevenuResult">
       <Column Name="idRevenu" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="montant" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idRecette" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.GetPersonnelOnly" Method="GetPersonnelOnly">
     <ElementType Name="GetPersonnelOnlyResult">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="prenomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="dateNaiss" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prenomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="dateNaissance" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="telephone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="specialisation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="pass" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="libelRole" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.GetRespAndPoste" Method="GetRespAndPoste">
     <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
     <ElementType Name="GetRespAndPosteResult">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fonction" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="salaireResp" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prenomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="dateNaissance" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="telephone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="specialisation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="libelRole" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="idPoste1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="nomPoste" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="budgetDepart" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="budgetActuel" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="idFestival1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.isAdmin" Method="isAdmin">
-    <Parameter Name="id" Type="System.Int32" DbType="Int" />
-    <ElementType Name="isAdminResult">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="dateFest" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="nomFest" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.isCompt" Method="isCompt">
-    <Parameter Name="id" Type="System.Int32" DbType="Int" />
-    <ElementType Name="isComptResult">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="budgetDisp" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="salaire" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idAdmin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.isParticipant" Method="isParticipant">
-    <Parameter Name="id" Type="System.Int32" DbType="Int" />
-    <ElementType Name="isParticipantResult">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="heureTravail" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="salaire" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idResp" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idDepense" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.isResponsable" Method="isResponsable">
-    <Parameter Name="id" Type="System.Int32" DbType="Int" />
-    <ElementType Name="isResponsableResult">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fonction" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="salaireResp" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+  <Function Name="dbo.GetSalaire" Method="GetSalaire">
+    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetSalaireResult">
+      <Column Name="idSalaire" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salaireHoraire" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="nbrHeure" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.ModifierPoste" Method="ModifierPoste">
@@ -292,7 +210,7 @@
   <Function Name="dbo.UpdateParticipant" Method="UpdateParticipant">
     <Parameter Name="salaire" Type="System.Decimal" DbType="Money" />
     <Parameter Name="ht" Type="System.Int32" DbType="Int" />
-    <Parameter Name="idPart" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.UpdateRevenu" Method="UpdateRevenu">
@@ -311,14 +229,48 @@
     <Parameter Name="email" Type="System.String" DbType="NVarChar(30)" />
     <Parameter Name="pass" Type="System.String" DbType="NVarChar(50)" />
     <ElementType Name="VérificationLoginResult">
-      <Column Name="idPers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="prenomPers" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="dateNaiss" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prenomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="dateNaissance" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="telephone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="specialisation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="pass" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="libelRole" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.AjouterParticipant" Method="AjouterParticipant">
+    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
+    <Parameter Name="salaire" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="ht" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetAllParticipant" Method="GetAllParticipant">
+    <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetAllParticipantResult">
+      <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prenomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="dateNaissance" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="telephone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="specialisation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="libelRole" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idSalaire" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salaireHoraire" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="nbrHeure" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idPersonnel1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.DeleteParticipant" Method="DeleteParticipant">
+    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

@@ -12,8 +12,11 @@ namespace gestionFestival.Models
         /*    Attribut     */
         /*******************/
 
-        private CComptable comptable;
+        //private CComptable comptable;
         private double salaire = 3000;
+        private int heureTravail = 3000;
+        private CComptable comptable;
+
 
         /*******************/
         /*   Proprietes    */
@@ -24,6 +27,11 @@ namespace gestionFestival.Models
             get { return salaire; }
          }
 
+
+        public double HeureTravail
+        {
+            get { return HeureTravail; }
+        }
         /*******************/
         /*  Constructeur   */
         /*******************/
