@@ -52,9 +52,10 @@ namespace gestionFestival.Models
         public List<CPoste> GetListPosteNonAssigne()
         {
             db = new DataContextDataContext();
-            //var chargerListePoste = db.AfficherPosteNonAttribue();
-            //foreach (var poste in chargerListePoste)
-            //    listP.Add(new CPoste(poste.idPoste, poste.nomPoste, poste.description, 0));
+            // a changer var chargerListePoste = db.AfficherPosteNonAttribue();
+            var chargerListePoste = db.AfficherPoste();
+            foreach (var poste in chargerListePoste)
+                listP.Add(new CPoste(poste.idPoste, poste.nomPoste, poste.description, 0));
             return listP;
         }
 
@@ -63,13 +64,12 @@ namespace gestionFestival.Models
             //db = new DataContextDataContext();
             List<VM_PosteAssigne> listPosteAssigne = new List<VM_PosteAssigne>();
             //var chargerListePoste = db.AfficherPosteAssigne();
-            //foreach (var poste in chargerListePoste)
-            //    listPosteAssigne.Add(new VM_PosteAssigne
-            //    {
-            //        poste = new CPoste(poste.nomPoste, poste.description, 0),
-            //        responsable = new CResponsable(poste.idPers, poste.fonction, 0)
-            //    }
-                //);
+            var chargerListePoste = db.AfficherPoste();
+            foreach (var poste in chargerListePoste)
+                listPosteAssigne.Add(new VM_PosteAssigne {
+                    poste = new CPoste(poste.nomPoste,poste.description,0),
+                    responsable = new CResponsable(poste.idPers,poste.fonction,0)}
+                );
             return listPosteAssigne;
         }
     }
