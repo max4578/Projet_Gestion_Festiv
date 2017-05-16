@@ -41,7 +41,7 @@ namespace gestionFestival.Models
 
         }
 
-        public CAdministrateur( string nom ,string prenom,string telephone,DateTime dateNaiss ,string mail,string specialisation):base(nom,prenom, telephone,dateNaiss,mail,specialisation)
+        public CAdministrateur(int id, string nom ,string prenom,string telephone,DateTime dateNaiss ,string mail,string specialisation,string libelRole):base(id,nom,prenom, telephone,dateNaiss,mail,specialisation,libelRole)
         {
             Nom = nom;
             Prenom = prenom;

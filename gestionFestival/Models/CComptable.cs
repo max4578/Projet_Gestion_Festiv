@@ -48,8 +48,8 @@ namespace gestionFestival.Models
 
         }
 
-        public CComptable(string nom, string prenom, string telephone,
-          DateTime dateNaiss, string mail, string specialisation,double salaire, double budgetDisponible):base(nom,prenom, telephone,dateNaiss,mail,specialisation)
+        public CComptable(int id,string nom, string prenom, string telephone,
+          DateTime dateNaiss, string mail, string specialisation, string libelRole, double salaire, double budgetDisponible):base(id,nom,prenom, telephone,dateNaiss,mail,specialisation,libelRole)
         {
             this.salaire = salaire;
             this.budgetDisponible = budgetDisponible;

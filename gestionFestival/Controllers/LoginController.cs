@@ -30,7 +30,7 @@ namespace gestionFestival.Controllers
         public ActionResult Register(string nom, string prenom, string tel ,DateTime dateNaiss,string mail,string spec,string pass)
         {
             CPersonnel p;
-            p = new CPersonnel(0,nom, prenom, tel, dateNaiss, mail, spec);
+            p = new CPersonnel(0,nom, prenom, tel, dateNaiss, mail, spec,"");
             if (p.AjoutPersonnel(pass))
             {
                 return View("Index");

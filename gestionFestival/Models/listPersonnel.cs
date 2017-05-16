@@ -45,7 +45,7 @@ namespace gestionFestival.Models
         {
             foreach (var elem in db.GetPersonnelOnly())
             {
-                listPerso.Add(new CParticipant(elem.idPersonnel, elem.nomPersonnel, elem.prenomPersonnel, elem.telephone, elem.dateNaissance, elem.email, elem.specialisation));
+                listPerso.Add(new CParticipant(elem.idPersonnel, elem.nomPersonnel, elem.prenomPersonnel, elem.telephone, elem.dateNaissance, elem.email, elem.specialisation,elem.libelRole));
             }
             return listPerso;
         }
@@ -54,7 +54,7 @@ namespace gestionFestival.Models
         {
             foreach (var elem in db.GetPersonnelOnly())
             {
-                listPerso.Add(new CPersonnel(elem.idPersonnel, elem.nomPersonnel, elem.prenomPersonnel, elem.telephone, elem.dateNaissance, elem.email, elem.specialisation));
+                listPerso.Add(new CPersonnel(elem.idPersonnel, elem.nomPersonnel, elem.prenomPersonnel, elem.telephone, elem.dateNaissance, elem.email, elem.specialisation,elem.libelRole));
             }
             return listPerso;
         }

@@ -98,7 +98,7 @@ namespace gestionFestival.Models
         }
 
         public CPersonnel(int id, string nom, string prenom, string telephone,
-            DateTime dateNaiss, string mail, string specialisation)
+            DateTime dateNaiss, string mail, string specialisation,string role)
         {
             this.id = id;
             this.nom = nom;
@@ -107,6 +107,7 @@ namespace gestionFestival.Models
             this.dateNaiss = dateNaiss;
             this.mail = mail;
             this.specialisation = specialisation;
+            this.libelRole = role;
 
         }
 
@@ -169,15 +170,15 @@ namespace gestionFestival.Models
             var sal=db.GetSalaire(id).FirstOrDefault();
 
             if (q.libelRole=="Admin")
-                return new CAdministrateur(q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation);
+                return new CAdministrateur(q.idPersonnel,q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,q.libelRole);
             else if (q.libelRole=="Comptable")
-                return new CComptable(q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation, (double)sal.salaireHoraire, sal.nbrHeure);
+                return new CComptable(q.idPersonnel,q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,q.libelRole, (double)sal.salaireHoraire, sal.nbrHeure);
             else if (q.libelRole == "Responsable")
-                return new CResponsable(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,sal.nbrHeure,(double)sal.salaireHoraire);
+                return new CResponsable(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,q.libelRole,sal.nbrHeure,(double)sal.salaireHoraire);
             else if (q.libelRole == "Participant")
-                return new CParticipant(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation, (double)sal.salaireHoraire,sal.nbrHeure);
+                return new CParticipant(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,q.libelRole, (double)sal.salaireHoraire,sal.nbrHeure);
             else
-                return new CPersonnel(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation);
+                return new CPersonnel(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,q.libelRole);
 
 
         }
