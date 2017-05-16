@@ -13,7 +13,7 @@ namespace gestionFestival.Models
         /*******************/
         private int heureTravail;
         private double salaireResp;
-
+        private DataContextDataContext db = new DataContextDataContext();
 
         /*******************/
         /*   Proprietes    */
@@ -40,21 +40,21 @@ namespace gestionFestival.Models
 
         }
 
-        public CResponsable(int id, string nom, string prénom, string téléphone,
-        DateTime dateNaiss, string mail, string spécialisation,int ht,double salaireResp)
-        :base(id,nom,prénom, téléphone,dateNaiss,mail,spécialisation)
-        public CResponsable(int id,string fonction, double salaireResp):base(id)
+        //public CResponsable(int id, string nom, string prénom, string téléphone,
+        //DateTime dateNaiss, string mail, string spécialisation,int ht,double salaireResp)
+        //:base(id,nom,prénom, téléphone,dateNaiss,mail,spécialisation)
+        public CResponsable(int id,int ht, double salaireResp):base(id)
         {
-            this.fonction = fonction;
+            this.heureTravail = ht;
             this.Salaire = salaireResp;
         }
 
         public CResponsable(int id, string nom, string prenom, string telephone,
-        DateTime dateNaiss, string mail, string specialisation,string fonction,double salaireResp)
+        DateTime dateNaiss, string mail, string specialisation,int ht,double salaireResp)
         :base(id,nom,prenom, telephone,dateNaiss,mail,specialisation)
         {
 
-            this.heureTravail = ht ;
+            this.heureTravail = ht;
             this.salaireResp = salaireResp;
             
         }
@@ -65,7 +65,7 @@ namespace gestionFestival.Models
 
         public void CreerResponsable(int idPoste)
         {
-            AjouterResponsable(Id,fonction,(decimal)salaireResp,idPoste);
+            //db.AjouterResponsable(Id,fonction,(decimal)salaireResp,idPoste);
         }
 
         public void DemandeAjoutMateriel(CMateriel mat,int idPoste)
