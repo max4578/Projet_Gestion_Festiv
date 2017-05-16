@@ -39,10 +39,10 @@ namespace gestionFestival.Models
         /*  Constructeur   */
         /*******************/
 
-        public CRecette(int id)
+        public CRecette(int idPoste)
         {
-            listRev = new listRevenu();
-            listRev.GetList(id);
+            listRev = new listRevenu(idPoste);
+            
             
         }
 

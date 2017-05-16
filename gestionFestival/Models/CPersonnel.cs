@@ -6,7 +6,7 @@ using gestionFestival.DAL;
 
 namespace gestionFestival.Models
 {
-    public class CPersonnel : DataContextDataContext
+    public class CPersonnel
     {
 
         /*******************/
@@ -19,7 +19,8 @@ namespace gestionFestival.Models
         private DateTime dateNaiss;
         private string mail;
         private string specialisation;
-
+        private string libelRole;
+        private DataContextDataContext db = new DataContextDataContext();
 
 
         /*******************/
@@ -74,6 +75,12 @@ namespace gestionFestival.Models
             set { specialisation = value; }
         }
 
+        public string Role
+        {
+            get { return libelRole; }
+            set { libelRole = value; }
+        }
+
 
 
         /*******************/
@@ -118,10 +125,6 @@ namespace gestionFestival.Models
         /*    Methodes     */
         /*******************/
 
-        public void CreePersonnel()
-        {
-
-        }
 
         public void ModifierPersonnel()
         {
@@ -136,14 +139,22 @@ namespace gestionFestival.Models
 
         public object Connexion(string email, string pass)
         {
-            VérificationLoginResult querry = VérificationLogin(email, pass).FirstOrDefault();
-            if (querry != null)
+            VérificationLoginResult query = db.VérificationLogin(email, pass).FirstOrDefault();
+            if (query != null)
             {
-                return FindStatut(querry.idPers, querry);
+                id = query.idPersonnel;
+                nom = query.nomPersonnel;
+                prenom = query.prenomPersonnel;
+                telephone = query.telephone;
+                dateNaiss = query.dateNaissance;
+                email = query.email;
+                specialisation = query.specialisation;
+                libelRole = query.libelRole;
+                return FindStatut(query);
             }
             else
                 return null;
-
+           
         }
 
 
@@ -152,35 +163,30 @@ namespace gestionFestival.Models
 
 
 
-        private object FindStatut(int id, VérificationLoginResult q)
+        private object FindStatut(VérificationLoginResult q)
         {
 
+            var sal=db.GetSalaire(id).FirstOrDefault();
 
-            var querry1 = isAdmin(id).FirstOrDefault();
-            var querry2 = isCompt(id).FirstOrDefault();
-            var querry3 = isResponsable(id).FirstOrDefault();
-            var querry4 = isParticipant(id).FirstOrDefault();
-
-
-            if (querry1 != null)
-                return new CAdministrateur(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation);
-            else if (querry2 != null)
-                return new CComptable(q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry2.salaire), Convert.ToDouble(querry2.budgetDisp));
-            else if (querry3 != null)
-                return new CResponsable(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, querry3.fonction, Convert.ToDouble(querry3.salaireResp));
-            else if (querry4 != null)
-                return new CParticipant(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation, Convert.ToDouble(querry4.salaire), querry4.heureTravail);
+            if (q.libelRole=="Admin")
+                return new CAdministrateur(q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation);
+            else if (q.libelRole=="Comptable")
+                return new CComptable(q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation, (double)sal.salaireHoraire, sal.nbrHeure);
+            else if (q.libelRole == "Responsable")
+                return new CResponsable(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,sal.nbrHeure,(double)sal.salaireHoraire);
+            else if (q.libelRole == "Participant")
+                return new CParticipant(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation, (double)sal.salaireHoraire,sal.nbrHeure);
             else
-                return new CPersonnel(q.idPers, q.nomPers, q.prenomPers, q.telephone, q.dateNaiss, q.email, q.specialisation);
+                return new CPersonnel(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation);
 
 
         }
 
         public bool AjoutPersonnel(string pass)
         {
-            if (VérificatioCompteExistant(mail).First().Column1 == 0)
+            if (db.VérificatioCompteExistant(mail).First().Column1 == 0)
             {
-                AjouterPersonnel(nom, prenom, dateNaiss, mail, telephone, specialisation, pass);
+                db.AjouterPersonnel(nom, prenom, dateNaiss, mail, telephone, specialisation, pass);
                 return true;
             }
             else

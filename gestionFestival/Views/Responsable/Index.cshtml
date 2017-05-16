@@ -3,10 +3,10 @@
 
 @{
     Layout = "~/Views/Shared/headerResponsable.cshtml";
-    VM_Responsable vm = Model;
+    CPoste Poste = Model;
 
 }
-
+<h1>Poste: @Poste.NomPoste</h1>
 
 @{ 
 
@@ -16,7 +16,7 @@
         <table border="1">
             <tr><th>Nom</th><th>prix par unité</th><th>quantité</th><th>Total</th>
             @{double somme = 0; }
-            @foreach (CMateriel mat in vm.depense.ListMat.ListeMat)
+            @foreach (CMateriel mat in Poste.Depense.ListMat.ListeMat)
             {
                 <tr>
                     <td>@mat.Nom</td>
@@ -42,7 +42,7 @@
                 <th>Téléphone</th>
                 <th>Salaire</th>
             
-                @foreach (CParticipant part in vm.depense.ListPart.ListePart)
+                @foreach (CParticipant part in Poste.Depense.ListPart.ListePart)
                 {
                 <tr>
                     <td>@part.Nom  @part.Prenom</td>
@@ -67,7 +67,7 @@
                 <th>Montant</th>
                
 
-                @foreach (CRevenu rev in vm.recette.ListRev.ListeRev)
+                @foreach (CRevenu rev in Poste.Recette.ListRev.ListeRev)
                 {
                 <tr>
                     <td>@rev.Description</td>
@@ -82,5 +82,5 @@
 
 
     <label>Budget</label>
-    <div id="budget">@somme/@vm.poste.BudgetDepart</div>
+    <div id="budget">@somme/@Poste.BudgetDepart</div>
 }

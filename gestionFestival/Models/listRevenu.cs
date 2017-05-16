@@ -30,9 +30,10 @@ namespace gestionFestival.Models
         /*  Constructeur   */
         /*******************/
 
-        public listRevenu()
+        public listRevenu(int idPoste)
         {
             listRev = new List<CRevenu>();
+            listRev = GetList(idPoste);
         }
 
 
@@ -44,12 +45,12 @@ namespace gestionFestival.Models
         {
             foreach (var elem in db.GetAllRevenu(id))
             {
-                listRev.Add(new CRevenu(elem.idPersonnel,elem.description,(double)elem.montant));
+                listRev.Add(new CRevenu(elem.idRevenu,elem.description, (double)elem.montant));
             }
 
             return listRev;
         }
 
-      
+
     }
 }
