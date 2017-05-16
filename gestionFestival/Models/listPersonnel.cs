@@ -47,7 +47,15 @@ namespace gestionFestival.Models
             {
                 listPerso.Add(new CParticipant(elem.idPersonnel, elem.nomPersonnel, elem.prenomPersonnel, elem.telephone, elem.dateNaissance, elem.email, elem.specialisation));
             }
+            return listPerso;
+        }
 
+        public List<CPersonnel> GetListPersonnel()
+        {
+            foreach (var elem in GetPersonnelOnly())
+            {
+                listPerso.Add(new CPersonnel(elem.idPers, elem.nomPers, elem.prenomPers, elem.telephone, elem.dateNaiss, elem.email, elem.specialisation));
+            }
             return listPerso;
         }
 

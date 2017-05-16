@@ -92,6 +92,11 @@ namespace gestionFestival.Models
 
         }
 
+        public CPersonnel(int id)
+        {
+            this.id = id;
+        }
+
         public CPersonnel(int id, string nom, string prenom, string telephone,
             DateTime dateNaiss, string mail, string specialisation)
         {
@@ -190,5 +195,9 @@ namespace gestionFestival.Models
             }
         }
 
+
+        public override string ToString(){
+            return "test";
+        }
     }
 }

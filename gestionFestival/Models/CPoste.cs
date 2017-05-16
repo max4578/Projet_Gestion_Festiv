@@ -94,14 +94,13 @@ namespace gestionFestival.Models
             recette = new CRecette(id);
         }
 
-        public CPoste(int id,string nomPoste,string description,double budget/*,CResponsable responsable*/)
+        public CPoste(int id,string nomPoste,string description,double budget)
         {
             this.id = id;
             this.nomPoste = nomPoste;
             this.description = description;
             budgetDepart = budget;
             BudgetActuel = budget;
-            //this.responsable = responsable;
         }
 
         public CPoste(string nomPoste, string description, double budget)
@@ -111,7 +110,6 @@ namespace gestionFestival.Models
             this.description = description;
             budgetDepart = budget;
             BudgetActuel = budget;
-            // Ajouter le responsable
         }
 
         /*******************/

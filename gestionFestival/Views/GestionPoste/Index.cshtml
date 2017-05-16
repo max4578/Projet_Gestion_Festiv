@@ -1,5 +1,6 @@
 ﻿@model gestionFestival.Models.CPoste
 @using gestionFestival.Models
+@using gestionFestival.ViewModel
 @{
     Layout = "~/Views/Shared/headerAdmin.cshtml";
 }
@@ -32,16 +33,33 @@
 <br />
 <div>
     <table>
-        <tr><td>Poste</td><td>Assigné à</td><td></td><td></td></tr>
+        <tr><td><h2>Poste a assigner</h2></td><td></td><td></td></tr>
         @{int i = 0; }
-        @foreach (CPoste liste in ViewBag.listeDesPostes)
+        @foreach (CPoste liste in ViewBag.listeDesPostesNonAssigne)
         {
             <tr>
                 <td>@liste.NomPoste </td>
-                <td>nom du responsable</td>
+                <td></td>
                 <td><button onclick="">@Html.ActionLink("Suppression Poste", "SuppressionPoste", "GestionPoste", new { id = i }, null)</button></td>
                 <td><button onclick="">@Html.ActionLink("Assigner le poste", "Responsable", "GestionPoste", new { id = i }, null)</button></td>
                 <td><button onclick="">@Html.ActionLink("Modification", "Poste", "GestionPoste", new { id = i++ }, null)</button></td>
+            </tr>
+        }
+    </table>
+
+</div>
+<br /><br />
+<div>
+    <table>
+        <tr><td><h2>Poste assigné</h2></td><td></td><td></td></tr>
+        @{int j = 0; }
+        @foreach (VM_PosteAssigne liste in ViewBag.listeDesPostes)
+        {
+            <tr>
+                <td>@liste.poste.NomPoste </td>
+                <td>@liste.responsable.Id</td>
+                <td><button onclick="">@Html.ActionLink("Suppression Poste", "SuppressionPosteAssigne", "GestionPoste", new { id = j }, null)</button></td>
+                <td><button onclick="">@Html.ActionLink("Modification", "Poste", "GestionPoste", new { id = j++ }, null)</button></td>
             </tr>
         }
     </table>
