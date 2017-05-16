@@ -15,10 +15,10 @@ namespace gestionFestival.Controllers
 
         public ActionResult Index()
         {
-            //VM_Responsable VM_Resp = new VM_Responsable();
-            //VM_Resp.depense = new CDepense(((CResponsable)Session["user"]).Id);
-            //VM_Resp.poste = new CPoste(((CResponsable)Session["user"]).Id);
-            //VM_Resp.recette = new CRecette(((CResponsable)Session["user"]).Id);
+            VM_Responsable VM_Resp = new VM_Responsable();
+            VM_Resp.depense = new CDepense(((CResponsable)Session["user"]).Id);
+            VM_Resp.poste = new CPoste(((CResponsable)Session["user"]).Id);
+            VM_Resp.recette = new CRecette(((CResponsable)Session["user"]).Id);
             CPoste poste = new CPoste(((CResponsable)Session["user"]).Id);
             Session["poste"] = poste;
            

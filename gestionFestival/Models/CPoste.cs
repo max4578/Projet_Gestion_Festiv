@@ -22,7 +22,7 @@ namespace gestionFestival.Models
         private CResponsable responsable;
         private CDepense depense;
         private CRecette recette;
-        private DataContextDataContext db= new DataContextDataContext();
+        private DataContextDataContext db;
 
 
         /*******************/
@@ -81,7 +81,10 @@ namespace gestionFestival.Models
         /*******************/
         /*  Constructeur   */
         /*******************/
-        public CPoste() { }
+        public CPoste()
+        {
+
+        }
         public CPoste(int idPers)
         {
             
@@ -101,6 +104,14 @@ namespace gestionFestival.Models
             this.description = description;
             budgetDepart = budget;
             BudgetActuel = budget;
+        }
+        public CPoste(int idPoste, string nomPoste, double budgetDepart, double budgetActuel, string description)
+        {
+            this.id = idPoste;
+            this.nomPoste = nomPoste;
+            this.BudgetDepart = budgetDepart;
+            this.budgetActuel = budgetActuel;
+            this.description = description;
         }
 
         public CPoste(string nomPoste, string description, double budget)
@@ -136,7 +147,12 @@ namespace gestionFestival.Models
         {
            //appel procédure stocké update budget
         }
-
+        public CPoste GetPost(int id)
+        {
+            CPoste poste = new CPoste();
+            db = new DataContextDataContext();
+            return poste=(CPoste)db.GetPoste(id);
+        }
         public void SupprimerUnPoste()
         {
             db = new DataContextDataContext();

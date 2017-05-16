@@ -40,9 +40,6 @@ namespace gestionFestival.Models
 
         }
 
-        //public CResponsable(int id, string nom, string prénom, string téléphone,
-        //DateTime dateNaiss, string mail, string spécialisation,int ht,double salaireResp)
-        //:base(id,nom,prénom, téléphone,dateNaiss,mail,spécialisation)
         public CResponsable(int id,int ht, double salaireResp):base(id)
         {
             this.heureTravail = ht;

@@ -8,8 +8,8 @@ namespace gestionFestival.ViewModel
 {
     public class VM_PosteAssigne
     {
-        public CPoste poste { get; set; }
-        public CResponsable responsable { get; set; }
+        public CPoste Poste { get; set; }
+        public CResponsable Responsable { get; set; }
 
     }
 }
