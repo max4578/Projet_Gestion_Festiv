@@ -63,14 +63,26 @@ namespace gestionFestival.Models
         /*    Méthodes     */
         /*******************/
 
-        public void CreerParticipant(int idPoste)
+        public bool CreerParticipant(int idPoste)
         {
-            db.AjouterParticipant(Id,(decimal)salaireParticipation,heureTravail,idPoste);
+            if (db.VerifMontant(idPoste, (decimal)salaireParticipation).FirstOrDefault().Column1 >= 0)
+            {
+                db.AjouterParticipant(Id, (decimal)salaireParticipation, heureTravail, idPoste);
+                return true;
+            }
+            else
+                return false;
         }
 
-        public void ModifParticipant()
+        public bool ModifParticipant(int idPoste)
         {
-            db.UpdateParticipant((decimal)salaireParticipation,heureTravail,Id);
+            if (db.VerifMontant(idPoste, (decimal)salaireParticipation).FirstOrDefault().Column1 >= 0)
+            {
+                db.UpdateParticipant((decimal)salaireParticipation,heureTravail,Id);
+                return true;
+            }
+            else
+                return false;
         }
 
 

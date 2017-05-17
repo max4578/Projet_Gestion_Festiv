@@ -5,7 +5,7 @@ using System.Web;
 using gestionFestival.DAL;
 namespace gestionFestival.Models
 {
-    public class CMateriel:DataContextDataContext
+    public class CMateriel
     {
 
         /*******************/
@@ -15,7 +15,7 @@ namespace gestionFestival.Models
         private string nom;
         private double prix;
         private int quantité;
-
+        private DataContextDataContext db = new DataContextDataContext();
 
         /*******************/
         /*   Propriétés    */
@@ -75,20 +75,34 @@ namespace gestionFestival.Models
         /*    Méthodes     */
         /*******************/
 
-        public void CreerMateriel(int idPoste)
+        public bool CreerMateriel(int idPoste)
         {
-            AjouterMateriel(nom, Convert.ToDecimal(prix), quantité, idPoste);
+            if (db.VerifMontant(idPoste, (decimal)prix*quantité).FirstOrDefault().Column1 >= 0)
+            {
+                db.AjouterMateriel(nom, Convert.ToDecimal(prix), quantité, idPoste);
+                return true;
+            }
+            else
+                return false;
         }
 
-        public void ModifMateriel()
+        public bool ModifMateriel(int idPoste)
         {
-            UpdateMateriel(nom,(decimal)prix,quantité,id);
+
+            if (db.VerifMontant(idPoste, (decimal)prix*quantité).FirstOrDefault().Column1 >= 0)
+            {
+                db.UpdateMateriel(nom, (decimal)prix, quantité, id);
+                return true;
+            }
+            else
+                return false;
+            
         }
 
 
         public void SupprimerMateriel()
         {
-            DeleteMateriel(id);
+            db.DeleteMateriel(id);
         }
     }
 }

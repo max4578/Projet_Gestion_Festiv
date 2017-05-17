@@ -13,8 +13,8 @@
                 <td>@mat.Nom</td>
                 <td>@mat.Prix €</td>
                 <td>@mat.Quantité</td>
-                <td>@(mat.Prix*mat.Quantité) €</td>
-                <td><button onclick="">@Html.ActionLink("Suppression Matériel", "SuppressionMateriel", "Responsable", new { id = i}, null)</button></td>
+                <td>@(mat.Prix * mat.Quantité) €</td>
+                <td><button onclick="">@Html.ActionLink("Suppression Matériel", "SuppressionMateriel", "Responsable", new { id = i }, null)</button></td>
                 <td><button onclick="">@Html.ActionLink("Modification", "ModifMaterialForm", "Responsable", new { id = i++ }, null)</button></td>
                 
             </tr>
@@ -38,3 +38,4 @@
                 
 </table>
 
+<h1>@Request.QueryString["error"]</h1>

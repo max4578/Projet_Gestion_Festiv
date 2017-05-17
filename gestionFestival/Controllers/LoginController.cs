@@ -14,7 +14,17 @@ namespace gestionFestival.Controllers
 
         public ActionResult Index()
         {
-     
+            try
+            {
+                DataContextDataContext db = new DataContextDataContext();
+                db.GetPersonnelOnly();
+            }
+            catch (SqlException e)
+            {
+                return View("ErrorDB");
+            }
+            Session["user"] = null;
+            Session["poste"] = null;
 
 
             return View();
@@ -25,6 +35,7 @@ namespace gestionFestival.Controllers
             ViewBag.Message = "";
             return View("Register");
         }
+
 
         [HttpPost]
         public ActionResult Register(string nom, string prenom, string tel ,DateTime dateNaiss,string mail,string spec,string pass)

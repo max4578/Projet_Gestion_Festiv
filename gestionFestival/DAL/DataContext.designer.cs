@@ -54,7 +54,7 @@ namespace gestionFestival.DAL
     #endregion
 		
 		public DataContextDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["GestionFestivalConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["GestionFestivalConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -291,6 +291,48 @@ namespace gestionFestival.DAL
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, pass);
 			return ((ISingleResult<VérificationLoginResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateBudgetActuel")]
+		public int UpdateBudgetActuel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> montant, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPoste)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), montant, idPoste);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.VerifMontant")]
+		public ISingleResult<VerifMontantResult> VerifMontant([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPoste, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> montant)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPoste, montant);
+			return ((ISingleResult<VerifMontantResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AjouterDemande")]
+		public int AjouterDemande([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string motif, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> montant, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> date)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), motif, montant, idPers, date);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetAllDemandeResp")]
+		public ISingleResult<GetAllDemandeRespResult> GetAllDemandeResp([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPers);
+			return ((ISingleResult<GetAllDemandeRespResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdatePersonnel")]
+		public int UpdatePersonnel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string mail, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string tel, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> dateNaiss, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string spec, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), mail, tel, dateNaiss, spec, idPers);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DeletePersonnel")]
+		public int DeletePersonnel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPers);
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
@@ -3309,6 +3351,130 @@ namespace gestionFestival.DAL
 				if ((this._idFestival != value))
 				{
 					this._idFestival = value;
+				}
+			}
+		}
+	}
+	
+	public partial class VerifMontantResult
+	{
+		
+		private System.Nullable<decimal> _Column1;
+		
+		public VerifMontantResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="", Storage="_Column1", DbType="Money")]
+		public System.Nullable<decimal> Column1
+		{
+			get
+			{
+				return this._Column1;
+			}
+			set
+			{
+				if ((this._Column1 != value))
+				{
+					this._Column1 = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetAllDemandeRespResult
+	{
+		
+		private int _idDemande;
+		
+		private string _motif;
+		
+		private decimal _montant;
+		
+		private System.DateTime _dateDemande;
+		
+		private int _idPersonnel;
+		
+		public GetAllDemandeRespResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idDemande", DbType="Int NOT NULL")]
+		public int idDemande
+		{
+			get
+			{
+				return this._idDemande;
+			}
+			set
+			{
+				if ((this._idDemande != value))
+				{
+					this._idDemande = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_motif", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string motif
+		{
+			get
+			{
+				return this._motif;
+			}
+			set
+			{
+				if ((this._motif != value))
+				{
+					this._motif = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_montant", DbType="Money NOT NULL")]
+		public decimal montant
+		{
+			get
+			{
+				return this._montant;
+			}
+			set
+			{
+				if ((this._montant != value))
+				{
+					this._montant = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateDemande", DbType="DateTime NOT NULL")]
+		public System.DateTime dateDemande
+		{
+			get
+			{
+				return this._dateDemande;
+			}
+			set
+			{
+				if ((this._dateDemande != value))
+				{
+					this._dateDemande = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPersonnel", DbType="Int NOT NULL")]
+		public int idPersonnel
+		{
+			get
+			{
+				return this._idPersonnel;
+			}
+			set
+			{
+				if ((this._idPersonnel != value))
+				{
+					this._idPersonnel = value;
 				}
 			}
 		}

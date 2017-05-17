@@ -68,18 +68,18 @@ namespace gestionFestival.Models
             //db.AjouterResponsable(Id,fonction,(decimal)salaireResp,idPoste);
         }
 
-        public void DemandeAjoutMateriel(CMateriel mat,int idPoste)
+        public bool DemandeAjoutMateriel(CMateriel mat,int idPoste)
         {
-            mat.CreerMateriel(idPoste);
+            return mat.CreerMateriel(idPoste);
         }
 
 
-        public void DemandeModificationMateriel(CMateriel mat,string nom,double prix, int qtt)
+        public bool DemandeModificationMateriel(CMateriel mat,string nom,double prix, int qtt,int idPoste)
         {
             mat.Nom = nom;
             mat.Prix = prix;
             mat.Quantite = qtt;
-            mat.ModifMateriel();
+            return mat.ModifMateriel(idPoste);
         }
 
         public void DemandeSuppressionMateriel(CMateriel mat)
@@ -87,17 +87,17 @@ namespace gestionFestival.Models
             mat.SupprimerMateriel();
         }
 
-        public void DemandeAjoutParticipant(CParticipant part,int idPoste)
+        public bool DemandeAjoutParticipant(CParticipant part,int idPoste)
         {
-            part.CreerParticipant(idPoste);
+           return part.CreerParticipant(idPoste);
         }
 
 
-        public void DemandeModificationParticipant(CParticipant p,double salaire, int heureTravail)
+        public bool DemandeModificationParticipant(CParticipant p,double salaire, int heureTravail,int idPoste)
         {
             p.Salaire = salaire;
             p.HeureTravail = heureTravail;
-            p.ModifParticipant();
+            return p.ModifParticipant(idPoste);
         }
 
         public void DemandeSuppressionParticipant(CParticipant part)
@@ -123,14 +123,14 @@ namespace gestionFestival.Models
             rev.SupprimerRevenu();
         }
 
-        public void DemandeAugmentBudget()
+        public void DemandeAugmentBudget(CDemande dem)
         {
-
+            dem.CreerDemande(Id);
         }
 
         public List<CPersonnel> ConsultListPersonnel()
         {
-            return new listPersonnel().GetList();
+            return new listPersonnel().ListePersonnel;
 
         }
 
@@ -148,5 +148,11 @@ namespace gestionFestival.Models
         {
             return new listRevenu(idPost).ListeRev;
         }
+
+        public List<CDemande> ConsultListDemande()
+        {
+            return new listDemande(Id).ListeDem;
+        }
+
     }
 }

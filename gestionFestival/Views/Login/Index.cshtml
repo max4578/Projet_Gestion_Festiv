@@ -7,15 +7,17 @@
 
     <label>Email du compe</label>
     <br/>
-    <input type="text" name="email" />
+    <input type="text" name="email" required="required"/>
     <br/><br/>
     <label>Password</label>
     <br/>
-    <input type="text" name="pass" />
+    <input type="text" name="pass" required="required"/>
     <br/>
     <input type="submit" value="connexion"/> 
     
     @Html.ActionLink("S' enregistrer", "RegisterForm","Login")
 
     <h1>@Model</h1>
+
+    <h1>@Request.QueryString["error"]</h1>
 }

@@ -59,18 +59,18 @@ namespace gestionFestival.Models
             return listP;
         }
 
-        public List<VM_PosteAssigne> GetListPosteAssigne()
-        {
-            //db = new DataContextDataContext();
-            List<VM_PosteAssigne> listPosteAssigne = new List<VM_PosteAssigne>();
-            //var chargerListePoste = db.AfficherPosteAssigne();
-            var chargerListePoste = db.AfficherPoste();
-            foreach (var poste in chargerListePoste)
-                listPosteAssigne.Add(new VM_PosteAssigne {
-                    poste = new CPoste(poste.nomPoste,poste.description,0),
-                    responsable = new CResponsable(poste.idPers,poste.fonction,0)}
-                );
-            return listPosteAssigne;
-        }
+        //public List<VM_PosteAssigne> GetListPosteAssigne()
+        //{
+        //    //db = new DataContextDataContext();
+        //    List<VM_PosteAssigne> listPosteAssigne = new List<VM_PosteAssigne>();
+        //    //var chargerListePoste = db.AfficherPosteAssigne();
+        //    var chargerListePoste = db.AfficherPoste();
+        //    foreach (var poste in chargerListePoste)
+        //        listPosteAssigne.Add(new VM_PosteAssigne {
+        //            poste = new CPoste(poste.nomPoste,poste.description,0),
+        //            responsable = new CResponsable(poste.idPers,poste.fonction,0)}
+        //        );
+        //    return listPosteAssigne;
+        //}
     }
 }

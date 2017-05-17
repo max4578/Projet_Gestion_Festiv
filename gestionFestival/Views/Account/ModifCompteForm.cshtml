@@ -1,0 +1,43 @@
+﻿@using gestionFestival.Models;
+
+
+@{
+    CPersonnel p = @Model;
+
+
+    if (p.Role == "Admin")
+        Layout = "~/Views/Shared/headerAdmin.cshtml";
+    else if (p.Role == "Comptable")
+        Layout = "~/Views/Shared/headerComptable.cshtml";
+    else if (p.Role == "Responsable")
+        Layout = "~/Views/Shared/headerResponsable.cshtml";
+    else if (p.Role == "Participant")
+        Layout = "~/Views/Shared/headerParticipant.cshtml";
+    else if (p.Role == "Personnel")
+        Layout = "~/Views/Shared/headerParticipant.cshtml";
+
+    <h1>Création d' un nouveau compte</h1>
+
+    using (Html.BeginForm("ModifInfoCompte", "Account"))
+    {
+
+    <br />
+    <label>Email</label>
+    <input type="text" value="@p.Mail" name="email" />
+
+    <br />
+    <label>Téléphone</label>
+    <input type="text" value="@p.Telephone" name="telephone" />
+    <br />
+    <label>Date de naissance</label>
+    <input type="datetime" value="@p.DateNaiss" name="dateNaiss" />
+
+    <br />
+    <label>Spécialisation</label>
+    <input type="text" value="@p.Specialisation" name="spec" />
+
+    <br />
+
+    <input type="submit" value="Confirmer la modification" />
+        }
+    }

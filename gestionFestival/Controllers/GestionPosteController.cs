@@ -10,12 +10,31 @@ namespace gestionFestival.Controllers
 {
     public class GestionPosteController : Controller
     {
+
+        public CPoste CalculBudgetPoste()
+        {
+            CPoste poste = new CPoste(((CResponsable)Session["user"]).Id);
+            poste.Depense.CalculerDepense();
+            poste.Recette.CalculerRecette();
+            double totalDepense = poste.Depense.Total - poste.Recette.Total;
+            poste.BudgetActuel = poste.BudgetDepart - totalDepense;
+            poste.ModifierBudget(poste.BudgetActuel);
+            return poste;
+        }
+
+        public bool TestSession()
+        {
+            if (Session["user"] == null)
+                return false;
+            else
+                return true;
+        }
         // GET: GestionPoste
         public ActionResult Index()
         {
             listPoste listePoste = new listPoste();
             Session["listePosteNonAssigne"] = listePoste.GetListPosteNonAssigne();
-            Session["listePoste"] = listePoste.GetListPosteAssigne();
+           // Session["listePoste"] = listePoste.GetListPosteAssigne();
             ViewBag.listeDesPostes = Session["listePoste"];
             ViewBag.listeDesPostesNonAssigne = Session["listePosteNonAssigne"];
             return View();

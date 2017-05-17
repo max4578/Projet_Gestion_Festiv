@@ -35,7 +35,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        @Html.ActionLink("Gestion Matériel", "gestionMateriel", "Responsable", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Gestion Matériel", "GestionMateriel", "Responsable", new { area = "" }, new { @class = "navbar-brand" })
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -43,7 +43,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        @Html.ActionLink("Gestion des participants", "gestionParticipant", "Responsable", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Gestion des participants", "GestionParticipant", "Responsable", new { area = "" }, new { @class = "navbar-brand" })
                     </div>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -51,7 +51,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("Gestion des revenus", "gestionRevenu", "Responsable", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Gestion des revenus", "GestionRevenu", "Responsable", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -59,8 +59,24 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        @Html.ActionLink("Consulter les dépenses et recettes", "gestionBudget", "Responsable", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Budget", "GestionBudget", "Responsable", new { area = "" }, new { @class = "navbar-brand" })
                     </div>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Gestion compte", "Index", "Account", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Déconnexion", "Index", "Login", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav"></ul>
                     </div>

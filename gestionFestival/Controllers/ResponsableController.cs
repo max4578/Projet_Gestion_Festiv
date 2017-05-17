@@ -12,15 +12,32 @@ namespace gestionFestival.Controllers
 {
     public class ResponsableController : Controller
     {
+        public CPoste CalculBudgetPoste()
+        {
+            CPoste poste = new CPoste(((CResponsable)Session["user"]).Id);
+            poste.Depense.CalculerDepense();
+            poste.Recette.CalculerRecette();
+            double totalDepense= poste.Depense.Total-poste.Recette.Total ;
+            poste.BudgetActuel = poste.BudgetDepart - totalDepense;
+            poste.ModifierBudget(poste.BudgetActuel);
+            return poste;
+        }
+
+        public bool TestSession()
+        {
+            if (Session["user"] == null)
+                return false;
+            else
+                return true;
+        }
 
         public ActionResult Index()
         {
-            //VM_Responsable VM_Resp = new VM_Responsable();
-            //VM_Resp.depense = new CDepense(((CResponsable)Session["user"]).Id);
-            //VM_Resp.poste = new CPoste(((CResponsable)Session["user"]).Id);
-            //VM_Resp.recette = new CRecette(((CResponsable)Session["user"]).Id);
+            if (!TestSession())
+                return Redirect("Login?error=Vous devez être connecté avant d acceder aux ressources");
+            
             CPoste poste = new CPoste(((CResponsable)Session["user"]).Id);
-            Session["poste"] = poste;
+            Session["poste"] = CalculBudgetPoste();
            
             return View(poste);
         }
@@ -29,8 +46,11 @@ namespace gestionFestival.Controllers
         /************************/
         /*  Gestion matériel    */
         /************************/
-        public ActionResult gestionMateriel()
+        public ActionResult GestionMateriel()
         {
+            if (!TestSession())
+                return Redirect("../Login?error=Vous devez être connecté avant d acceder aux ressources");
+
             CResponsable resp = (CResponsable)Session["user"];
             CPoste post = (CPoste)Session["poste"];
             listMateriel listM = post.Depense.ListMat;
@@ -40,11 +60,11 @@ namespace gestionFestival.Controllers
             if (Session["listMateriel"]==null) {
                 List<CMateriel> list = resp.ConsultListMateriel(post.Id);
                 Session["listMateriel"] = list;
-                return View("gestionMateriel");
+                return View("GestionMateriel");
             }
             else
             {
-                return View("gestionMateriel");
+                return View("GestionMateriel");
             }
 
         }
@@ -55,17 +75,25 @@ namespace gestionFestival.Controllers
             CMateriel mat = ((List<CMateriel>)Session["listMateriel"]).ElementAt(id);         
             resp.DemandeSuppressionMateriel(mat);
             ((List<CMateriel>)Session["listMateriel"]).RemoveAt(id); 
-            return View("gestionMateriel");
+            return View("GestionMateriel");
         }
 
+        
 
         public ActionResult AjouterMateriel(string nom, double prix, int qtt)
         {
             CResponsable resp = (CResponsable)Session["user"];
-            CMateriel mat = new CMateriel(nom,prix,qtt);        
-            resp.DemandeAjoutMateriel(mat,((CPoste)Session["poste"]).Id);
-            Session["listMateriel"] = null;
-            return Redirect("gestionMateriel");
+            CMateriel mat = new CMateriel(nom,prix,qtt);
+            if (resp.DemandeAjoutMateriel(mat, ((CPoste)Session["poste"]).Id))
+            {
+                Session["listMateriel"] = null;
+                return Redirect("GestionMateriel");
+            }
+            else
+            {
+                
+            return Redirect("GestionMateriel?error=Erreur: pas assez de fond");
+            }
         }
 
         public ActionResult ModifMaterialForm(int id)
@@ -81,15 +109,19 @@ namespace gestionFestival.Controllers
         {
             CResponsable resp = (CResponsable)Session["user"];
             List<CMateriel> list = (List<CMateriel>)Session["listMateriel"];
-
-            list.ElementAt(index).Nom = nom;
-            list.ElementAt(index).Prix = prix;
-            list.ElementAt(index).Quantité = qtt;
-            list.ElementAt(index).ModifMateriel();
+            CPoste poste = CalculBudgetPoste();
+            
+            
             CMateriel mat = list.ElementAt(index);
-            resp.DemandeModificationMateriel(mat,nom,prix,qtt);
-
-            return Redirect("gestionMateriel");
+            if (resp.DemandeModificationMateriel(mat, nom, prix, qtt, poste.Id))
+            {
+                return Redirect("GestionMateriel");
+            }
+            else
+            {
+                Session["listMateriel"] = null;
+                return Redirect("GestionMateriel?error=Erreur: pas assez de fond");
+            }
         }
 
 
@@ -98,8 +130,11 @@ namespace gestionFestival.Controllers
         /************************/
         /*  Gestion participant */
         /************************/
-        public ActionResult gestionParticipant()
+        public ActionResult GestionParticipant()
         {
+            if (!TestSession())
+                return Redirect("../Login?error=Vous devez être connecté avant d acceder aux ressources");
+
             CResponsable resp = (CResponsable)Session["user"];
             CPoste post = (CPoste)Session["poste"];
 
@@ -109,11 +144,11 @@ namespace gestionFestival.Controllers
             if (Session["listParticipant"] == null)
             {           
                 Session["listParticipant"] = resp.ConsultListParticipant(post.Id) ;  
-                return View("gestionParticipant");
+                return View("GestionParticipant");
             }
             else
             {
-                return View("gestionParticipant");
+                return View("GestionParticipant");
 
             }
 
@@ -125,7 +160,7 @@ namespace gestionFestival.Controllers
             CParticipant part = ((List<CParticipant>)Session["listParticipant"]).ElementAt(id);
             resp.DemandeSuppressionParticipant(part);
             ((List<CParticipant>)Session["listParticipant"]).RemoveAt(id);
-            return Redirect("../gestionParticipant");
+            return Redirect("../GestionParticipant");
         }
 
 
@@ -137,10 +172,18 @@ namespace gestionFestival.Controllers
             CParticipant part = (CParticipant)persToAdd;
             part.Salaire = salaire;
             part.HeureTravail = heureTravail;
-            resp.DemandeAjoutParticipant(part, ((CPoste)Session["poste"]).Id);
-            Session["listParticipant"] = null;
-            return Redirect("gestionParticipant");
-  
+           
+            if (resp.DemandeAjoutParticipant(part, ((CPoste)Session["poste"]).Id))
+            {
+                Session["listParticipant"] = null;
+                return Redirect("GestionParticipant");
+            }
+            else
+            {
+
+                return Redirect("GestionParticipant?error=Erreur: pas assez de fond");
+            }
+
         }
 
         public ActionResult ModifParticipantForm(int id)
@@ -156,14 +199,19 @@ namespace gestionFestival.Controllers
         {
           
             List<CParticipant> list = (List<CParticipant>)Session["listParticipant"];
-
+            CResponsable resp = (CResponsable)Session["user"];
             list.ElementAt(index).Salaire = salaire;
-            list.ElementAt(index).HeureTravail = heureTravail;
-            
+            list.ElementAt(index).HeureTravail = heureTravail;          
             CParticipant part = list.ElementAt(index);
-            ((CResponsable)Session["user"]).DemandeModificationParticipant(part, salaire,heureTravail);
-
-            return Redirect("gestionParticipant");
+            if (resp.DemandeModificationParticipant(part, salaire, heureTravail, ((CPoste)Session["poste"]).Id))
+            {
+                return Redirect("GestionParticipant");
+            }
+            else
+            {
+                Session["listParticipant"] = null;
+                return Redirect("GestionParticipant?error=Erreur: pas assez de fond");
+            }
         }
 
 
@@ -171,8 +219,12 @@ namespace gestionFestival.Controllers
         /************************/
         /*  Gestion Revenu    */
         /************************/
-        public ActionResult gestionRevenu()
+        public ActionResult GestionRevenu()
         {
+            if (!TestSession())
+                return Redirect("../Login?error=Vous devez être connecté avant d acceder aux ressources");
+
+
             CResponsable resp = (CResponsable)Session["user"];
             CPoste post = (CPoste)Session["poste"];
 
@@ -181,11 +233,11 @@ namespace gestionFestival.Controllers
             {
                 List<CRevenu> list = resp.ConsultListRevenu(post.Id);
                 Session["listRevenu"] = list;
-                return View("gestionRevenu");
+                return View("GestionRevenu");
             }
             else
             {
-                return View("gestionRevenu");
+                return View("GestionRevenu");
             }
 
         }
@@ -196,7 +248,7 @@ namespace gestionFestival.Controllers
             CRevenu rev = ((List<CRevenu>)Session["listRevenu"]).ElementAt(id);
             resp.DemandeSuppressionRevenu(rev);
             ((List<CRevenu>)Session["listRevenu"]).RemoveAt(id);
-            return View("gestionRevenu");
+            return View("GestionRevenu");
         }
 
 
@@ -206,7 +258,7 @@ namespace gestionFestival.Controllers
             CRevenu rev = new CRevenu(description, montant);
             resp.DemandeAjoutRevenu(rev, ((CPoste)Session["poste"]).Id);
             Session["listRevenu"] = null;
-            return Redirect("gestionRevenu");
+            return Redirect("GestionRevenu");
         }
 
         public ActionResult ModifRevenuForm(int id)
@@ -227,7 +279,7 @@ namespace gestionFestival.Controllers
             CRevenu rev = list.ElementAt(index);
             resp.DemandeModificationRevenu(rev, description,montant);
 
-            return Redirect("gestionRevenu");
+            return Redirect("GestionRevenu");
         }
 
 
@@ -235,20 +287,27 @@ namespace gestionFestival.Controllers
         /*  Gestion Budget      */
         /************************/
 
-        public ActionResult gestionBudget()
+        public ActionResult GestionBudget()
         {
             CResponsable resp = (CResponsable)Session["user"];
-            CDepense Dep = new CDepense(resp.Id);
-            CRecette Rec = new CRecette(resp.Id);
-            Dep.CalculerDepense();
-            Rec.CalculerRecette();
-            ViewBag.Dep = Dep;
-            ViewBag.Rec = Rec;
-
-           
-
-            return View();
+            CPoste poste = CalculBudgetPoste();
+            List<CDemande> listDem= resp.ConsultListDemande();
+            ViewBag.listDem = listDem;
+            return View(poste);
         }
 
+
+        public ActionResult DemandeForm()
+        {     
+            return View("DemandeForm");
+        }
+
+        public ActionResult AddDemande(string motif, double montant)
+        {
+            CDemande dem = new CDemande(montant, motif, DateTime.Now);
+            CResponsable resp = (CResponsable)Session["user"];
+            resp.DemandeAugmentBudget(dem);
+            return Redirect("GestionBudget");
+        }
     }
 }

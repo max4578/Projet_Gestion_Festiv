@@ -134,7 +134,7 @@ namespace gestionFestival.Models
         }
         public void ModifierBudget(double budget)
         {
-           //appel procédure stocké update budget
+            db.UpdateBudgetActuel((decimal)budget,id);
         }
 
         public void SupprimerUnPoste()

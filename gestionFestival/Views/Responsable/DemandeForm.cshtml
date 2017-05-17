@@ -1,0 +1,16 @@
+﻿
+@using gestionFestival.Models
+
+@using (Html.BeginForm("AddDemande", "Responsable"))
+{
+
+   
+    <label>Motif de la demande</label>
+    <input type="text"  name="motif" required="required" />
+    <label>Prix</label>
+    <input type="number"  name="montant" min="0" required="required"/>
+    
+    
+    <input type="submit" value="Confirmer la modification" />
+
+}

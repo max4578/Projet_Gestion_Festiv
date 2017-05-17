@@ -117,6 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ParticipantController.cs" />
+    <Compile Include="Controllers\PersonnelController.cs" />
     <Compile Include="Controllers\RedirecteurController.cs" />
     <Compile Include="Controllers\BudgetFestivalController.cs" />
     <Compile Include="Controllers\GestionPosteController.cs" />
@@ -132,6 +135,7 @@
     </Compile>
     <Compile Include="Models\CAdministrateur.cs" />
     <Compile Include="Models\CComptable.cs" />
+    <Compile Include="Models\CDemande.cs" />
     <Compile Include="Models\CDepense.cs" />
     <Compile Include="Models\CMateriel.cs" />
     <Compile Include="Models\CParticipant.cs" />
@@ -141,6 +145,7 @@
     <Compile Include="Models\CResponsable.cs" />
     <Compile Include="Models\CRevenu.cs" />
     <Compile Include="Models\IPrevision.cs" />
+    <Compile Include="Models\listDemande.cs" />
     <Compile Include="Models\listMateriel.cs" />
     <Compile Include="Models\listParticipant.cs" />
     <Compile Include="Models\listPersonnel.cs" />
@@ -164,17 +169,24 @@
     <Content Include="Views\Shared\headerResponsable.cshtml" />
     <Content Include="Views\BudgetFestival\Index.cshtml" />
     <Content Include="Views\GestionPoste\Index.cshtml" />
-    <Content Include="Views\Responsable\gestionMateriel.cshtml" />
+    <Content Include="Views\Responsable\GestionMateriel.cshtml" />
     <Content Include="Views\Shared\headerAdmin.cshtml" />
     <Content Include="Views\Responsable\Index.cshtml" />
     <Content Include="Views\Responsable\ModifMatForm.cshtml" />
     <Content Include="Views\GestionPoste\ModifierPoste.cshtml" />
-    <Content Include="Views\Responsable\gestionParticipant.cshtml" />
+    <Content Include="Views\Responsable\GestionParticipant.cshtml" />
     <Content Include="Views\Responsable\ModifParticipantForm.cshtml" />
     <Content Include="Views\GestionPoste\AssignerPoste.cshtml" />
-    <Content Include="Views\Responsable\gestionRevenu.cshtml" />
+    <Content Include="Views\Responsable\GestionRevenu.cshtml" />
     <Content Include="Views\Responsable\ModifRevenuForm.cshtml" />
-    <Content Include="Views\Responsable\gestionBudget.cshtml" />
+    <Content Include="Views\Responsable\GestionBudget.cshtml" />
+    <Content Include="Views\Login\ErrorDB.cshtml" />
+    <Content Include="Views\Responsable\DemandeForm.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\ModifCompteForm.cshtml" />
+    <Content Include="Views\Participant\Index.cshtml" />
+    <Content Include="Views\Shared\headerParticipant.cshtml" />
+    <Content Include="Views\Personnel\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -184,7 +196,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\" />
     <Folder Include="Views\Redirecteur\" />
   </ItemGroup>
   <ItemGroup>
