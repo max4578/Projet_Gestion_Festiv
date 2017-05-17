@@ -52,25 +52,23 @@ namespace gestionFestival.Models
         public List<CPoste> GetListPosteNonAssigne()
         {
             db = new DataContextDataContext();
-            // a changer var chargerListePoste = db.AfficherPosteNonAttribue();
-            var chargerListePoste = db.AfficherPoste();
+            var chargerListePoste = db.AfficherPosteNonAssigne();
             foreach (var poste in chargerListePoste)
                 listP.Add(new CPoste(poste.idPoste, poste.nomPoste, poste.description, 0));
             return listP;
         }
 
-        //public List<VM_PosteAssigne> GetListPosteAssigne()
-        //{
-        //    //db = new DataContextDataContext();
-        //    List<VM_PosteAssigne> listPosteAssigne = new List<VM_PosteAssigne>();
-        //    //var chargerListePoste = db.AfficherPosteAssigne();
-        //    var chargerListePoste = db.AfficherPoste();
-        //    foreach (var poste in chargerListePoste)
-        //        listPosteAssigne.Add(new VM_PosteAssigne {
-        //            poste = new CPoste(poste.nomPoste,poste.description,0),
-        //            responsable = new CResponsable(poste.idPers,poste.fonction,0)}
-        //        );
-        //    return listPosteAssigne;
-        //}
+        public List<CPoste> GetListPosteAssigne()
+        {
+            db = new DataContextDataContext();
+            List<CPoste> listPosteAssigne = new List<CPoste>();
+            var chargerListePoste = db.AfficherPosteAssigne();
+            foreach (var item in chargerListePoste) {
+                CResponsable resp = new CResponsable(item.idPersonnel1,item.nomPersonnel,item.prenomPersonnel, item.telephone, item.dateNaissance, item.email, item.specialisation, item.libelRole, item.nbrHeure, (double)item.salaireHoraire);
+                listPosteAssigne.Add(new CPoste((int)item.idPoste,item.nomPoste,(double)item.budgetDepart,(double)item.budgetActuel,item.description, resp));
+               }
+
+            return listPosteAssigne;
+        }
     }
 }
