@@ -58,16 +58,16 @@ namespace gestionFestival.Models
             return listP;
         }
 
-        public List<VM_PosteAssigne> GetListPosteAssigne()
+        public List<CPoste> GetListPosteAssigne()
         {
             db = new DataContextDataContext();
-            List<VM_PosteAssigne> listPosteAssigne = new List<VM_PosteAssigne>();
-            var chargerListePoste = db.AfficherPosteAssigne("Responsable");
-            foreach (var item in chargerListePoste)
-                listPosteAssigne.Add(new VM_PosteAssigne {
-                    Poste = new CPoste(item.idPoste1,item.nomPoste,(double)item.budgetDepart,(double)item.budgetActuel,item.description),
-                    Responsable = new CResponsable(item.idPersonnel,item.nomPersonnel,item.prenomPersonnel,item.telephone,item.dateNaissance,item.email,item.specialisation,item.libelRole,item.nbrHeure,(double)item.salaireHoraire)}
-                );
+            List<CPoste> listPosteAssigne = new List<CPoste>();
+            var chargerListePoste = db.AfficherPosteAssigne();
+            foreach (var item in chargerListePoste) {
+                CResponsable resp = new CResponsable(item.idPersonnel1,item.nomPersonnel,item.prenomPersonnel, item.telephone, item.dateNaissance, item.email, item.specialisation, item.libelRole, item.nbrHeure, (double)item.salaireHoraire);
+                listPosteAssigne.Add(new CPoste((int)item.idPoste,item.nomPoste,(double)item.budgetDepart,(double)item.budgetActuel,item.description, resp));
+               }
+
             return listPosteAssigne;
         }
     }

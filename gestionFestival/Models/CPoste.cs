@@ -123,6 +123,16 @@ namespace gestionFestival.Models
             BudgetActuel = budget;
         }
 
+        public CPoste(int idPoste, string nomPoste, double budgetDepart, double budgetActuel, string description,CResponsable resp)
+        {
+            this.id = idPoste;
+            this.nomPoste = nomPoste;
+            this.BudgetDepart = budgetDepart;
+            this.budgetActuel = budgetActuel;
+            this.description = description;
+            responsable = resp;
+        }
+
         /*******************/
         /*    Methodes     */
         /*******************/
@@ -133,7 +143,7 @@ namespace gestionFestival.Models
             db.AjouterPoste(nomPoste, descriptionPoste);
         }
 
-        public void ModifierInfoPoste(string nom, string description)
+        public void ModifierInfoPoste(int id,string nom, string description)
         {
             db = new DataContextDataContext();
             db.ModifierPoste(id, nom, description);
@@ -147,13 +157,35 @@ namespace gestionFestival.Models
         {
            //appel procédure stocké update budget
         }
-        public CPoste GetPost(int id)
+        public void GetPostAndResponsable(int id)
         {
-            CPoste poste = new CPoste();
             db = new DataContextDataContext();
-            return poste=(CPoste)db.GetPoste(id);
+            var charger = db.GetPoste(id).FirstOrDefault();
+            id = charger.idPoste;
+            nomPoste = charger.nomPoste;
+            description = charger.description;
+            budgetDepart = (double)charger.budgetDepart;
+            budgetActuel = (double)charger.budgetActuel;
+            responsable.Id = charger.idPersonnel;
+            responsable.Nom = charger.nomPersonnel;
+            responsable.Prenom = charger.prenomPersonnel;
+            responsable.Telephone = charger.telephone;
+            responsable.DateNaiss = charger.dateNaissance;
+            responsable.Mail = charger.email;
+            responsable.Specialisation = charger.specialisation;
+            responsable.Role = charger.libelRole;
         }
-        public void SupprimerUnPoste()
+
+        public void GetPost(int id)
+        {
+            db = new DataContextDataContext();
+            var charger = db.GetPostOnly(id).FirstOrDefault();
+            id = charger.idPoste;
+            nomPoste = charger.nomPoste;
+            description = charger.description;
+        }
+
+        public void SupprimerUnPoste(int id)
         {
             db = new DataContextDataContext();
             db.SupprimerPoste(id);
