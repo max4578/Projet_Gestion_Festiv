@@ -69,13 +69,15 @@ namespace gestionFestival.Models
             db = new DataContextDataContext();
             // ajout de la procédure stockée
         }
-        public CFestival GetFestival()
+        public void InfoFestival()
         {
-            CFestival festival = new CFestival();
             db = new DataContextDataContext();
-            // var charger = procédure
-            // CFestival festival = new CFestival(charger.idFestival,charger.nomFestival,charger.dateDebut,charger.dateFin,(double)charger.budget);
-            return festival;
+            var data=db.GetFestival().FirstOrDefault();
+            idFestival = data.idFestival;
+            nomFestival = data.nomFest;
+            dateDebutFestival = data.dateDebut;
+            dateFinFestival = data.dateFin;
+            budgetFestival = (double)data.budget;
         }
     }
 }

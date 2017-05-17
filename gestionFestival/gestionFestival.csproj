@@ -132,6 +132,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ComptableController.cs" />
     <Compile Include="Controllers\ParticipantController.cs" />
     <Compile Include="Controllers\PersonnelController.cs" />
     <Compile Include="Controllers\RedirecteurController.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Models\CComptable.cs" />
     <Compile Include="Models\CDemande.cs" />
     <Compile Include="Models\CDepense.cs" />
+    <Compile Include="Models\CFestival.cs" />
     <Compile Include="Models\CMateriel.cs" />
     <Compile Include="Models\CParticipant.cs" />
     <Compile Include="Models\CPersonnel.cs" />
@@ -200,6 +202,7 @@
     <Content Include="Views\Participant\Index.cshtml" />
     <Content Include="Views\Shared\headerParticipant.cshtml" />
     <Content Include="Views\Personnel\Index.cshtml" />
+    <Content Include="Views\Comptable\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -115,23 +115,35 @@ namespace gestionFestival.Controllers
             CPoste poste = new CPoste();
             poste.GetPost(id);
             listPersonnel listP = new listPersonnel();
-            ViewBag.listePersonnel = new SelectList(listP.ListePersonnel, "Id", "Nom", "Prenom");
+            ViewBag.listePersonnel = new SelectList(listP.ListePersonnel, "Id", "Nom");
             ViewBag.idPoste = id;
             return View("AssignerPoste", poste);
         }
         [HttpPost]
-        public ActionResult AssignerPoste(string selectResponsable, string fonction, int salaire, int index)
+        public ActionResult AssignerPoste(string selectResponsable, string description, string salaire, int id)
         {
             int key;
-            List<CPoste> list = (List<CPoste>)Session["listePoste"];
-            CPoste poste = list.ElementAt(index);
             bool result = int.TryParse(selectResponsable, out key);
             if (result)
             {
-                CResponsable responsable = new CResponsable(key, 5, salaire);
-                responsable.CreerResponsable(poste.Id);
+                double salaireResp;
+                bool resulta = double.TryParse(salaire, out salaireResp);
+                if (resulta)
+                {
+                    CPoste poste = new CPoste();
+                    poste.AssignerUnPoste(key, id, salaireResp);
+                }
+                else
+                {
+                    ViewBag.message = "Entrez une valeur correcte pour le salaire";
+                    return View(salaireResp);
+                }
+
             }
-            ViewBag.listeDesPostes = list;
+            listPoste listePosteNonAssigne = new listPoste();
+            listPoste listePosteAssigne = new listPoste();
+            ViewBag.listeDesPostes = listePosteAssigne.GetListPosteAssigne();
+            ViewBag.listeDesPostesNonAssigne = listePosteNonAssigne.GetListPosteNonAssigne();
             return View("Index");
         }
 

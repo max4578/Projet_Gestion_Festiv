@@ -1,10 +1,13 @@
-﻿
+﻿@model gestionFestival.Models.CFestival
 @{
     Layout = "~/Views/Shared/headerAdmin.cshtml";
 }
 
 
-<h2>Buget du festival</h2>
+<h2>@Model.NomFestival</h2>
+<div>
+    <p>Le budget actuel du festival est de : @Model.BudgetFestival €</p>
+</div>
 @using (Html.BeginForm("EnvoyerBudget", "BudgetFestival"))
 {
     @Html.Label("Quel montant voulez-vous allouer au festival ?")
@@ -13,7 +16,7 @@
     <span>€</span>
     <br />
     <input type="submit" value="Confirmer" />
-    <input type="reset" value="Annuler" />
+    <td><button onclick="">@Html.ActionLink("Annuler", "Index", "GestionPoste")</button></td>
 }
 <div>
     @ViewBag.message

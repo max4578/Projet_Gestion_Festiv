@@ -57,6 +57,7 @@ namespace gestionFestival.Models
 
         public void DefinirBudgetFestival(double budget)
         {
+            comptable = new CComptable();
             comptable.DemandeModifierBudget(budget);
         }
         public void AjouterPoste()

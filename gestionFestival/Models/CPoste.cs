@@ -161,7 +161,7 @@ namespace gestionFestival.Models
         {
             db = new DataContextDataContext();
             var charger = db.GetPoste(id).FirstOrDefault();
-            id = charger.idPoste;
+            this.id = charger.idPoste;
             nomPoste = charger.nomPoste;
             description = charger.description;
             budgetDepart = (double)charger.budgetDepart;
@@ -176,18 +176,18 @@ namespace gestionFestival.Models
             responsable.Role = charger.libelRole;
         }
 
-        public void GetPost(int id)
+        public void GetPost(int idPoste)
         {
             db = new DataContextDataContext();
-            var charger = db.GetPostOnly(id).FirstOrDefault();
+            var charger = db.GetPostOnly(idPoste).FirstOrDefault();
             id = charger.idPoste;
             nomPoste = charger.nomPoste;
             description = charger.description;
         }
-        public void AssignerUnPoste(int idPoste,int idPers)
+        public void AssignerUnPoste(int idPoste,int idPers,double salaire)
         {
             db = new DataContextDataContext();
-            db.AssignerUnPoste(idPoste,idPers);
+            db.AssignerUnPoste(idPoste,idPers,(decimal)salaire);
         }
         public void SupprimerUnPoste(int id)
         {

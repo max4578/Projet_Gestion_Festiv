@@ -1,4 +1,5 @@
 ﻿using System;
+using gestionFestival.DAL;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,6 +15,7 @@ namespace gestionFestival.Models
         private double salaire;
         private listPoste listP;
         private double budgetDisponible;
+        DataContextDataContext db;
     
 
 
@@ -49,10 +51,11 @@ namespace gestionFestival.Models
         }
 
         public CComptable(int id,string nom, string prenom, string telephone,
-          DateTime dateNaiss, string mail, string specialisation, string libelRole, double salaire, double budgetDisponible):base(id,nom,prenom, telephone,dateNaiss,mail,specialisation,libelRole)
+          DateTime dateNaiss, string mail, string specialisation, string libelRole, double salaire):base(id,nom,prenom, telephone,dateNaiss,mail,specialisation,libelRole)
         {
             this.salaire = salaire;
-            this.budgetDisponible = budgetDisponible;
+            
+            
         }
 
         /*******************/
@@ -61,7 +64,9 @@ namespace gestionFestival.Models
 
         public void DemandeModifierBudget(double budget)
         {
+            db = new DataContextDataContext();
             budgetDisponible = budget;
+            db.BudgetFestival((decimal)budget);
         }
 
         public void AlloueBudget()

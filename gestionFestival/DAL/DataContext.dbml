@@ -75,7 +75,7 @@
     <Type Name="Salaire">
       <Column Name="idSalaire" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="salaireHoraire" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="nbrHeure" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nbrHeure" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Personnel_Salaire" Member="Personnel" ThisKey="idPersonnel" OtherKey="idPersonnel" Type="Personnel" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
@@ -164,11 +164,6 @@
   <Function Name="dbo.AjouterRevenu" Method="AjouterRevenu">
     <Parameter Name="desc" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="montant" Type="System.Decimal" DbType="Money" />
-    <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.AssignerUnPoste" Method="AssignerUnPoste">
-    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
     <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
@@ -386,6 +381,25 @@
     <Parameter Name="montant" Type="System.Decimal" DbType="Money" />
     <ElementType Name="VerifMontantResult">
       <Column Name="" Member="Column1" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.AssignerUnPoste" Method="AssignerUnPoste">
+    <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
+    <Parameter Name="salaire" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.BudgetFestival" Method="BudgetFestival">
+    <Parameter Name="budget" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetFestival" Method="GetFestival">
+    <ElementType Name="GetFestivalResult">
+      <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomFest" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dateDebut" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateFin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="budget" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

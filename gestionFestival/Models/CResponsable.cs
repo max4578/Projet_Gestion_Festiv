@@ -24,7 +24,6 @@ namespace gestionFestival.Models
             get { return heureTravail; }
             set { heureTravail = value; }
         }
-
         public double Salaire
         {
             get { return salaireResp; }
@@ -59,12 +58,6 @@ namespace gestionFestival.Models
         /*******************/
         /*    Methodes     */
         /*******************/
-
-        public void CreerResponsable(int idPoste)
-        {
-            //db.AjouterResponsable(Id,fonction,(decimal)salaireResp,idPoste);
-        }
-
         public bool DemandeAjoutMateriel(CMateriel mat,int idPoste)
         {
             return mat.CreerMateriel(idPoste);
