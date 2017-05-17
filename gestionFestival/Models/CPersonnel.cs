@@ -129,13 +129,13 @@ namespace gestionFestival.Models
 
         public void ModifierPersonnel()
         {
-
+            db.UpdatePersonnel(mail,telephone,dateNaiss,specialisation,id);
         }
 
 
         public void SupprimerPersonnel()
         {
-
+            db.DeletePersonnel(id);
         }
 
         public object Connexion(string email, string pass)

@@ -26,10 +26,13 @@ namespace gestionFestival.Controllers
                 return Redirect("GestionPoste");
             }
 
-            //else if (type == "gestionFestival.Models.CComptable")
-            //{
-            //    // Layout = "~/Views/Shared/headerComptable.cshtml";Session["user"] = user;
-            //}
+            else if (p.Role == "Comptable")
+            {
+
+                CComptable comp = (CComptable)user;
+                Session["user"] = comp;
+                return Redirect("");
+            }
 
             else
             if (p.Role == "Responsable")
@@ -38,19 +41,23 @@ namespace gestionFestival.Controllers
                 Session["user"] = resp;
                 return Redirect("Responsable");
             }
-            return Redirect("Responsable");
+            
 
-            //else if (type == "gestionFestival.Models.CParticipant")
-            //{
-            //    //Layout = "~/Views/Shared/headerParticipant.cshtml";
-            //}
+            else if (p.Role == "Participant")
+            {
+                CParticipant part = (CParticipant)user;
+                Session["user"] = part;
+                return Redirect("Participant");
+            }
 
-            //else if (type == "gestionFestival.Models.CPersonnel")
-            //{
-            //    //Layout = "~/Views/Shared/headerPersonnel.cshtml";
-            //}
-            //gestionFestival.Models.CComptable
-            //Ce string pourra servir a determiner le header de la page dans un script java
+            else if (p.Role == "Personnel")
+            {
+                Session["user"] = p;
+                return Redirect("Personnel");
+            }
+
+            return Redirect("Login?error=Login ou mot de passe incorrect");
+
         }
     }
 }

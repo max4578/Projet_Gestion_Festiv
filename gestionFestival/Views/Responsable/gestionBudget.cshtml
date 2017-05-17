@@ -3,12 +3,24 @@
 @{
     Layout = "~/Views/Shared/headerResponsable.cshtml";
 
+    CPoste poste = Model;
 
-    CDepense Dep = ViewBag.Dep;
-    CRecette Rec = ViewBag.Rec;
+    <h1>Budget restant au poste @poste.NomPoste =@poste.BudgetActuel/@poste.BudgetDepart</h1>
 
-    <h1>Budget alloué au poste =@Dep.Total</h1>
+    <h1>Dépensé : @poste.Depense.Total</h1>
+    <h1>Recette : @poste.Recette.Total</h1>
 
-    <h1>Recette alloué au poste =@Rec.Total</h1>
+    <br />
+
+    @Html.ActionLink("Introduire une demande", "DemandeForm", "Responsable", null, null)
+    <br/>
+    foreach (CDemande dem in ViewBag.listDem)
+    {
+        <label>Demande du : @dem.Date.ToString()</label>
+        <label>Motif</label>
+        <p>@dem.Motif</p>
+        <label>Montant : @dem.Montant</label>
+
+    }
 
 }
