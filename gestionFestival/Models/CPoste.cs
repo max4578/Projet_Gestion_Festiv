@@ -184,7 +184,11 @@ namespace gestionFestival.Models
             nomPoste = charger.nomPoste;
             description = charger.description;
         }
-
+        public void AssignerUnPoste(int idPoste,int idPers)
+        {
+            db = new DataContextDataContext();
+            db.AssignerUnPoste(idPoste,idPers);
+        }
         public void SupprimerUnPoste(int id)
         {
             db = new DataContextDataContext();

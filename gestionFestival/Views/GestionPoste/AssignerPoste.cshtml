@@ -13,7 +13,7 @@
 
         <div>
             @Html.Label(Model.NomPoste)
-            @Html.Label("assigné à ")
+            @Html.Label(" à ")
             @Html.DropDownList("selectResponsable", (SelectList)ViewBag.ListePersonnel)
             <input type="hidden" value="@ViewBag.index" name="index" />
             <br />
