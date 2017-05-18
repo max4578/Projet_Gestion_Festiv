@@ -174,9 +174,9 @@ namespace gestionFestival.Models
             else if (q.libelRole=="Comptable")
                 return new CComptable(q.idPersonnel,q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,q.libelRole, (double)sal.salaireHoraire);
             else if (q.libelRole == "Responsable")
-                return new CResponsable(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,q.libelRole,sal.nbrHeure,(double)sal.salaireHoraire);
+                return new CResponsable(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,q.libelRole,(int)sal.nbrHeure,(double)sal.salaireHoraire);
             else if (q.libelRole == "Participant")
-                return new CParticipant(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,q.libelRole, (double)sal.salaireHoraire,sal.nbrHeure);
+                return new CParticipant(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,q.libelRole, (double)sal.salaireHoraire,(int)sal.nbrHeure);
             else
                 return new CPersonnel(q.idPersonnel, q.nomPersonnel, q.prenomPersonnel, q.telephone, q.dateNaissance, q.email, q.specialisation,q.libelRole);
 

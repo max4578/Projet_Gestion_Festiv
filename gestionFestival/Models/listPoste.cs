@@ -64,7 +64,7 @@ namespace gestionFestival.Models
             List<CPoste> listPosteAssigne = new List<CPoste>();
             var chargerListePoste = db.AfficherPosteAssigne();
             foreach (var item in chargerListePoste) {
-                CResponsable resp = new CResponsable(item.idPersonnel1,item.nomPersonnel,item.prenomPersonnel, item.telephone, item.dateNaissance, item.email, item.specialisation, item.libelRole, item.nbrHeure, (double)item.salaireHoraire);
+                CResponsable resp = new CResponsable(item.idPersonnel,item.nomPersonnel,item.prenomPersonnel, item.telephone, item.dateNaissance, item.email, item.specialisation, item.libelRole, (int)item.nbrHeure, (double)item.salaireHoraire);
                 listPosteAssigne.Add(new CPoste((int)item.idPoste,item.nomPoste,(double)item.budgetDepart,(double)item.budgetActuel,item.description, resp));
                }
             return listPosteAssigne;

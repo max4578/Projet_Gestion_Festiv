@@ -22,7 +22,7 @@ namespace gestionFestival.Models
         private CResponsable responsable;
         private CDepense depense;
         private CRecette recette;
-        private DataContextDataContext db;
+        private DataContextDataContext db = new DataContextDataContext();
 
 
         /*******************/

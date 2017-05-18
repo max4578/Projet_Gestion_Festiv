@@ -42,13 +42,12 @@ namespace gestionFestival.Models
         }
 
 
-        public int Quantité
+        public int Quantite
         {
             get { return quantité; }
             set { quantité = value; }
         }
 
-        public int Quantite { get; internal set; }
 
 
 
@@ -86,8 +85,11 @@ namespace gestionFestival.Models
                 return false;
         }
 
-        public bool ModifMateriel(int idPoste)
+        public bool ModifMateriel(int idPoste,string nom, double prix, int qtt)
         {
+            this.nom = nom;
+            this.prix = prix;
+            this.quantité = qtt;
 
             if (db.VerifMontant(idPoste, (decimal)prix*quantité).FirstOrDefault().Column1 >= 0)
             {

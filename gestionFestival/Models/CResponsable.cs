@@ -66,10 +66,8 @@ namespace gestionFestival.Models
 
         public bool DemandeModificationMateriel(CMateriel mat,string nom,double prix, int qtt,int idPoste)
         {
-            mat.Nom = nom;
-            mat.Prix = prix;
-            mat.Quantite = qtt;
-            return mat.ModifMateriel(idPoste);
+           
+            return mat.ModifMateriel(idPoste,nom,prix,qtt);
         }
 
         public void DemandeSuppressionMateriel(CMateriel mat)
