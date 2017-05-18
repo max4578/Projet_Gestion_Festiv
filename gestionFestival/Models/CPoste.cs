@@ -22,7 +22,8 @@ namespace gestionFestival.Models
         private CResponsable responsable;
         private CDepense depense;
         private CRecette recette;
-        private DataContextDataContext db;
+        private DataContextDataContext db= new DataContextDataContext();
+        private listDemande listeDesDemandes;
 
 
         /*******************/
@@ -85,9 +86,19 @@ namespace gestionFestival.Models
         {
 
         }
+        public CPoste(int id,string nom,double budgetActuel,double budgetDepart,string description,CDepense dep, CRecette rec)
+        {
+            this.id = id;
+            this.nomPoste = nom;
+            this.description = description;
+
+            this.budgetActuel = budgetActuel;
+            this.budgetDepart = budgetDepart;
+            depense = dep;
+            recette = rec;
+        }
         public CPoste(int idPers)
         {
-            
             var result= db.GetRespAndPoste(idPers).FirstOrDefault();
             this.id = result.idPoste.Value;
             this.nomPoste = result.nomPoste;
@@ -198,6 +209,13 @@ namespace gestionFestival.Models
             db = new DataContextDataContext();
             db.SupprimerPosteNonAssigne(idPoste);
         }
- 
+        
+        //public listDemande GetListeDemande()
+        //{
+        //    responsable = new CResponsable();
+        //    listeDesDemandes = new listDemande(Id);
+        //    return listeDesDemandes;
+        //}
+        
     }
 }

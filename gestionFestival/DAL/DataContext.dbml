@@ -407,4 +407,40 @@
     <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.GetAskBudget" Method="GetAskBudget">
+    <ElementType Name="GetAskBudgetResult">
+      <Column Name="idDemande" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="motif" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="montant" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="dateDemande" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idPersonnel1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prenomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="dateNaissance" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="telephone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="specialisation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="libelRole" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPoste" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="budgetDepart" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="budgetActuel" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="idFestival1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetAllPoste" Method="GetAllPoste">
+    <ElementType Name="GetAllPosteResult">
+      <Column Name="idPoste" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPoste" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="budgetDepart" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="budgetActuel" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

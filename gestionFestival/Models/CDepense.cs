@@ -48,6 +48,7 @@ namespace gestionFestival.Models
         {
             listMat = new listMateriel(idPoste);
             listPart = new listParticipant(idPoste);
+            CalculerDepense();
         }
 
         /*******************/

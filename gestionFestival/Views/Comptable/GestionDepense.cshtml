@@ -1,7 +1,23 @@
-﻿@{
+﻿@model gestionFestival.Models.CPoste
+@using gestionFestival.Models
+@{
     Layout = "~/Views/Shared/headerComptable.cshtml";
     ViewBag.Title = "GestionDepense";
 }
 
-<h2>GestionDepense</h2>
+<h2>Gestion des dépenses</h2>
 
+
+<div>
+    <table>
+        <tr><td colspan="4"><h2>Poste assigné</h2></td></tr>
+        @foreach (CPoste poste in ViewBag.listeDesPostes)
+        {
+            <tr>
+                <td>@poste.NomPoste</td>
+                <td>@poste.Depense.Total</td>
+            </tr>
+        }
+    </table>
+
+</div>

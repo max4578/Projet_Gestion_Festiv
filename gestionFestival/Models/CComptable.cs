@@ -14,6 +14,7 @@ namespace gestionFestival.Models
         /*******************/
         private double salaire;
         private listPoste listP;
+        private listDemande listD;
         private double budgetDisponible;
         DataContextDataContext db;
     
@@ -69,15 +70,31 @@ namespace gestionFestival.Models
             db.BudgetFestival((decimal)budget);
         }
 
-        public void AlloueBudget()
+        public void AccepterDemandeBudget(int idPers,double budget,int idDemande)
         {
-
+            db = new DataContextDataContext();
+            //procédure qui ajoute le budget au budget de départ du poste
+            //procédure qui efface la demande dans la table
+        }
+        public void RefuserDemandeBudget(int idDemande)
+        {
+            db = new DataContextDataContext();
+            //procédure qui efface la demande dans la table
         }
 
-
-        public void ConsulterListePoste()
+        public List<CPoste> ConsulterListePoste()
         {
+            listP = new listPoste();
             
+            return listP.GetList();
         }
+
+        public double ConsultertotalDisponible()
+        {
+            listP = new listPoste();
+
+            return listP.GetTotalDisponible();
+        }
+
     }
 }

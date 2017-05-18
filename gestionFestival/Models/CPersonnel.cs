@@ -58,11 +58,7 @@ namespace gestionFestival.Models
             set { dateNaiss = value; }
         }
 
-        internal bool AjouterPersonnel(string pass)
-        {
-            throw new NotImplementedException();
-        }
-
+  
         public string Mail
         {
             get { return mail; }
@@ -109,6 +105,13 @@ namespace gestionFestival.Models
             this.specialisation = specialisation;
             this.libelRole = role;
 
+        }
+        public CPersonnel(int id,string nom, string prenom,string libelRole)
+        {
+            this.id = id;
+            this.nom = nom;
+            this.prenom = prenom;
+            this.libelRole = libelRole;
         }
 
         public CPersonnel(string nom, string prenom, string telephone, DateTime dateNaiss, string mail, string specialisation)
