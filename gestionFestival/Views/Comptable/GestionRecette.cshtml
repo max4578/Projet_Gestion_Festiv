@@ -1,0 +1,16 @@
+﻿@model gestionFestival.Models.CPoste
+@using gestionFestival.Models
+@{
+    Layout = "~/Views/Shared/headerComptable.cshtml";
+    ViewBag.Title = "GestionRecette";
+}
+
+<h2>Liste des recettes actuelles</h2>
+
+@foreach (CPoste liste in ViewBag.listeDesPostes)
+{
+    <tr>
+        <td>@liste.NomPoste </td>
+        <td>@liste.Responsable.Prenom </td>
+    </tr>
+}

@@ -29,8 +29,24 @@ namespace gestionFestival.Controllers
             else
                 return true;
         }
+        
         // GET: GestionPoste
         public ActionResult Index()
+        {
+            listPoste listePosteAssigne = new listPoste();
+            listPoste listePosteNonAssigne = new listPoste();
+            CFestival festival = new CFestival();
+            festival.InfoFestival();
+            VM_Admin vm = new VM_Admin();
+            vm.NomFestival = festival.NomFestival;
+            vm.DebutFestival = festival.DateDebutFestival;
+            vm.FinFestival = festival.DateFinFestival;
+            vm.BudgetFestival = festival.BudgetFestival;
+            ViewBag.listeDesPostes = listePosteAssigne.GetListPosteAssigne();
+            ViewBag.listeDesPostesNonAssigne = listePosteNonAssigne.GetListPosteNonAssigne();
+            return View(vm);
+        }
+        public ActionResult GestionPoste()
         {
             listPoste listePosteAssigne = new listPoste();
             listPoste listePosteNonAssigne = new listPoste();
@@ -40,7 +56,7 @@ namespace gestionFestival.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(CPoste poste)
+        public ActionResult GestionPoste(CPoste poste)
         {
             if (!ModelState.IsValid)
             {
@@ -58,7 +74,7 @@ namespace gestionFestival.Controllers
                 listPoste listePosteNonAssigne = new listPoste();
                 ViewBag.listeDesPostes = listePosteAssigne.GetListPosteAssigne();
                 ViewBag.listeDesPostesNonAssigne = listePosteNonAssigne.GetListPosteNonAssigne();
-                return RedirectToAction("Index");
+                return RedirectToAction("GestionPoste");
             }
         }
 
@@ -94,20 +110,27 @@ namespace gestionFestival.Controllers
                 listPoste listePosteAssigne = new listPoste();
                 ViewBag.listeDesPostes = listePosteAssigne.GetListPosteAssigne();
                 ViewBag.listeDesPostesNonAssigne = listePosteNonAssigne.GetListPosteNonAssigne();
-                return RedirectToAction("Index");
+                return RedirectToAction("GestionPoste");
             }
         }
         
-        public ActionResult SuppressionPoste(int id,string nom)
+        public ActionResult SuppressionPoste(int id,string nom, int idPers)
         {
             CPoste poste = new CPoste();
-            poste.SupprimerUnPoste(id);
+            if(idPers == 0)
+            {
+                poste.SupprimerUnPoste(id);
+            }
+            else
+            {
+                poste.SupprimerUnPoste(id, idPers);
+            }
             ViewBag.message = "Le poste " + nom + " a été supprimé";
             listPoste listePosteNonAssigne = new listPoste();
             listPoste listePosteAssigne = new listPoste();
             ViewBag.listeDesPostes = listePosteAssigne.GetListPosteAssigne();
             ViewBag.listeDesPostesNonAssigne = listePosteNonAssigne.GetListPosteNonAssigne();
-            return View("Index");
+            return View("GestionPoste");
         }
 
         public ActionResult Responsable(int id)
@@ -144,7 +167,7 @@ namespace gestionFestival.Controllers
             listPoste listePosteAssigne = new listPoste();
             ViewBag.listeDesPostes = listePosteAssigne.GetListPosteAssigne();
             ViewBag.listeDesPostesNonAssigne = listePosteNonAssigne.GetListPosteNonAssigne();
-            return View("Index");
+            return View("GestionPoste");
         }
 
 

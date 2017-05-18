@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using gestionFestival.DAL;
+using System.ComponentModel.DataAnnotations;
 
 namespace gestionFestival.Models
 {
@@ -30,11 +31,13 @@ namespace gestionFestival.Models
             get { return nomFestival; }
             set { nomFestival = value; }
         }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime DateDebutFestival
         {
             get { return dateDebutFestival; }
             set { dateDebutFestival = value; }
         }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime DateFinFestival
         {
             get { return dateFinFestival; }

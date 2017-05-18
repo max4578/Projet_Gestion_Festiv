@@ -116,7 +116,6 @@ namespace gestionFestival.Models
 
         public CPoste(string nomPoste, string description, double budget)
         {
-       
             this.nomPoste = nomPoste;
             this.description = description;
             budgetDepart = budget;
@@ -189,11 +188,17 @@ namespace gestionFestival.Models
             db = new DataContextDataContext();
             db.AssignerUnPoste(idPoste,idPers,(decimal)salaire);
         }
-        public void SupprimerUnPoste(int id)
+        public void SupprimerUnPoste(int idPoste, int idPerso)
         {
             db = new DataContextDataContext();
-            db.SupprimerPoste(id);
+            db.SupprimerPosteAssigne(idPoste,idPerso);
         }
+        public void SupprimerUnPoste(int idPoste)
+        {
+            db = new DataContextDataContext();
+            db.SupprimerPosteNonAssigne(idPoste);
+        }
+
         public void Print()
         {
             throw new NotImplementedException();

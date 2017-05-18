@@ -1,61 +1,37 @@
-﻿@model gestionFestival.Models.CPoste
+﻿@model gestionFestival.ViewModel.VM_Admin
 @using gestionFestival.Models
 @{
     Layout = "~/Views/Shared/headerAdmin.cshtml";
 }
 
-<h2></h2>
-<div>
-    @using (Html.BeginForm("Index", "GestionPoste"))
-    {
-        <fieldset>
-            <legend>Gestion des postes</legend>
+<h2>Accueil</h2>
 
-            <div>
-                @Html.Label("Nouveau poste")
-                @Html.TextBoxFor(model => model.NomPoste)
-                @Html.ValidationMessageFor(model => model.NomPoste)
-            </div>
-            <div>
-                @Html.LabelFor(model => model.Description)
-                @Html.TextAreaFor(model => model.Description)
-            </div>
-            <br />
-            <input type="submit" value="Ajouter" />
-        </fieldset>
-    }
-</div>
-<br />
-<div>
-    <h3>@ViewBag.message</h3>
-</div>
-<br />
-<div>
-    <table>
-        <tr><td colspan="4"><h2>Poste a assigner</h2></td></tr>
-        @foreach (CPoste liste in ViewBag.listeDesPostesNonAssigne)
-        {
-            <tr>
-                <td>@liste.NomPoste </td>
-                <td><button onclick="">@Html.ActionLink("Suppression Poste", "SuppressionPoste", "GestionPoste", new { id = liste.Id, nom = liste.NomPoste }, null)</button></td>
-                <td><button onclick="">@Html.ActionLink("Assigner le poste", "Responsable", "GestionPoste", new { id = liste.Id }, null)</button></td>
-                <td><button onclick="">@Html.ActionLink("Modification", "Poste", "GestionPoste", new { id = liste.Id }, null)</button></td>
-            </tr>
-        }
-    </table>
+<h1>@Model.NomFestival</h1>
+<h2>du @Model.DebutFestival.ToString("dd/MM/yyyy") au @Model.FinFestival.ToString("dd/MM/yyyy")</h2>
+<p>Budget total du festival : @Model.BudgetFestival</p>
+<p>Budget encore disponible : faire fonction</p>
 
-</div>
 <br /><br />
 <div>
     <table>
-        <tr><td colspan="4"><h2>Poste assigné</h2></td></tr>
+        <tr><td colspan="4"><h2>Poste(s) assigné(s)</h2></td></tr>
         @foreach (CPoste liste in ViewBag.listeDesPostes)
         {
             <tr>
                 <td>@liste.NomPoste</td>
                 <td>@liste.Responsable.Nom</td>
-                <td><button onclick="">@Html.ActionLink("Suppression Poste", "SuppressionPoste", "GestionPoste", new { id = liste.Id, nom = liste.NomPoste }, null)</button></td>
-                <td><button onclick="">@Html.ActionLink("Modification", "PosteAssigne", "GestionPoste", new { id = liste.Id }, null)</button></td>
+            </tr>
+        }
+    </table>
+
+</div>
+<div>
+    <table>
+        <tr><td colspan="4"><h2>Poste(s) non assigné(s)</h2></td></tr>
+        @foreach (CPoste liste in ViewBag.listeDesPostesNonAssigne)
+        {
+            <tr>
+                <td>@liste.NomPoste </td>
             </tr>
         }
     </table>

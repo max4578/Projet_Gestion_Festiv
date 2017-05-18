@@ -317,10 +317,6 @@
     <Parameter Name="description" Type="System.String" DbType="NVarChar(50)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.SupprimerPoste" Method="SupprimerPoste">
-    <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.UpdateBudgetActuel" Method="UpdateBudgetActuel">
     <Parameter Name="montant" Type="System.Decimal" DbType="Money" />
     <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
@@ -401,5 +397,14 @@
       <Column Name="dateFin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="budget" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.SupprimerPosteAssigne" Method="SupprimerPosteAssigne">
+    <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idPersonnel" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SupprimerPosteNonAssigne" Method="SupprimerPosteNonAssigne">
+    <Parameter Name="idPoste" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

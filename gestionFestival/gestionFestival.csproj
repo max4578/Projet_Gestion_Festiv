@@ -168,6 +168,7 @@
     <Compile Include="Models\listPoste.cs" />
     <Compile Include="Models\listRevenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\VM_Admin.cs" />
     <Compile Include="ViewModel\VM_PosteAssigne.cs" />
     <Compile Include="ViewModel\VM_Responsable.cs" />
   </ItemGroup>
@@ -203,6 +204,11 @@
     <Content Include="Views\Shared\headerParticipant.cshtml" />
     <Content Include="Views\Personnel\Index.cshtml" />
     <Content Include="Views\Comptable\Index.cshtml" />
+    <Content Include="Views\Shared\headerComptable.cshtml" />
+    <Content Include="Views\Comptable\GestionDepense.cshtml" />
+    <Content Include="Views\Comptable\GestionRecette.cshtml" />
+    <Content Include="Views\Comptable\GestionDemande.cshtml" />
+    <Content Include="Views\GestionPoste\GestionPoste.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
