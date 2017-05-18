@@ -50,14 +50,14 @@ namespace gestionFestival.Models
             return listPerso;
         }
 
-        public List<CPersonnel> GetListPersonnel()
-        {
-            foreach (var elem in db.GetPersonnelOnly())
-            {
-                listPerso.Add(new CPersonnel(elem.idPersonnel, elem.nomPersonnel, elem.prenomPersonnel, elem.telephone, elem.dateNaissance, elem.email, elem.specialisation,elem.libelRole));
-            }
-            return listPerso;
-        }
+        //public List<CPersonnel> GetListPersonnel()
+        //{
+        //    foreach (var elem in db.GetPersonnelOnly())
+        //    {
+        //        listPerso.Add(new CPersonnel(elem.idPersonnel, elem.nomPersonnel, elem.prenomPersonnel, elem.telephone, elem.dateNaissance, elem.email, elem.specialisation,elem.libelRole));
+        //    }
+        //    return listPerso;
+        //}
 
     }
 }

@@ -115,7 +115,7 @@ namespace gestionFestival.Controllers
             List<CPoste> list = (List<CPoste>)Session["listePoste"];
             CPoste poste = list.ElementAt(id);
             listPersonnel listP = new listPersonnel();
-            ViewBag.listePersonnel = new SelectList(listP.GetListPersonnel(), "Id", "Nom", "Prenom");
+            ViewBag.listePersonnel = new SelectList(listP.GetList(), "Id", "Nom", "Prenom");
             ViewBag.index = id;
             return View("AssignerPoste", poste);
         }

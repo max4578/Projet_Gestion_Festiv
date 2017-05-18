@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace gestionFestival.Models
 {
-    public class CPoste :IPrevision
+    public class CPoste 
     {
         /*******************/
         /*    Attribut     */
@@ -190,19 +190,6 @@ namespace gestionFestival.Models
             db = new DataContextDataContext();
             db.SupprimerPoste(id);
         }
-        public void Print()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ConsultGraph()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ConsultNum()
-        {
-            throw new NotImplementedException();
-        }
+ 
     }
 }
