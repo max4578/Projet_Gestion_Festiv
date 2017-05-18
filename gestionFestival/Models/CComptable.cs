@@ -62,7 +62,11 @@ namespace gestionFestival.Models
         /*******************/
         /*    Methodes     */
         /*******************/
-
+        public void AllouerBudget(int id, double budget)
+        {
+            db = new DataContextDataContext();
+            db.AjouterBudget((decimal)budget, id);
+        }
         public void DemandeModifierBudget(double budget)
         {
             db = new DataContextDataContext();
@@ -76,6 +80,7 @@ namespace gestionFestival.Models
             //procédure qui ajoute le budget au budget de départ du poste
             //procédure qui efface la demande dans la table
         }
+
         public void RefuserDemandeBudget(int idDemande)
         {
             db = new DataContextDataContext();
@@ -85,14 +90,12 @@ namespace gestionFestival.Models
         public List<CPoste> ConsulterListePoste()
         {
             listP = new listPoste();
-            
             return listP.GetList();
         }
 
         public double ConsultertotalDisponible()
         {
             listP = new listPoste();
-
             return listP.GetTotalDisponible();
         }
 

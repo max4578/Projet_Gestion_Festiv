@@ -1,0 +1,27 @@
+﻿@model gestionFestival.Models.CPoste
+@using gestionFestival.Models
+
+@{
+    Layout = "~/Views/Shared/headerAdmin.cshtml";
+    ViewBag.Title = "ModiferPoste";
+}
+<br />
+@using (Html.BeginForm("UpdateBudget", "Comptable"))
+{
+    <fieldset>
+        <legend>Gérer le budget du poste @Html.TextBoxFor(model => model.NomPoste, new { @readonly = "readonly" }) </legend>
+        
+        <input type="hidden" value="@ViewBag.id" name="id" />
+
+        <div>
+            @Html.Label("Quel budget voulez-vous alloué au poste ?")
+            @Html.TextBox("budget")
+        </div>
+        <div>
+            @ViewBag.message
+        </div>
+        <br />
+        <input type="submit" value="Confirmer la demande" />
+        <button onclick="">@Html.ActionLink("Annuler", "GestionBudget", "Comptable")</button>
+    </fieldset>
+}

@@ -4,13 +4,10 @@
     Layout = "~/Views/Shared/headerComptable.cshtml";
     ViewBag.Title = "GestionDepense";
 }
-
-<h2>Gestion des recettes</h2>
-
-
+<br />
 <div>
     <table>
-        <tr><td colspan="4"><h2>Poste assigné</h2></td></tr>
+        <tr><td colspan="4"><h2>Gestion des recettes</h2></td></tr>
         @foreach (CPoste poste in ViewBag.listeDesPostes)
         {
             <tr>

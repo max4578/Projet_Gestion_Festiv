@@ -23,7 +23,6 @@ namespace gestionFestival.Models
         private CDepense depense;
         private CRecette recette;
         private DataContextDataContext db= new DataContextDataContext();
-        private listDemande listeDesDemandes;
 
 
         /*******************/
@@ -91,7 +90,6 @@ namespace gestionFestival.Models
             this.id = id;
             this.nomPoste = nom;
             this.description = description;
-
             this.budgetActuel = budgetActuel;
             this.budgetDepart = budgetDepart;
             depense = dep;
@@ -120,7 +118,7 @@ namespace gestionFestival.Models
         {
             this.id = idPoste;
             this.nomPoste = nomPoste;
-            this.BudgetDepart = budgetDepart;
+            this.budgetDepart = budgetDepart;
             this.budgetActuel = budgetActuel;
             this.description = description;
         }
