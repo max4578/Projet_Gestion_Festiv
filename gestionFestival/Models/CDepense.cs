@@ -60,7 +60,7 @@ namespace gestionFestival.Models
 
             foreach(CMateriel mat in listMat.ListeMat)
             {
-                totalDepense += mat.Prix * mat.Quantité;
+                totalDepense += mat.Prix * mat.Quantite;
             }
 
             foreach (CParticipant part in ListPart.ListePart)

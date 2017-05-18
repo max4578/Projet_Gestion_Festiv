@@ -12,8 +12,8 @@
             <tr>
                 <td>@mat.Nom</td>
                 <td>@mat.Prix €</td>
-                <td>@mat.Quantité</td>
-                <td>@(mat.Prix * mat.Quantité) €</td>
+                <td>@mat.Quantite</td>
+                <td>@(mat.Prix * mat.Quantite) €</td>
                 <td><button onclick="">@Html.ActionLink("Suppression Matériel", "SuppressionMateriel", "Responsable", new { id = i }, null)</button></td>
                 <td><button onclick="">@Html.ActionLink("Modification", "ModifMaterialForm", "Responsable", new { id = i++ }, null)</button></td>
                 

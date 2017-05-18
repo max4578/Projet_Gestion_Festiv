@@ -54,7 +54,7 @@ namespace gestionFestival.DAL
     #endregion
 		
 		public DataContextDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["GestionFestivalConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["GestionFestivalConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -202,6 +202,20 @@ namespace gestionFestival.DAL
 			return ((int)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AssignerUnPoste")]
+		public int AssignerUnPoste([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPoste, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> salaire)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPers, idPoste, salaire);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.BudgetFestival")]
+		public int BudgetFestival([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> budget)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), budget);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DeleteMateriel")]
 		public int DeleteMateriel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idMat)
 		{
@@ -258,6 +272,13 @@ namespace gestionFestival.DAL
 			return ((ISingleResult<GetAllRevenuResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetFestival")]
+		public ISingleResult<GetFestivalResult> GetFestival()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<GetFestivalResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetPersonnelOnly")]
 		public ISingleResult<GetPersonnelOnlyResult> GetPersonnelOnly()
 		{
@@ -300,17 +321,24 @@ namespace gestionFestival.DAL
 			return ((int)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SupprimerPosteAssigne")]
+		public int SupprimerPosteAssigne([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPoste, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPersonnel)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPoste, idPersonnel);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SupprimerPosteNonAssigne")]
+		public int SupprimerPosteNonAssigne([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPoste)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPoste);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateBudgetActuel")]
 		public int UpdateBudgetActuel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> montant, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPoste)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), montant, idPoste);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateMateriel")]
-		public int UpdateMateriel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string nom, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> prix, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> qtt, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idMat)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nom, prix, qtt, idMat);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -356,17 +384,10 @@ namespace gestionFestival.DAL
 			return ((ISingleResult<VerifMontantResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AssignerUnPoste")]
-		public int AssignerUnPoste([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPoste, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> salaire)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateMateriel")]
+		public int UpdateMateriel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string nom, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> prix, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> qtt, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idMat)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPers, idPoste, salaire);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.BudgetFestival")]
-		public int BudgetFestival([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> budget)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), budget);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nom, prix, qtt, idMat);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -935,7 +956,7 @@ namespace gestionFestival.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Poste_Materiel", Storage="_Poste", ThisKey="idPoste", OtherKey="idPoste", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Poste_Materiel", Storage="_Poste", ThisKey="idPoste", OtherKey="idPoste", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Poste Poste
 		{
 			get
@@ -1816,7 +1837,7 @@ namespace gestionFestival.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Poste_Revenu", Storage="_Poste", ThisKey="idPoste", OtherKey="idPoste", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Poste_Revenu", Storage="_Poste", ThisKey="idPoste", OtherKey="idPoste", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Poste Poste
 		{
 			get
@@ -2169,7 +2190,7 @@ namespace gestionFestival.DAL
 		
 		private decimal _salaireHoraire;
 		
-		private int _nbrHeure;
+		private System.Nullable<int> _nbrHeure;
 		
 		private int _idPersonnel;
 		
@@ -2243,8 +2264,8 @@ namespace gestionFestival.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nbrHeure", DbType="Int NOT NULL")]
-		public int nbrHeure
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nbrHeure", DbType="Int")]
+		public System.Nullable<int> nbrHeure
 		{
 			get
 			{
@@ -2889,7 +2910,7 @@ namespace gestionFestival.DAL
 		
 		private decimal _salaireHoraire;
 		
-		private int _nbrHeure;
+		private System.Nullable<int> _nbrHeure;
 		
 		private int _idPersonnel1;
 		
@@ -3105,8 +3126,8 @@ namespace gestionFestival.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nbrHeure", DbType="Int NOT NULL")]
-		public int nbrHeure
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nbrHeure", DbType="Int")]
+		public System.Nullable<int> nbrHeure
 		{
 			get
 			{
@@ -3213,6 +3234,104 @@ namespace gestionFestival.DAL
 				if ((this._idPoste != value))
 				{
 					this._idPoste = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetFestivalResult
+	{
+		
+		private int _idFestival;
+		
+		private string _nomFest;
+		
+		private System.DateTime _dateDebut;
+		
+		private System.DateTime _dateFin;
+		
+		private decimal _budget;
+		
+		public GetFestivalResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idFestival", DbType="Int NOT NULL")]
+		public int idFestival
+		{
+			get
+			{
+				return this._idFestival;
+			}
+			set
+			{
+				if ((this._idFestival != value))
+				{
+					this._idFestival = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomFest", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nomFest
+		{
+			get
+			{
+				return this._nomFest;
+			}
+			set
+			{
+				if ((this._nomFest != value))
+				{
+					this._nomFest = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateDebut", DbType="DateTime NOT NULL")]
+		public System.DateTime dateDebut
+		{
+			get
+			{
+				return this._dateDebut;
+			}
+			set
+			{
+				if ((this._dateDebut != value))
+				{
+					this._dateDebut = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateFin", DbType="DateTime NOT NULL")]
+		public System.DateTime dateFin
+		{
+			get
+			{
+				return this._dateFin;
+			}
+			set
+			{
+				if ((this._dateFin != value))
+				{
+					this._dateFin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budget", DbType="Money NOT NULL")]
+		public decimal budget
+		{
+			get
+			{
+				return this._budget;
+			}
+			set
+			{
+				if ((this._budget != value))
+				{
+					this._budget = value;
 				}
 			}
 		}
@@ -4175,7 +4294,7 @@ namespace gestionFestival.DAL
 		
 		private decimal _salaireHoraire;
 		
-		private int _nbrHeure;
+		private System.Nullable<int> _nbrHeure;
 		
 		private int _idPersonnel;
 		
@@ -4215,8 +4334,8 @@ namespace gestionFestival.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nbrHeure", DbType="Int NOT NULL")]
-		public int nbrHeure
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nbrHeure", DbType="Int")]
+		public System.Nullable<int> nbrHeure
 		{
 			get
 			{

@@ -12,6 +12,7 @@ namespace gestionFestival.Controllers
 {
     public class ResponsableController : Controller
     {
+        //Cette méthode calculera les dépenses et recettes du poste 
         public CPoste CalculBudgetPoste()
         {
             CPoste poste = new CPoste(((CResponsable)Session["user"]).Id);
@@ -21,6 +22,8 @@ namespace gestionFestival.Controllers
             return poste;
         }
 
+        //Testera si une session existe , si aucune session n est trouvée
+        //Vous etes redirigé vers le login screen
         public bool TestSession()
         {
             if (Session["user"] == null)
@@ -29,13 +32,15 @@ namespace gestionFestival.Controllers
                 return true;
         }
 
+        //Retourne vers l' index
+        //Et met le poste dans la session
         public ActionResult Index()
         {
             if (!TestSession())
                 return Redirect("Login?error=Vous devez être connecté avant d acceder aux ressources");
             
-            CPoste poste = new CPoste(((CResponsable)Session["user"]).Id);
-            Session["poste"] = CalculBudgetPoste();
+           CPoste poste = CalculBudgetPoste();
+            Session["poste"] = poste;
            
             return View(poste);
         }
@@ -44,17 +49,15 @@ namespace gestionFestival.Controllers
         /************************/
         /*  Gestion matériel    */
         /************************/
+
+        //Page principale de la gestion de matériel
         public ActionResult GestionMateriel()
         {
             if (!TestSession())
                 return Redirect("../Login?error=Vous devez être connecté avant d acceder aux ressources");
 
             CResponsable resp = (CResponsable)Session["user"];
-            CPoste post = (CPoste)Session["poste"];
-            listMateriel listM = post.Depense.ListMat;
-
-            
-            //Rajouter exception ici
+            CPoste post = (CPoste)Session["poste"];   
             if (Session["listMateriel"]==null) {
                 List<CMateriel> list = resp.ConsultListMateriel(post.Id);
                 Session["listMateriel"] = list;
@@ -66,6 +69,7 @@ namespace gestionFestival.Controllers
             }
 
         }
+
 
         public ActionResult SuppressionMateriel(int id)
         {
