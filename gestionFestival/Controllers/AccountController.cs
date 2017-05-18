@@ -32,15 +32,14 @@ namespace gestionFestival.Controllers
 
         }
 
+        
         public ActionResult ModifInfoCompte(string email , string telephone,DateTime dateNaiss,string spec)
         {
-            
             ((CPersonnel)Session["user"]).Mail=email;
             ((CPersonnel)Session["user"]).Telephone=telephone;
             ((CPersonnel)Session["user"]).DateNaiss = dateNaiss;
             ((CPersonnel)Session["user"]).Specialisation = spec;
             ((CPersonnel)Session["user"]).ModifierPersonnel();
-
 
             return View("Index", ((CPersonnel)Session["user"]));
         }
