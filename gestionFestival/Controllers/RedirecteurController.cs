@@ -31,7 +31,7 @@ namespace gestionFestival.Controllers
 
                 CComptable comp = (CComptable)user;
                 Session["user"] = comp;
-                return Redirect("");
+                return Redirect("Comptable");
             }
 
             else

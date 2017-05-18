@@ -11,7 +11,9 @@ namespace gestionFestival.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            CFestival festival = new CFestival();
+            festival.InfoFestival();
+            return View(festival);
         }
         [HttpPost]
         public ActionResult EnvoyerBudget(string budget)
@@ -21,12 +23,16 @@ namespace gestionFestival.Controllers
             if (result && montant > 0)
             {
                 ViewBag.message = "Budget confirmé";
+                CAdministrateur admin = new CAdministrateur();
+                admin.DefinirBudgetFestival(montant);
             }
             else
             {
                 ViewBag.message = "Veuillez entrer une valeur correcte";
             }
-            return View("Index");
+            CFestival festival = new CFestival();
+            festival.InfoFestival();
+            return View("Index",festival);
         }
     }
 }

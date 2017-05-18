@@ -13,16 +13,17 @@
 
         <div>
             @Html.Label(Model.NomPoste)
-            @Html.Label("assigné à ")
+            @Html.Label(" à ")
             @Html.DropDownList("selectResponsable", (SelectList)ViewBag.ListePersonnel)
-            <input type="hidden" value="@ViewBag.index" name="index" />
+            <input type="hidden" value="@Model.Id" name="id" />
             <br />
             @Html.Label("Description du poste")
-            @Html.TextArea("fonction", "", new { @class = "form-control" })
+            <br />
+            @Html.TextArea("description", Model.Description, new { @readonly = "readonly" })
             <br />
             @Html.Label("Salaire")
-            @Html.TextBox("Salaire") €
-
+            @Html.TextBox("Salaire",null, new { @required = "required" }) €
+            @Html.ValidationMessage("salaire")
         </div>
         <br />
         <input type="submit" value="Assigner le poste" />
