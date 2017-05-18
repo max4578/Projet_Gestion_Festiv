@@ -85,14 +85,6 @@ namespace gestionFestival.Controllers
             ViewBag.id = id;
             return View("ModifierPoste", poste);
         }
-        public ActionResult PosteAssigne(int id)
-        {
-            listPoste listePosteAssigne = new listPoste();
-            CPoste poste = new CPoste();
-            poste.GetPostAndResponsable(id);
-            ViewBag.index = id;
-            return View("ModifierPoste", poste);
-        }
 
         [HttpPost]
         public ActionResult ChangementPoste(CPoste poste, int id)
