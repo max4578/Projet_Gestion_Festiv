@@ -77,7 +77,7 @@ namespace gestionFestival.Models
 
         public void ConsulterListePoste()
         {
-
+            
         }
     }
 }

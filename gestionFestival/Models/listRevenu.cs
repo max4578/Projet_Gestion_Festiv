@@ -50,7 +50,5 @@ namespace gestionFestival.Models
 
             return listRev;
         }
-
-
     }
 }

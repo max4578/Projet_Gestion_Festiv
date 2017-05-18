@@ -27,7 +27,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("Accueil", "Index", "GestionPoste", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Accueil", "Index", "Comptable", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -35,7 +35,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("Gestion Poste", "GestionPoste", "GestionPoste", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Recette", "GestionRecette", "Comptable", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -43,7 +43,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("Gestion du budget", "Index", "BudgetFestival", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Dépense", "GestionDepense", "Comptable", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Demande en cours", "GestionDemande", "Comptable", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

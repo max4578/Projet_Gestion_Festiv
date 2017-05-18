@@ -21,11 +21,12 @@
             <br />
             @Html.TextArea("description", Model.Description, new { @readonly = "readonly" })
             <br />
-            @Html.Label("Salaire")
+            @Html.Label("Salaire/Heure")
             @Html.TextBox("Salaire",null, new { @required = "required" }) €
             @Html.ValidationMessage("salaire")
         </div>
         <br />
         <input type="submit" value="Assigner le poste" />
+        <button onclick="">@Html.ActionLink("Annuler", "GestionPoste", "GestionPoste")</button>
     </fieldset>
 }
