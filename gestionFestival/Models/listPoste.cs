@@ -39,7 +39,17 @@ namespace gestionFestival.Models
         /*******************/
         /*    Méthodes     */
         /*******************/
-
+        public List<CPoste> GetList()
+        {
+            db = new DataContextDataContext();
+            List<CPoste> listPoste = new List<CPoste>();
+            var chargerListePoste = db.GetAllPoste();
+            foreach (var poste in chargerListePoste)
+            {
+                listPoste.Add(new CPoste(poste.idPoste,poste.nomPoste,(double)poste.budgetActuel,(double)poste.budgetDepart,poste.description,new CDepense(poste.idPoste),new CRecette(poste.idPoste)));
+            }
+            return listPoste;
+        }
         public List<CPoste> GetListPoste()
         {
             db = new DataContextDataContext();
@@ -64,10 +74,25 @@ namespace gestionFestival.Models
             List<CPoste> listPosteAssigne = new List<CPoste>();
             var chargerListePoste = db.AfficherPosteAssigne();
             foreach (var item in chargerListePoste) {
-                CResponsable resp = new CResponsable(item.idPersonnel,item.nomPersonnel,item.prenomPersonnel, item.telephone, item.dateNaissance, item.email, item.specialisation, item.libelRole, (int)item.nbrHeure, (double)item.salaireHoraire);
+                CResponsable resp = new CResponsable(item.idPersonnel,item.nomPersonnel,item.prenomPersonnel,item.libelRole, (int)item.nbrHeure, (double)item.salaireHoraire);
                 listPosteAssigne.Add(new CPoste((int)item.idPoste,item.nomPoste,(double)item.budgetDepart,(double)item.budgetActuel,item.description, resp));
                }
             return listPosteAssigne;
+        }
+
+        public double GetTotalDisponible()
+        {
+            db = new DataContextDataContext();
+            double totalDepense = 0;
+            List<CPoste> listPoste = new List<CPoste>();
+            var chargerListePoste = db.GetAllPoste();
+            foreach (var poste in chargerListePoste)
+            {
+                listPoste.Add(new CPoste(poste.idPoste, poste.nomPoste, (double)poste.budgetActuel, (double)poste.budgetDepart, poste.description, new CDepense(poste.idPoste), new CRecette(poste.idPoste)));
+                totalDepense += (double)poste.budgetActuel;
+
+            }
+            return totalDepense;
         }
     }
 }

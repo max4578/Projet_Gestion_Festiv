@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using gestionFestival.Models;
 using gestionFestival.ViewModel;
 
@@ -109,13 +105,13 @@ namespace gestionFestival.Controllers
         public ActionResult SuppressionPoste(int id,string nom, int idPers)
         {
             CPoste poste = new CPoste();
-            if(idPers == 0)
+            if(idPers != 0)
             {
-                poste.SupprimerUnPoste(id);
+                poste.SupprimerUnPoste(id, idPers);
             }
             else
             {
-                poste.SupprimerUnPoste(id, idPers);
+                poste.SupprimerUnPoste(id);
             }
             ViewBag.message = "Le poste " + nom + " a été supprimé";
             listPoste listePosteNonAssigne = new listPoste();

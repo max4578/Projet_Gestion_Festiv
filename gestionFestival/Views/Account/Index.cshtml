@@ -28,15 +28,19 @@
     <br />
     <label>Téléphone:>@p.Telephone</label>
     <br />
-    <label>Date de naissance:@p.DateNaiss.Date</label>
+    <label>Date de naissance:@p.DateNaiss.Date.ToString("dd/MM/yyyy")</label>
     <br />
     <label>Spécialisation:@p.Specialisation</label>
+    <br />
+    <label>Role:@p.Role</label>
     <br />
 
     <br />
 
     @Html.ActionLink("Modifier les informations du compte", "ModifCompteForm", "Account", null, null)
-    @Html.ActionLink("Se désinscrire du projet", "SupprimerCompte", "Account", null, null)
-
+    <br /><br />
+   
+    @Html.ActionLink("Se désinscrire du projet", "SupprimerCompte", "Account", null, null);
+    
 
 }

@@ -45,6 +45,13 @@ namespace gestionFestival.Models
             this.Salaire = salaireResp;
         }
 
+        public CResponsable(int id, string nom, string prenom, string libelRole, int ht, double salaireResp): base(id, nom, prenom, libelRole)
+        {
+            this.heureTravail = ht;
+            this.salaireResp = salaireResp;
+
+        }
+
         public CResponsable(int id, string nom, string prenom, string telephone,
         DateTime dateNaiss, string mail, string specialisation,string libelRole,int ht,double salaireResp)
         :base(id,nom,prenom, telephone,dateNaiss,mail,specialisation,libelRole)

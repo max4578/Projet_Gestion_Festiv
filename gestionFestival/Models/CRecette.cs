@@ -42,7 +42,7 @@ namespace gestionFestival.Models
         public CRecette(int idPoste)
         {
             listRev = new listRevenu(idPoste);
-            
+            CalculerRecette();
             
         }
 

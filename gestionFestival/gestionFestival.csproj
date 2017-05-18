@@ -209,6 +209,8 @@
     <Content Include="Views\Comptable\GestionRecette.cshtml" />
     <Content Include="Views\Comptable\GestionDemande.cshtml" />
     <Content Include="Views\GestionPoste\GestionPoste.cshtml" />
+    <Content Include="Views\Comptable\GestionBudget.cshtml" />
+    <Content Include="Views\Comptable\GestionCompte.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

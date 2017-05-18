@@ -54,7 +54,7 @@ namespace gestionFestival.DAL
     #endregion
 		
 		public DataContextDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["GestionFestivalConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["GestionFestivalConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -265,11 +265,25 @@ namespace gestionFestival.DAL
 			return ((ISingleResult<GetAllParticipantResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetAllPoste")]
+		public ISingleResult<GetAllPosteResult> GetAllPoste()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<GetAllPosteResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetAllRevenu")]
 		public ISingleResult<GetAllRevenuResult> GetAllRevenu([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPoste)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPoste);
 			return ((ISingleResult<GetAllRevenuResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetAskBudget")]
+		public ISingleResult<GetAskBudgetResult> GetAskBudget()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<GetAskBudgetResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetFestival")]
@@ -342,6 +356,13 @@ namespace gestionFestival.DAL
 			return ((int)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateMateriel")]
+		public int UpdateMateriel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string nom, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> prix, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> qtt, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idMat)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nom, prix, qtt, idMat);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateParticipant")]
 		public int UpdateParticipant([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> salaire, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> ht, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idPers)
 		{
@@ -384,10 +405,17 @@ namespace gestionFestival.DAL
 			return ((ISingleResult<VerifMontantResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateMateriel")]
-		public int UpdateMateriel([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string nom, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> prix, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> qtt, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idMat)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AjouterBudget")]
+		public int AjouterBudget([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> montant, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nom, prix, qtt, idMat);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), montant, id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AjouterBudget")]
+		public int AjouterBudget1([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> montant, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), montant, id);
 			return ((int)(result.ReturnValue));
 		}
 	}
@@ -3124,6 +3152,122 @@ namespace gestionFestival.DAL
 		}
 	}
 	
+	public partial class GetAllPosteResult
+	{
+		
+		private int _idPoste;
+		
+		private string _nomPoste;
+		
+		private string _description;
+		
+		private System.Nullable<decimal> _budgetDepart;
+		
+		private System.Nullable<decimal> _budgetActuel;
+		
+		private int _idFestival;
+		
+		public GetAllPosteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste", DbType="Int NOT NULL")]
+		public int idPoste
+		{
+			get
+			{
+				return this._idPoste;
+			}
+			set
+			{
+				if ((this._idPoste != value))
+				{
+					this._idPoste = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPoste", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nomPoste
+		{
+			get
+			{
+				return this._nomPoste;
+			}
+			set
+			{
+				if ((this._nomPoste != value))
+				{
+					this._nomPoste = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(50)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budgetDepart", DbType="Money")]
+		public System.Nullable<decimal> budgetDepart
+		{
+			get
+			{
+				return this._budgetDepart;
+			}
+			set
+			{
+				if ((this._budgetDepart != value))
+				{
+					this._budgetDepart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budgetActuel", DbType="Money")]
+		public System.Nullable<decimal> budgetActuel
+		{
+			get
+			{
+				return this._budgetActuel;
+			}
+			set
+			{
+				if ((this._budgetActuel != value))
+				{
+					this._budgetActuel = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idFestival", DbType="Int NOT NULL")]
+		public int idFestival
+		{
+			get
+			{
+				return this._idFestival;
+			}
+			set
+			{
+				if ((this._idFestival != value))
+				{
+					this._idFestival = value;
+				}
+			}
+		}
+	}
+	
 	public partial class GetAllRevenuResult
 	{
 		
@@ -3199,6 +3343,410 @@ namespace gestionFestival.DAL
 				if ((this._idPoste != value))
 				{
 					this._idPoste = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetAskBudgetResult
+	{
+		
+		private int _idDemande;
+		
+		private string _motif;
+		
+		private decimal _montant;
+		
+		private System.DateTime _dateDemande;
+		
+		private int _idPersonnel;
+		
+		private int _idPersonnel1;
+		
+		private string _nomPersonnel;
+		
+		private string _prenomPersonnel;
+		
+		private System.DateTime _dateNaissance;
+		
+		private string _email;
+		
+		private string _telephone;
+		
+		private string _specialisation;
+		
+		private string _password;
+		
+		private string _libelRole;
+		
+		private System.Nullable<int> _idPoste;
+		
+		private int _idFestival;
+		
+		private int _idPoste1;
+		
+		private string _nomPoste;
+		
+		private string _description;
+		
+		private System.Nullable<decimal> _budgetDepart;
+		
+		private System.Nullable<decimal> _budgetActuel;
+		
+		private int _idFestival1;
+		
+		public GetAskBudgetResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idDemande", DbType="Int NOT NULL")]
+		public int idDemande
+		{
+			get
+			{
+				return this._idDemande;
+			}
+			set
+			{
+				if ((this._idDemande != value))
+				{
+					this._idDemande = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_motif", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string motif
+		{
+			get
+			{
+				return this._motif;
+			}
+			set
+			{
+				if ((this._motif != value))
+				{
+					this._motif = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_montant", DbType="Money NOT NULL")]
+		public decimal montant
+		{
+			get
+			{
+				return this._montant;
+			}
+			set
+			{
+				if ((this._montant != value))
+				{
+					this._montant = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateDemande", DbType="DateTime NOT NULL")]
+		public System.DateTime dateDemande
+		{
+			get
+			{
+				return this._dateDemande;
+			}
+			set
+			{
+				if ((this._dateDemande != value))
+				{
+					this._dateDemande = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPersonnel", DbType="Int NOT NULL")]
+		public int idPersonnel
+		{
+			get
+			{
+				return this._idPersonnel;
+			}
+			set
+			{
+				if ((this._idPersonnel != value))
+				{
+					this._idPersonnel = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPersonnel1", DbType="Int NOT NULL")]
+		public int idPersonnel1
+		{
+			get
+			{
+				return this._idPersonnel1;
+			}
+			set
+			{
+				if ((this._idPersonnel1 != value))
+				{
+					this._idPersonnel1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPersonnel", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string nomPersonnel
+		{
+			get
+			{
+				return this._nomPersonnel;
+			}
+			set
+			{
+				if ((this._nomPersonnel != value))
+				{
+					this._nomPersonnel = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_prenomPersonnel", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string prenomPersonnel
+		{
+			get
+			{
+				return this._prenomPersonnel;
+			}
+			set
+			{
+				if ((this._prenomPersonnel != value))
+				{
+					this._prenomPersonnel = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateNaissance", DbType="DateTime NOT NULL")]
+		public System.DateTime dateNaissance
+		{
+			get
+			{
+				return this._dateNaissance;
+			}
+			set
+			{
+				if ((this._dateNaissance != value))
+				{
+					this._dateNaissance = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this._email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telephone", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string telephone
+		{
+			get
+			{
+				return this._telephone;
+			}
+			set
+			{
+				if ((this._telephone != value))
+				{
+					this._telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_specialisation", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string specialisation
+		{
+			get
+			{
+				return this._specialisation;
+			}
+			set
+			{
+				if ((this._specialisation != value))
+				{
+					this._specialisation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this._password = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_libelRole", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string libelRole
+		{
+			get
+			{
+				return this._libelRole;
+			}
+			set
+			{
+				if ((this._libelRole != value))
+				{
+					this._libelRole = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste", DbType="Int")]
+		public System.Nullable<int> idPoste
+		{
+			get
+			{
+				return this._idPoste;
+			}
+			set
+			{
+				if ((this._idPoste != value))
+				{
+					this._idPoste = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idFestival", DbType="Int NOT NULL")]
+		public int idFestival
+		{
+			get
+			{
+				return this._idFestival;
+			}
+			set
+			{
+				if ((this._idFestival != value))
+				{
+					this._idFestival = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPoste1", DbType="Int NOT NULL")]
+		public int idPoste1
+		{
+			get
+			{
+				return this._idPoste1;
+			}
+			set
+			{
+				if ((this._idPoste1 != value))
+				{
+					this._idPoste1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomPoste", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nomPoste
+		{
+			get
+			{
+				return this._nomPoste;
+			}
+			set
+			{
+				if ((this._nomPoste != value))
+				{
+					this._nomPoste = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(50)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budgetDepart", DbType="Money")]
+		public System.Nullable<decimal> budgetDepart
+		{
+			get
+			{
+				return this._budgetDepart;
+			}
+			set
+			{
+				if ((this._budgetDepart != value))
+				{
+					this._budgetDepart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_budgetActuel", DbType="Money")]
+		public System.Nullable<decimal> budgetActuel
+		{
+			get
+			{
+				return this._budgetActuel;
+			}
+			set
+			{
+				if ((this._budgetActuel != value))
+				{
+					this._budgetActuel = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idFestival1", DbType="Int NOT NULL")]
+		public int idFestival1
+		{
+			get
+			{
+				return this._idFestival1;
+			}
+			set
+			{
+				if ((this._idFestival1 != value))
+				{
+					this._idFestival1 = value;
 				}
 			}
 		}

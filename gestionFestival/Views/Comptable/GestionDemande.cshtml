@@ -1,7 +1,26 @@
-﻿@{
+﻿@using gestionFestival.Models
+@{
     Layout = "~/Views/Shared/headerComptable.cshtml";
     ViewBag.Title = "GestionDemande";
 }
 
-<h2>GestionDemande</h2>
+@*<h2>@ViewBag.message</h2>
+<div>
+    <table>
+        <tr><td colspan="4"><h2>Gestion des demandes de budgets</h2></td></tr>
+        <thead>Poste demandeur</thead><thead>Date de la demande</thead><thead>Motif</thead><thead>Montant</thead>
+        @foreach (CDemande demande in ViewBag.listeDesDemande)
+        {
+            <tr>
+                <td>@demande.nomPoste</td>
+                <td>@demande.nomPers</td>
+                <td>@demande.Date.ToString("dd/MM/yyyy")</td>
+                <td>@demande.Motif </td>
+                <td>@demande.Montant </td>
+                <td><button onclick="">@Html.ActionLink("Accepter", "DemandeDeBudget", "Comptable", new { idPers = 8, budget = demande.Montant, idDemande = idDemande }, null)</button></td>
+                <td><button onclick="">@Html.ActionLink("Refuser", "DemandeDeBudget", "Comptable", new { idPers = 8 , 0 , 0}, null)</button></td>
+            </tr>
+        }
+    </table>
 
+</div>*@

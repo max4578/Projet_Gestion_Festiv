@@ -16,8 +16,6 @@ namespace gestionFestival.Controllers
         public CPoste CalculBudgetPoste()
         {
             CPoste poste = new CPoste(((CResponsable)Session["user"]).Id);
-            poste.Depense.CalculerDepense();
-            poste.Recette.CalculerRecette();
             double totalDepense= poste.Depense.Total-poste.Recette.Total ;
             poste.BudgetActuel = poste.BudgetDepart - totalDepense;
             poste.ModifierBudget(poste.BudgetActuel);

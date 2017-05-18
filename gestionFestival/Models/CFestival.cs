@@ -70,7 +70,7 @@ namespace gestionFestival.Models
         public void CreerUnFestival()
         {
             db = new DataContextDataContext();
-            // ajout de la procédure stockée
+            // ajout de la procédure stockée pour plustard si on gère plusieurs festivals
         }
         public void InfoFestival()
         {

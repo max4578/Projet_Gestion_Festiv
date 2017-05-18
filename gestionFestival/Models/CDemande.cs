@@ -44,6 +44,7 @@ namespace gestionFestival.Models
         /*******************/
         /*  Constructeur   */
         /*******************/
+        public CDemande(){ }
 
         public CDemande(double montant , string motif, DateTime date)
         {
@@ -53,10 +54,6 @@ namespace gestionFestival.Models
 
         }
 
-    
-
-
-
         /*******************/
         /*    Methodes     */
         /*******************/
@@ -65,5 +62,6 @@ namespace gestionFestival.Models
         {
             db.AjouterDemande(motif,(decimal)montant,idPers,dateDem);
         }
+        
     }
 }

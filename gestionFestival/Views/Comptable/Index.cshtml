@@ -9,5 +9,5 @@
 <h1>@Model.NomFestival</h1>
 <h2>du @Model.DateDebutFestival.ToString("dd/MM/yyyy") au @Model.DateFinFestival.ToString("dd/MM/yyyy")</h2>
 <p>Budget total du festival : @Model.BudgetFestival</p>
-<p>Budget encore disponible : faire fonction</p>
+<p>Budget encore disponible : @(Model.BudgetFestival-ViewBag.budgetTotalDisponible)</p>
 
