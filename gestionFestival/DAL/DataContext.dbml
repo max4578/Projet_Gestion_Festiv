@@ -125,6 +125,11 @@
       <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.AjouterBudget" Method="AjouterBudget">
+    <Parameter Name="montant" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.AjouterDemande" Method="AjouterDemande">
     <Parameter Name="motif" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="montant" Type="System.Decimal" DbType="Money" />
@@ -192,6 +197,15 @@
   <Function Name="dbo.DeleteRevenu" Method="DeleteRevenu">
     <Parameter Name="idRev" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetAllDemande" Method="GetAllDemande">
+    <ElementType Name="GetAllDemandeResult">
+      <Column Name="idDemande" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="motif" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="montant" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="dateDemande" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
   </Function>
   <Function Name="dbo.GetAllDemandeResp" Method="GetAllDemandeResp">
     <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
@@ -278,6 +292,16 @@
       <Column Name="idFestival1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.GetDemande" Method="GetDemande">
+    <Parameter Name="idDemande" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetDemandeResult">
+      <Column Name="idDemande" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="motif" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="montant" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="dateDemande" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.GetFestival" Method="GetFestival">
     <ElementType Name="GetFestivalResult">
       <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -357,6 +381,22 @@
       <Column Name="idFestival1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.GetResponsable" Method="GetResponsable">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetResponsableResult">
+      <Column Name="idPersonnel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prenomPersonnel" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="dateNaissance" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="telephone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="specialisation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="libelRole" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="idPoste" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idFestival" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.GetSalaire" Method="GetSalaire">
     <Parameter Name="idPers" Type="System.Int32" DbType="Int" />
     <ElementType Name="GetSalaireResult">
@@ -370,6 +410,10 @@
     <Parameter Name="id" Type="System.Int32" DbType="Int" />
     <Parameter Name="nomPoste" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="description" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.RefuserDemande" Method="RefuserDemande">
+    <Parameter Name="idDemande" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.SupprimerPosteAssigne" Method="SupprimerPosteAssigne">
@@ -442,15 +486,5 @@
     <ElementType Name="VerifMontantResult">
       <Column Name="" Member="Column1" Type="System.Decimal" DbType="Money" CanBeNull="true" />
     </ElementType>
-  </Function>
-  <Function Name="dbo.AjouterBudget" Method="AjouterBudget">
-    <Parameter Name="montant" Type="System.Decimal" DbType="Money" />
-    <Parameter Name="id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.AjouterBudget" Method="AjouterBudget1">
-    <Parameter Name="montant" Type="System.Decimal" DbType="Money" />
-    <Parameter Name="id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
   </Function>
 </Database>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using gestionFestival.Models;
+using gestionFestival.ViewModel;
 
 namespace gestionFestival.Controllers
 {
@@ -41,23 +42,24 @@ namespace gestionFestival.Controllers
         public ActionResult GestionDemande()
         {
             listDemande listDemande = new listDemande();
+            ViewBag.listeDemande=listDemande.GetList();
             return View();
         }
-
-        public ActionResult DemandeDeBudget(int idPers, double budget, int idDemande)
+        public ActionResult DemandeDeBudget(int idDemande, double budget, int idPers)
         {
             CComptable comptable = new CComptable();
-            if(idDemande != 0)
+            if(idPers != 0)
             {
                 comptable.AccepterDemandeBudget(idPers, budget, idDemande);
                 ViewBag.message = "La demande a été acceptée";
             }
             else
             {
-                comptable.AccepterDemandeBudget(idPers, budget, idDemande);
+                comptable.RefuserDemandeBudget(idDemande);
                 ViewBag.message = "La demande a été refusée";
             }
-            
+            listDemande listDemande = new listDemande();
+            ViewBag.listeDemande = listDemande.GetList();
             return View("GestionDemande");
         }
 

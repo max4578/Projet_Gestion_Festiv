@@ -12,7 +12,7 @@ namespace gestionFestival.Models
         /*    Attribut     */
         /*******************/
 
-        //private CComptable comptable;
+        private CPoste poste;
         private double salaire = 3000;
         private int heureTravail = 3000;
         private CComptable comptable;
@@ -62,7 +62,7 @@ namespace gestionFestival.Models
         }
         public void AjouterPoste()
         {
-
+            
         }
 
         public void DemandeModifPoste()

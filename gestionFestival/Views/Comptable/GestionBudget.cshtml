@@ -14,7 +14,7 @@
             {
                 <tr>
                     <td>@liste.NomPoste</td>
-                    <td><button onclick="" class="btn-block active bg-primary">@Html.ActionLink("Gérer le compte", "GestionCompte", "Comptable", new { id = liste.Id, nom = liste.NomPoste, budgetActuel = liste.BudgetActuel, budgetDepart = liste.BudgetDepart, description = liste.Description, dep = liste.Depense, rec = liste.Recette },null)</button></td>
+                    <td><button onclick="">@Html.ActionLink("Gérer le compte", "GestionCompte", "Comptable", new { id = liste.Id, nom = liste.NomPoste, budgetActuel = liste.BudgetActuel, budgetDepart = liste.BudgetDepart, description = liste.Description, dep = liste.Depense, rec = liste.Recette }, null)</button></td>
                 </tr>
             }
         }

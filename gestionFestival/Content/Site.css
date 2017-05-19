@@ -13,7 +13,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 325px;
 }
 
 td{
@@ -23,7 +23,8 @@ td{
 table {
     border: medium solid #6495ed;
     border-collapse: collapse;
-    width: 50%;
+    width: 75%;
+    color:black;
 }
 
 th {
@@ -47,3 +48,5 @@ td {
 caption {
     font-family: sans-serif;
 }
+
+

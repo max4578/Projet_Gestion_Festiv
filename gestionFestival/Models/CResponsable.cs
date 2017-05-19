@@ -33,9 +33,14 @@ namespace gestionFestival.Models
         /*******************/
         /*  Constructeur   */
         /*******************/
-
-        public CResponsable()
+        public CResponsable() { }
+        public CResponsable(int id)
         {
+            var charger = db.GetResponsable(id).FirstOrDefault();
+            Id = charger.idPersonnel;
+            Nom = charger.nomPersonnel;
+            Role = charger.libelRole;
+
 
         }
 
@@ -149,5 +154,11 @@ namespace gestionFestival.Models
             return new listDemande(Id).ListeDem;
         }
 
+        public CResponsable GetResponsable(int id)
+        {
+            var charger = db.GetResponsable(id).FirstOrDefault();
+            CResponsable responsable = new CResponsable(charger.idPersonnel, charger.nomPersonnel, charger.prenomPersonnel, charger.libelRole, 0, 0);
+            return responsable;
+        }
     }
 }

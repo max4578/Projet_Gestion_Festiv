@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using gestionFestival.DAL;
+using gestionFestival.ViewModel;
 
 namespace gestionFestival.Models
 {
@@ -55,6 +56,30 @@ namespace gestionFestival.Models
             }
 
             return listDem;
+        }
+
+        public List<CDemande> GetList()
+        {
+            db = new DataContextDataContext();
+            List<CDemande> listDemande = new List<CDemande>();
+            var chargerListeDemande = db.GetAllDemande();
+            foreach (var item in chargerListeDemande)
+            {
+                listDemande.Add(new CDemande((int)item.idDemande, (double)item.montant, item.motif, item.dateDemande,item.idPersonnel));
+            }
+            return listDemande;
+        }
+        public List<CPoste> GetListPosteAssigne()
+        {
+            db = new DataContextDataContext();
+            List<CPoste> listPosteAssigne = new List<CPoste>();
+            var chargerListePoste = db.AfficherPosteAssigne();
+            foreach (var item in chargerListePoste)
+            {
+                CResponsable resp = new CResponsable(item.idPersonnel, item.nomPersonnel, item.prenomPersonnel, item.libelRole, (int)item.nbrHeure, (double)item.salaireHoraire);
+                listPosteAssigne.Add(new CPoste((int)item.idPoste, item.nomPoste, (double)item.budgetDepart, (double)item.budgetActuel, item.description, resp));
+            }
+            return listPosteAssigne;
         }
     }
 }

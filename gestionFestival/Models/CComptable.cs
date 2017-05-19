@@ -73,18 +73,22 @@ namespace gestionFestival.Models
             budgetDisponible = budget;
             db.BudgetFestival((decimal)budget);
         }
-
+        public List<CDemande> ConsulterListeDemande()
+        {
+            listD = new listDemande();
+            return listD.GetList();
+        }
         public void AccepterDemandeBudget(int idPers,double budget,int idDemande)
         {
             db = new DataContextDataContext();
-            //procédure qui ajoute le budget au budget de départ du poste
-            //procédure qui efface la demande dans la table
+            db.AjouterBudget((decimal)budget, idPers);
+            db.RefuserDemande(idDemande);
         }
 
         public void RefuserDemandeBudget(int idDemande)
         {
             db = new DataContextDataContext();
-            //procédure qui efface la demande dans la table
+            db.RefuserDemande(idDemande);
         }
 
         public List<CPoste> ConsulterListePoste()
